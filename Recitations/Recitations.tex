@@ -1,0 +1,249 @@
+\documentclass[fleqn, a4paper, 12pt, twoside]{article}
+\usepackage{exsheets}
+\usepackage{amsmath, amssymb, amsthm} %standard AMS packages
+\usepackage{marginnote} %marginnotes
+\usepackage{gensymb} %miscellaneous symbols
+\usepackage{commath} %differential symbols
+\usepackage{xcolor} %colours
+\usepackage{cancel} %cancelling terms
+\usepackage{siunitx} %formatting units
+\usepackage{tikz, pgfplots} %diagrams
+	\usetikzlibrary{calc, hobby, patterns, intersections}
+\usepackage{graphicx} %inserting graphics
+\usepackage{hyperref} %hyperlinks
+\usepackage{datetime} %date and time
+\usepackage{ulem} %underline for \emph{}
+\usepackage{xfrac} %inline fractions
+\usepackage{enumerate} %numbered lists
+\usepackage{float} %inserting floats
+\usepackage{circuitikz} %circuit diagrams
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}} %adds numbers to specific equations in non-numbered list of equations
+
+\newcommand{\AxisRotator}[1][rotate=0]{
+	\tikz [x=0.25cm,y=0.60cm,line width=.2ex,-stealth,#1] \draw (0,0) arc (-150:150:1 and 1);%
+} %rotation symbols on axes
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newcommand{\curl}{\mathrm{curl\,}}
+
+\makeatletter
+\@addtoreset{section}{part} %resets section numbers in new part
+\makeatother
+
+%opening
+\title{Physics 2 : Recitations}
+\author{Aakash Jog}
+\date{2014-15}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Instructor Information}
+
+\textbf{Dr. Richard Spitzberg}\\
+~\\
+Office: Ma Aabadot 119\\
+E-mail: rms9999@gmail.com\\
+
+\newpage
+
+\part{Electrostatics}
+
+\section{Gravitation and Electromagnetism}
+
+\begin{tabular}{l l}
+	Gravitation & Electromagnetism\\
+		$F_G = G \dfrac{m_1 m_2}{r^2}$ & $F_E = k \dfrac{q_1 q_2}{r^2}$\\
+		$G = 6.7 \times 10^{11} \si{\newton\metre\squared\per\kg\squared}$ & $8.99 \times 10^9 \si{\newton\metre\squared\per\coulomb\squared}$\\
+\end{tabular}
+
+\section{Coulomb's Law}
+
+\begin{question}
+	Four identical charges $q$ are placed in the corners of a square of length $a$. A fifth charge $Q$ is free to move along the straight line perpendicular to the square plane and passing through its centre. When the charge $Q$ is in the same plane as the other charges, all the forces in the system cancel out.
+	\begin{enumerate}
+		\item Calculate $Q$ for a given $q$ and $a$.
+		\item Find the force $\overrightarrow{F(z)}$ acting on the charge $Q$ when it is at height $z$ above the square.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}[print]
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\a{4};
+			
+			\draw (-\a/2,-\a/2) rectangle (\a/2,\a/2);
+			
+			\filldraw ({-\a/2},{-\a/2}) circle [radius = 2pt] node [below left] {$q$};
+			\filldraw ({-\a/2},{\a/2}) circle [radius = 2pt] node [above left] {$q$};
+			\filldraw ({\a/2},{\a/2}) circle [radius = 2pt] node [above right] {$q$};
+			\filldraw ({\a/2},{-\a/2}) circle [radius = 2pt] node [below right] {$q$};
+			
+			\filldraw (0,0) circle [radius = 2pt] node [left] {$Q$};
+		\end{tikzpicture}
+	\end{figure}
+	Consider $q$ on the top right corner of the square. The total force acting on it is 0. Therefore
+	\begin{align*}
+		0 &= \dfrac{k q^2}{a^2} \cos \dfrac{\pi}{4} + \dfrac{k q^2}{a^2} \cos \dfrac{\pi}{4} + \dfrac{k q^2}{2 a^2} + \dfrac{2 k Q q}{a^2}\\
+		\therefore Q &= - \dfrac{1 + 2 \sqrt{2}}{4} q
+	\end{align*}
+	~\\
+	If $Q$ is at a height $z$ from the plane, the distance between each $q$ and $Q$ is
+	\begin{align*}
+		r &= \sqrt{z^2 + \left( \dfrac{a}{\sqrt{2}} \right)^2}
+	\end{align*}
+	Therefore the force of each $q$ on $Q$ is $\dfrac{k Q q}{r^2}$.\\
+	Due to symmetry, the components of the forces in the $z$ direction will add up, and all other components will cancel out.\\
+	Let the angle between the $z$ direction and the line joining $q$ and $Q$ be $\varphi$.\\
+	Therefore, the net force is 
+	\begin{align*}
+		F &= 4 \dfrac{k Q q}{r^2} \cos \varphi\\
+		&= 4 \dfrac{k Q q}{r^2} \dfrac{z}{r}\\
+		&= 4 \dfrac{k Q q}{z^2 \left( 1 + \dfrac{a^2}{2 z^2} \right)^{\sfrac{3}{2}}}
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	\begin{enumerate}
+		\item A wire of length 3 \si{metre} is charged with 2 \si{\coulomb\per\metre}. What is the wire's total charge?
+	\end{enumerate}
+\end{question}
+
+\begin{solution}[print]
+	\begin{align*}
+		\lambda &= \dfrac{Q}{L}\\
+		\therefore Q &= L \lambda\\
+		&= 6 \si{\coulomb}
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	A wire of length $L$ has the following charge distribution: $\lambda = \lambda_0 \cos \dfrac{\pi x}{L}$, where $x$ is the distance from the wire's edge. What is the wire's total charge?
+\end{question}
+
+\begin{solution}[print]
+	\begin{align*}
+		\lambda &= \dod{q}{x}\\
+		\therefore \dod{q}{x} &= \lambda_0 \cos \dfrac{\pi x}{L}\\
+		\therefore q &= \int\limits_{0}^{L} \lambda_0 \cos \dfrac{\pi x}{L} \dif x\\
+		&= 0
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	A hollow sphere of radius $R$ is uniformly charged with a charge $Q$. Calculate the charge distribution on the surface of the sphere.
+\end{question}
+
+\begin{solution}[print]
+	\begin{align*}
+		\sigma &= \dfrac{Q}{A}\\
+		&= \dfrac{Q}{4 \pi R^2}
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	A straight thin wire is uniformly charged with distribution $\lambda$. A charge $q$ is positioned at distance $y_1$ beneath the wire and $r$ away form it.
+	\begin{enumerate}
+		\item Find the force acting on the charge $q$.
+		\item Show that when the charge is positioned in front of the centre of the wire the $\hat{y}$ component of the force is cancelled.
+		\item Calculate the force an infinite straight wire will exert on the charge $q$.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}[print]
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\L{3};
+			\def\y{2};
+			\def\r{2};
+			\def\Y{1};
+			
+			\def\xMAX{\L + \Y + 1};
+			\def\yMAX{\r + 1};
+			
+			\begin{scope}[gray, -stealth]
+				\draw (0,0) -- (\xMAX,0) node [right] {$y$};
+				\draw (0,0) -- (0,\yMAX) node [above] {$z$};
+			\end{scope}
+			
+			\draw [ultra thick, red] (0,0) -- (\L,0);
+			
+			\begin{scope}[|-stealth, yshift = -10]
+				\draw (\L,0) -- ++(\Y,0) node [below] {$y_1$};
+				\draw (0,0) -- (\y,0) node [below] {$y$};
+				\draw [yshift = -10] (0,0) -- (\L,0) node [below] {$L$};
+			\end{scope}
+			
+			\filldraw ({\L + \Y}, \r) circle [radius = 2pt] node [left] {$q$};
+			
+			\begin{scope}[dashed]
+				\draw ({\L + \Y},0) -- ({\L + \Y}, \r) node [midway, right] {$r$};
+				\draw (\y,0) -- ({\L + \Y}, \r) node [midway, above left] {$R$};
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+	Consider an elemental charge $\dif Q$ of length $\dif y$, at distance $y$ as shown. Let the angle between the line joining $\dif Q$ and $q$ and the $y$ direction be $\theta$.
+	\begin{align*}
+		F_y &= F \cos \theta\\
+		F_z &= F \sin \theta\\
+	\end{align*}
+	Let
+	\begin{align*}
+		a &= L + y_1\\
+		\therefore R &= \sqrt{r^2 + (a - y)^2}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\cos \theta &= \dfrac{a - y}{R}\\
+		\sin \theta &= \dfrac{r}{R}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		F_y &= k q \int\limits_{0}^{L} \dfrac{\lambda \dif y}{R^2} \dfrac{(a - y)}{R}\\
+		&= k q \lambda \int\limits_{0}^{L} \dfrac{\dif y (a - y)}{\left( (a - y)^2 + r^2 \right)^{\sfrac{3}{2}}}\\
+		&= k q \lambda \left( \dfrac{1}{\sqrt{{y_1}^2 + r^2}} - \dfrac{1}{\sqrt{a^2 + r^2}} \right)
+	\end{align*}
+	\begin{align*}
+		F_z &= k q \int\limits_{0}^{L} \dfrac{\lambda \dif y}{R^2} \dfrac{r}{R}\\
+		&= k q \lambda \int\limits_{0}^{L} \dfrac{r \dif y}{\left( (a - y)^2 + r^2 \right)^{\sfrac{3}{2}}}\\
+		&= \dfrac{k q \lambda}{r} \left( \dfrac{a}{\sqrt{r^2 + a^2}} - \dfrac{y_1}{\sqrt{r^2 + {y_1}^2}} \right)
+	\end{align*}
+	~\\
+	When the charge is positioned above the centre of the wire,
+	\begin{align*}
+		y_1 &= -\dfrac{L}{2}\\
+		\therefore a &= \dfrac{L}{2}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		F_y &= k q \lambda \left( \dfrac{1}{\sqrt{{y_1}^2 + r^2}} - \dfrac{1}{\sqrt{a^2 + r^2}} \right)\\
+		&= k q \lambda \left( \dfrac{1}{\sqrt{{-\dfrac{L}{2}}^2 + r^2}} - \dfrac{1}{\sqrt{{\dfrac{L}{2}}^2 + r^2}} \right)\\
+		&= 0
+	\end{align*}
+	\begin{align*}
+		F_z &= \dfrac{k q \lambda}{r} \left( \dfrac{a}{\sqrt{r^2 + a^2}} - \dfrac{y_1}{\sqrt{r^2 + {y_1}^2}} \right)\\
+		&= \dfrac{k q \lambda}{r} \left( \dfrac{\dfrac{L}{2}}{\sqrt{r^2 + {\dfrac{L}{2}}^2}} - \dfrac{-\dfrac{L}{2}}{\sqrt{r^2 + {-\dfrac{L}{2}}^2}} \right)\\
+		&= \dfrac{k q \lambda}{r} \left( \dfrac{L}{\sqrt{r^2 + {\dfrac{L}{2}}^2}} \right)\\
+		&= \dfrac{k q \lambda}{r} \left( \dfrac{1}{\sqrt{\dfrac{1}{4} + \left( \dfrac{r}{L} \right)^2}} \right)
+	\end{align*}
+	~\\
+	If the line is infinite, $L \to \infty$. Therefore
+	\begin{align*}
+		F_z &= \dfrac{k q \lambda}{r} \left( \dfrac{1}{\sqrt{\dfrac{1}{4} + \left( \dfrac{r}{L} \right)^2}} \right)\\
+		&= \dfrac{2 k q \lambda}{r} 
+	\end{align*}
+\end{solution}
+
+\end{document}
