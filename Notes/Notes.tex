@@ -10,6 +10,7 @@
 \usepackage{tikz, pgfplots} %diagrams
 	\usetikzlibrary{calc, hobby, patterns, intersections}
 \usepackage{graphicx} %inserting graphics
+\usepackage{epstopdf}
 \usepackage{hyperref} %hyperlinks
 \usepackage{datetime} %date and time
 \usepackage{ulem} %underline for \emph{}
@@ -37,6 +38,15 @@
 \@addtoreset{section}{part} %resets section numbers in new part
 \makeatother
 
+\newcommand\blfootnote[1]{%
+	\begingroup
+	\renewcommand\thefootnote{}\footnote{#1}%
+	\addtocounter{footnote}{-1}%
+	\endgroup
+}
+
+\SetupExSheets{solution/print = true}
+
 %opening
 \title{Physics 2}
 \author{Aakash Jog}
@@ -46,6 +56,17 @@
 
 \maketitle
 %\setlength{\mathindent}{0pt}
+
+\blfootnote
+{	
+	\begin{figure}[H]
+		\includegraphics[height = 12pt]{cc.eps}
+		\includegraphics[height = 12pt]{by.eps}
+		\includegraphics[height = 12pt]{nc.eps}
+		\includegraphics[height = 12pt]{sa.eps}
+	\end{figure}
+	This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
+}
 
 \tableofcontents
 
@@ -89,7 +110,7 @@ Charge is defined according to this law.\\
 	A charge $q$ is placed at the origin. A charge $-2q$ is placed at 1 \si{\metre} from it, in the $x$ direction. Find a point on the $y$-axis where the total force acting on a charge $q'$ will be parallel to the $x$-axis.\\
 \end{question}
 
-\begin{solution}[print]
+\begin{solution}
 	\begin{figure}[H]
 		\begin{tikzpicture}
 			\def\y{-2};
@@ -141,7 +162,7 @@ Charge is defined according to this law.\\
 	\end{figure}
 \end{question}
 
-\begin{solution}[print]
+\begin{solution}
 	\begin{figure}[H]
 		\begin{tikzpicture}
 			\def\L{5};
@@ -199,7 +220,7 @@ Charge is defined according to this law.\\
 	A point charge $q$ is kept at a distance $z$ above a ring of radius $R$ charged with $Q = 2 \pi R \lambda$, where $\lambda$ is the linear charge density. Find the force acting on $q$.
 \end{question}
 
-\begin{solution}[print]
+\begin{solution}
 	\begin{figure}[H]
 		\begin{tikzpicture}
 			\def\R{3};
@@ -227,7 +248,7 @@ Charge is defined according to this law.\\
 		&= k q z \dfrac{\dif Q}{\left( z^2 + R^2 \right)^{\sfrac{3}{2}}}\\
 		\therefore \overrightarrow{F} &= \hat{z} \int \dif F_z\\
 		&= \hat{z} k q z \dfrac{1}{\left( z^2 + R^2 \right)^{\sfrac{3}{2}}} \int\limits_{0}^{Q} \dif Q\\
-		&= k \dfrac{Q q}{\left( z^2 + R^2 \right)^{\sfrac{3}{2}}} \overrightarrow{z}
+		&= k \dfrac{Q q z}{\left( z^2 + R^2 \right)^{\sfrac{3}{2}}} \overrightarrow{z}
 	\end{align*}
 \end{solution}
 
@@ -235,7 +256,7 @@ Charge is defined according to this law.\\
 	A point charge $q$ is kept at a distance $z$ above a disk of radius $R$ charged with $Q = \pi R^2 \sigma$, where $\sigma$ is the surface charge density. Find the force acting on $q$.
 \end{question}
 
-\begin{solution}[print]
+\begin{solution}
 	The disk can be considered to be made up of elemental rings, with radii varying from $0$ to $R$.\\
 	Therefore,
 	\begin{align*}
