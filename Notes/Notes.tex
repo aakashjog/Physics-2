@@ -1,6 +1,7 @@
 \documentclass[fleqn, a4paper, 12pt, twoside]{article}
-\usepackage{exsheets}
+\usepackage{exsheets} %question and solution environments
 \usepackage{amsmath, amssymb, amsthm} %standard AMS packages
+\usepackage{esint} %integral signs
 \usepackage{marginnote} %marginnotes
 \usepackage{gensymb} %miscellaneous symbols
 \usepackage{commath} %differential symbols
@@ -8,9 +9,9 @@
 \usepackage{cancel} %cancelling terms
 \usepackage{siunitx} %formatting units
 \usepackage{tikz, pgfplots} %diagrams
-	\usetikzlibrary{calc, hobby, patterns, intersections}
+	\usetikzlibrary{calc, hobby, patterns, intersections, angles, quotes}
 \usepackage{graphicx} %inserting graphics
-\usepackage{epstopdf}
+\usepackage{epstopdf} %converting and inserting eps graphics
 \usepackage{hyperref} %hyperlinks
 \usepackage{datetime} %date and time
 \usepackage{ulem} %underline for \emph{}
@@ -31,6 +32,7 @@
 
 \theoremstyle{theorem}
 \newtheorem{theorem}{Theorem}
+\newtheorem{law}{Law}
 
 \newcommand{\curl}{\mathrm{curl\,}}
 
@@ -45,7 +47,7 @@
 	\endgroup
 }
 
-\SetupExSheets{solution/print = true}
+\SetupExSheets{solution/print = true} %prints all solutions by default
 
 %opening
 \title{Physics 2}
@@ -66,7 +68,7 @@
 		\includegraphics[height = 12pt]{sa.eps}
 	\end{figure}
 	This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
-}
+} %CC-BY-NC-SA licencse
 
 \tableofcontents
 
@@ -91,18 +93,20 @@ E-mail: erezpyet@mail.tau.ac.il\\
 
 \section{Coulomb's Law}
 
-The force between two charged particles is directly proportional to the product of the charges of the particles, and inversely proportional to the square of the distance between them.
-\begin{align*}
-	F &\propto \dfrac{q_1 q_2}{r^2}\\
-	F &= k \dfrac{q_1 q_2}{r^2}\\
-	&= \dfrac{1}{4 \pi \varepsilon_0} \cdot \dfrac{q_1 q_2}{r^2}
-\end{align*}
-The constant of proportionality is $k = 8.99 \times 10^9 \si{\newton\metre\squared\per\coulomb\squared}$.\\
-$\varepsilon_0 = 8.8541878162 \times 10^{-12} \si{\coulomb\squared\per\newton\per\metre\squared}$ is called the permittivity of free space.\\
-In vector notation,
-\begin{align*}
-	\overrightarrow{F_{2 1}} &= \dfrac{1}{4 \pi \varepsilon_0} \dfrac{q_1 q_2}{{r_{1 2}}^2} \hat{r_{1 2}}
-\end{align*}
+\begin{law}[Coulomb's Law]
+	The force between two charged particles is directly proportional to the product of the charges of the particles, and inversely proportional to the square of the distance between them.
+	\begin{align*}
+		F &\propto \dfrac{q_1 q_2}{r^2}\\
+		F &= k \dfrac{q_1 q_2}{r^2}\\
+		&= \dfrac{1}{4 \pi \varepsilon_0} \cdot \dfrac{q_1 q_2}{r^2}
+	\end{align*}
+	The constant of proportionality is $k = 8.99 \times 10^9 \si{\newton\metre\squared\per\coulomb\squared}$.\\
+	$\varepsilon_0 = 8.8541878162 \times 10^{-12} \si{\coulomb\squared\per\newton\per\metre\squared}$ is called the permittivity of free space.\\
+	In vector notation,
+	\begin{align*}
+		\overrightarrow{F_{2 1}} &= \dfrac{1}{4 \pi \varepsilon_0} \dfrac{q_1 q_2}{{r_{1 2}}^2} \hat{r_{1 2}}
+	\end{align*}
+\end{law}
 ~\\
 Charge is defined according to this law.\\
 
@@ -274,5 +278,219 @@ Charge is defined according to this law.\\
 		F &= 2 q \sigma \pi k 
 	\end{align*}
 \end{solution}
+
+\section{Electric Field}
+
+\begin{definition}[Electric field]
+	The electric field at a point in space is the electric force felt by a charge of 1 \si{\coulomb} had it been kept there.
+\end{definition}
+
+\subsection{Standard Electric Fields}
+
+\begin{tabular}{l l}
+	Line of charge & $\dfrac{1}{4 \pi \varepsilon_0} \dfrac{\lambda L}{r \sqrt{r^2 + \dfrac{L^2}{4}}}$\\
+	Infinite line of charge & $\dfrac{\lambda}{2 \pi \varepsilon_0 r}$\\
+	Ring of charge & $\dfrac{\lambda R z}{2 \varepsilon_0 \left( z^2 + R^2 \right)^{\sfrac{3}{2}}}$\\
+	Infinite plane of charge & $\dfrac{\sigma}{2 \varepsilon_0}$
+\end{tabular}
+
+\section{Electric Dipoles}
+
+\begin{definition}[Electric dipole]
+	Two charges, $q$ and $-q$, separated by a distance $d$ is called an electric dipole.
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\d{4};
+			
+			\draw [-stealth] ({-\d/2},0) -- ({\d/2},0) node [midway, below] {$\overrightarrow{d}$};
+			
+			\filldraw ({-\d/2},0) circle (2pt) node [below] {$-q$};
+			\filldraw ({\d/2},0) circle (2pt) node [below] {$q$};
+		\end{tikzpicture}
+	\end{figure}
+\end{definition}
+
+\begin{definition}[Dipole moment]
+	If two charges $q$ and $-q$ are separated by a distance $d$, the dipole moment is defined as
+	\begin{equation*}
+		\overrightarrow{P} \doteq q \cdot \overrightarrow{d}
+	\end{equation*}
+	where $\overrightarrow{d}$ is the vector of length $d$ pointing from $-q$ to $q$.
+\end{definition}
+
+\subsection{Electric Field Due to Electric Dipoles}
+
+\subsubsection{Electric Field}
+
+\begin{figure}[H]
+	\begin{tikzpicture}
+		\def\d{4};
+		\def\x{3};
+		
+		\coordinate (O) at (0,0);
+		\coordinate (+q) at (0,{\d/2});
+		\coordinate (-q) at (0,{-\d/2});
+		\coordinate (x) at (\x,0);
+		
+		\begin{scope}[-stealth, lightgray]
+			\draw ({-(\x + 1)},0) -- ({\x + 1},0) node [right] {$x$};
+			\draw (0,{-(\d/2 + 1)}) -- (0,{\d/2 + 1}) node [above] {$z$};
+		\end{scope}
+		
+		\filldraw (+q) circle (1pt);
+		\filldraw (-q) circle (1pt);
+		
+		\begin{scope}[xshift = -10, |<->|]
+			\draw (0,0) -- (0,{\d/2}) node [midway, fill = white] {$\dfrac{d}{2}$};
+			\draw (0,0) -- (0,{-\d/2}) node [midway, fill = white] {$\dfrac{d}{2}$};
+		\end{scope}
+		
+		\begin{scope}[dashed, blue]
+			\draw (\x,0) -- (+q) node [midway, above right] {$\sqrt{\dfrac{d^2}{4} + z^2}$};
+			\draw (\x,0) -- (-q) node [midway, below right] {$\sqrt{\dfrac{d^2}{4} + z^2}$};
+		\end{scope}
+		
+		\begin{scope}[-stealth, blue]
+			\draw (\x,0) -- ($ (\x,0) ! -1cm ! (+q) $);
+			\draw (\x,0) -- ($ (\x,0) ! 1cm ! (-q) $);
+		\end{scope}
+		
+		\pic [draw,  "$\theta$", angle eccentricity = 1.5] {angle = O--+q--x};
+	\end{tikzpicture}
+\end{figure}
+
+\begin{align*}
+	\overrightarrow{F} &= 2 E_+ \cos \theta (- \hat{z})\\
+	&= 2 \cdot \dfrac{1}{4 \pi \varepsilon_0} \dfrac{q}{\left( \dfrac{d}{2} \right)^2 + x^2} \cdot \dfrac{\dfrac{d}{2}}{\left( \left( \dfrac{d}{2} \right)^2 + x^2 \right)^{\sfrac{1}{2}}} (- \hat{z})\\
+	&= - \dfrac{1}{4 \pi \varepsilon_0} \dfrac{\overrightarrow{P}}{\left( \left( \dfrac{d}{2} \right)^2 + x^2 \right)^{\sfrac{3}{2}}}
+\end{align*}
+
+\section{Capacitors}
+
+A parallel plate capacitor is constructed by arranging two infinite plates with surface charge density $\sigma$ and $-\sigma$ respectively.
+\begin{figure}[H]
+	\begin{tikzpicture}
+		\def\l{4};
+		\def\d{2};
+		
+		\draw [blue] ({-\l/2}, {-\d/2}) -- ({\l/2}, {-\d/2}) node [right] {$\sigma$};
+		\draw [red] ({-\l/2}, {\d/2}) -- ({\l/2}, {\d/2}) node [right] {$-\sigma$};
+		
+		\begin{scope}[blue, -stealth]
+			\foreach \i in {-1.5,...,1.5}
+				\draw (\i,{-\d/4}) -- ++(0,1);
+		\end{scope}
+		
+		\begin{scope}[blue, -stealth]
+			\foreach \i in {-1.5,...,1.5}
+				\draw (\i,{\d/2}) -- ++(0,1);
+		\end{scope}
+		
+		\begin{scope}[blue, -stealth]
+			\foreach \i in {-1.5,...,1.5}
+				\draw (\i,{-\d/2}) -- ++(0,-1);
+		\end{scope}
+		
+		\begin{scope}[red, stealth-]
+			\foreach \i in {-2,...,2}
+				\draw (\i,{\d/4}) -- ++(0,-1);
+		\end{scope}
+		
+		\begin{scope}[red, stealth-]
+			\foreach \i in {-2,...,2}
+				\draw (\i,{\d/2}) -- ++(0,1);
+		\end{scope}
+		
+		\begin{scope}[red, stealth-]
+			\foreach \i in {-2,...,2}
+				\draw (\i,{-\d/2}) -- ++(0,-1);
+		\end{scope}
+	\end{tikzpicture}
+\end{figure}
+
+The electric field due to the plates are as shown. 
+Therefore, the fields between the plates add up and the fields outside the plates cancel out.\\
+Therefore, the net field inside the capacitor is 
+\begin{equation*}
+	{\color{red} \dfrac{\sigma}{2 \varepsilon_0}} + {\color{blue} \dfrac{\sigma}{2 \varepsilon_0}} = \dfrac{\sigma}{\varepsilon_0}
+\end{equation*}
+
+\section{Gauss' Law}
+
+\begin{definition}[Electric flux]
+	Electric flux is defined as the dot product of the electric field passing through a surface, and the area vector of the surface.
+	\begin{equation*}
+		\Phi = \overrightarrow{E} \cdot \overrightarrow{A}
+	\end{equation*}
+	where the magnitude of the area vector is proportional to the area of the surface and the direction is perpendicular to the surface.
+\end{definition}
+
+This can be modelled as water passing through a surface.
+
+\begin{figure}[H]
+	\begin{tikzpicture}
+		\def\angle{30};
+		\def\l{4};
+		
+		\coordinate (O) at (0,0);
+		\coordinate (plate top) at (0,{\l*cos(\angle)});
+		\coordinate (plate bottom) at ($ (plate top) + ({-90 + \angle}:\l) $);
+		
+		\draw (plate top) -- (plate bottom);
+		
+		\draw [red, stealth-stealth] (plate top) -- (O) node [midway, below left] {$A \cos \theta$};
+		
+		\begin{scope}[blue, stealth-]
+			\draw ({-\l*cos(\angle)/4},{\l*cos(\angle)/4}) -- ++(180:1) node [left] {$v$};
+			\draw ({-\l*cos(\angle)/4},{2*\l*cos(\angle)/4}) -- ++(180:1) node [left] {$v$};
+			\draw ({-\l*cos(\angle)/4},{3*\l*cos(\angle)/4}) -- ++(180:1) node [left] {$v$};
+		\end{scope}
+		
+		\pic [draw, "$\theta$", angle eccentricity = 1.5] {angle = O--plate top--plate bottom};
+	\end{tikzpicture}
+\end{figure}
+
+The flux of the water passing through the area $A$ is $A v \cos \theta$.
+
+\begin{theorem}[Gauss' Law]
+	\begin{equation*}
+		\oiint \overrightarrow{E} \cdot \overrightarrow{\dif A} = \dfrac{Q_{\textnormal{inside}}}{\varepsilon_0}
+	\end{equation*}
+\end{theorem}
+
+\begin{question}
+	A hollow sphere of radius $R$ has surface charge density $\sigma$. Find the field at a point at distance $r$ from the centre of the sphere.
+\end{question}
+
+\begin{solution}
+	Consider the imaginary Gaussian surface as a sphere with radius $r$.
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\R{3};
+			\def\r{5};
+			
+			\begin{scope}
+				\draw (0,0) circle (\R);
+				\draw [dashed] (0,0) -- ++({360*rnd}:\R) node [midway, fill = white] {$R$};
+			\end{scope}
+			
+			\begin{scope}[blue, dashed]
+				\draw (0,0) circle (\r);
+				\draw [dashed] (0,0) -- ++({360*rnd}:\r) node [midway, fill = white] {$r$};
+			\end{scope}
+			
+		\end{tikzpicture}
+	\end{figure}
+	Using Gauss' Law over the Gaussian surface,
+	\begin{align*}
+		\oiint \overrightarrow{E} \cdot \overrightarrow{\dif A} &= \dfrac{Q_{\textnormal{total}}}{\varepsilon_0}\\
+		\therefore \oiint E \dif A &= \dfrac{Q_{\textnormal{total}}}{\varepsilon_0}\\
+		\therefore E \oiint \dif A &= \dfrac{Q_{\textnormal{total}}}{\varepsilon_0}\\
+		\therefore E \cdot 4 \pi r^2 &= \dfrac{Q_{\textnormal{total}}}{\varepsilon_0}\\
+		\therefore \overrightarrow{E} &= \dfrac{1}{4 \pi \varepsilon_0} \dfrac{Q_{\textnormal{total}}}{r^2} \hat{r}
+	\end{align*}
+\end{solution}
+~\\
+Similarly for $r < R$, $E = 0$.
 
 \end{document}
