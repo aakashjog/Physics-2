@@ -1,5 +1,9 @@
 \documentclass[fleqn, a4paper, 12pt, twoside]{article}
-\usepackage{exsheets}
+
+\newcounter{recitationcount} %creates a new counter for recitation numbers (must be executed before exsheets is loaded)
+\newcommand\recitation{\refstepcounter{recitationcount}}
+
+\usepackage[counter-within = recitationcount]{exsheets}
 \usepackage{amsmath, amssymb, amsthm} %standard AMS packages
 \usepackage{marginnote} %marginnotes
 \usepackage{gensymb} %miscellaneous symbols
@@ -37,6 +41,17 @@
 \@addtoreset{section}{part} %resets section numbers in new part
 \makeatother
 
+\newcommand\blfootnote[1]{%
+	\begingroup
+	\renewcommand\thefootnote{}\footnote{#1}%
+	\addtocounter{footnote}{-1}%
+	\endgroup
+}
+
+\RenewQuSolPair{question}[name=Recitation \therecitationcount\ -- Exercise]{solution}[name=Recitation \therecitationcount\ -- Solution]
+
+\SetupExSheets{solution/print = true, totoc = true} %prints all solutions by default
+
 %opening
 \title{Physics 2 : Recitations}
 \author{Aakash Jog}
@@ -46,6 +61,17 @@
 
 \maketitle
 %\setlength{\mathindent}{0pt}
+
+\blfootnote
+{	
+	\begin{figure}[H]
+		\includegraphics[height = 12pt]{cc.eps}
+		\includegraphics[height = 12pt]{by.eps}
+		\includegraphics[height = 12pt]{nc.eps}
+		\includegraphics[height = 12pt]{sa.eps}
+	\end{figure}
+	This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
+} %CC-BY-NC-SA licencse
 
 \tableofcontents
 
@@ -70,6 +96,8 @@ E-mail: rms9999@gmail.com\\
 \end{tabular}
 
 \section{Coulomb's Law}
+
+\recitation
 
 \begin{question}
 	Four identical charges $q$ are placed in the corners of a square of length $a$. A fifth charge $Q$ is free to move along the straight line perpendicular to the square plane and passing through its centre. When the charge $Q$ is in the same plane as the other charges, all the forces in the system cancel out.
@@ -243,6 +271,126 @@ E-mail: rms9999@gmail.com\\
 	\begin{align*}
 		F_z &= \dfrac{k q \lambda}{r} \left( \dfrac{1}{\sqrt{\dfrac{1}{4} + \left( \dfrac{r}{L} \right)^2}} \right)\\
 		&= \dfrac{2 k q \lambda}{r} 
+	\end{align*}
+\end{solution}
+
+\section{Gauss' Law}
+
+\recitation
+\setcounter{question}{1}
+
+\begin{question}
+	A ball of radius $a$ is charged with distribution $\rho$ = $\rho_0 \dfrac{r}{a}$. Find the electric field everywhere.
+\end{question}
+
+\begin{solution}
+	Consider a spherical Gaussian surface of radius $r$.\\
+	If $r \leq a$, the charge in the interior of the Gaussian surface is
+	\begin{align*}
+		q(r) &= \int\limits_{0}^{r} \dfrac{\rho_0 r}{a} \cdot 4 \pi r^2 \dif r\\
+		&= \dfrac{\rho_0}{a} \pi r^4
+	\end{align*}
+	Therefore, by Gauss' Law,
+	\begin{align*}
+		E \cdot 4 \pi r^2 &= \dfrac{q(r)}{\varepsilon_0}\\
+		\therefore E &= \dfrac{\rho_0 \pi r^4}{4 \pi a r^2}\\
+		&= \dfrac{\rho_0 r^2}{4 a \varepsilon_0}
+	\end{align*}
+	If $r \geq a$, the entire ball of charge is in the interior of the Gaussian surface.\\
+	Therefore,
+	\begin{align*}
+		Q &= q(a)\\
+		&= \dfrac{\rho_0}{a} \cdot \pi a^4\\
+		&= \rho_0 \pi a^3
+	\end{align*}
+	Therefore, by Gauss' Law,
+	\begin{align*}
+		E \cdot 4 \pi r^2 &= \dfrac{Q}{\varepsilon_0}\\
+		\therefore E &= \dfrac{Q}{4 \pi r^2 \varepsilon_0}\\
+		&= \dfrac{\rho_0 a^3}{4 r^2 \varepsilon_0}
+	\end{align*}
+	~\\
+	Therefore,
+	\begin{align*}
+		E &=
+			\begin{cases}
+				\dfrac{\rho_0 r^2}{4 a \varepsilon_0} &;\quad r \leq a\\
+				\dfrac{\rho_0 a^3}{4 r^2 \varepsilon} &;\quad r \geq a\\
+			\end{cases}
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	An infinitely long cylinder of radius $a$ is charged with distribution $\rho = \rho_0 \dfrac{r}{a}$. Find the electric field everywhere.
+\end{question}
+
+\begin{solution}
+	Consider a infinite cylindrical Gaussian surface with radius $r$.\\
+	If $r \leq a$, the charge in the interior of the Gaussian surface is
+	\begin{align*}
+		q(r) &= \int\limits_{0}^{r} \dfrac{\rho_0 r}{a} \pi r^2 \dif r\\
+		&= \dfrac{2 \pi \rho_0 L r^3}{3 a}
+	\end{align*}
+	Therefore, by Gauss' Law,
+	\begin{align*}
+		E \cdot 2 \pi r L &= \dfrac{2 \pi \rho_0 L r^3}{3 a \varepsilon_0}\\
+		\therefore E &= \dfrac{\rho_0 r^2}{3 a \varepsilon_0}
+	\end{align*}
+	If $r \geq a$, the entire cylinder of charge is in the interior of the Gaussian surface.\\
+	Therefore,
+	\begin{align*}
+		Q &= q(a)\\
+		&= \dfrac{2 \pi \rho_0 L a^3}{3 a}\\
+		&= \dfrac{2 \pi \rho_0 L a^2}{3}
+	\end{align*}
+	Therefore, by Gauss' Law,
+	\begin{align*}
+		E \cdot 2 \pi r L &= \dfrac{2 \pi \rho_0 L a^2}{3 \varepsilon_0}\\
+		\therefore E &= \dfrac{\rho_0 a^2}{3 \varepsilon_0 r}
+	\end{align*}
+	~\\
+	Therefore,
+	\begin{align*}
+		E &= 
+			\begin{cases}
+				\dfrac{\rho_0 r^2}{3 a \varepsilon_0} &;\quad r \leq a\\
+				\dfrac{\rho_0 a^2}{3 \varepsilon_0 r} &; \quad r \geq a\\
+			\end{cases}
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	Find the electric field due to a thin infinite plane of uniform charge distribution $\sigma$.
+\end{question}
+
+\begin{solution}
+	Consider a cylindrical Gaussian surface, with ends of area $A$, as shown.
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\h{2};
+			\def\r{1};
+			\def\L{5};
+			
+			\draw [blue] ({-\L/2},0) -- ({\L/2},0) node [right] {$\sigma$};
+			
+			\begin{scope}[red]
+				\draw (0,{-\h/2}) circle [x radius = \r, y radius = 0.4*\r];
+				\draw (0,{\h/2}) circle [x radius = \r, y radius = 0.4*\r];
+				
+				\draw ({-\r},{-\h/2}) -- ({-\r},{\h/2});
+				\draw ({\r},{-\h/2}) -- ({\r},{\h/2});
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+	The charge in the interior of the surface is
+	\begin{align*}
+		\dif q &= A \sigma
+	\end{align*}
+	Therefore, by Gauss' Law,
+	\begin{align*}
+		E_1 \cdot A_1 + E_2 \cdot A_2 &= \dfrac{A \sigma}{\varepsilon_0}\\
+		\therefore 2 E A &= \dfrac{A \sigma}{\varepsilon_0}\\
+		\therefore E &= \dfrac{\sigma}{2 \varepsilon_0}
 	\end{align*}
 \end{solution}
 
