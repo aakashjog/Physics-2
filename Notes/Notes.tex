@@ -493,4 +493,220 @@ The flux of the water passing through the area $A$ is $A v \cos \theta$.
 ~\\
 Similarly for $r < R$, $E = 0$.
 
+\section{Electric Potential}
+
+\begin{definition}[Electrical Potential]
+	The electric potential due to a point charge $q$ is
+	\begin{align*}
+		\varphi \left( \overrightarrow{r} \right) &= \dfrac{1}{4 \pi \varepsilon_0} \dfrac{q}{r} + c
+	\end{align*}
+\end{definition}
+
+If a charge $q$ in moved from point $\textnormal{A}$ to $\textnormal{B}$,
+\begin{align*}
+	W_{\textnormal{\textnormal{A}} \to \textnormal{B}} &= \int\limits_{\overrightarrow{r_{\textnormal{A}}}}^{\overrightarrow{r_{\textnormal{B}}}} \overrightarrow{E} \cdot \dif \overrightarrow{r}\\
+	&= \int\limits_{r_{\textnormal{A}}}^{r_{\textnormal{B}}} \dfrac{1}{4 \pi \varepsilon_0} \dfrac{q}{r^2} \dif r\\
+	&= \left. - \dfrac{1}{4 \pi \varepsilon_0} \dfrac{q}{r} \right|_{r_{\textnormal{A}}}^{r_{\textnormal{B}}}\\
+	&= \dfrac{1}{4 \pi \varepsilon_0} \dfrac{q}{r_{\textnormal{A}}} - \dfrac{1}{4 \pi \varepsilon_0} \dfrac{q}{r_{\textnormal{B}}}
+\end{align*}
+
+Therefore,
+\begin{align*}
+	W_{\textnormal{A} \to \textnormal{B}} &= \varphi \left( \overrightarrow{r_A} \right) - \varphi \left( \overrightarrow{r_B} \right)\\
+	\therefore \varphi \left( \overrightarrow{r_B} - \overrightarrow{r_A} \right) &= - \int\limits_{\overrightarrow{r_A}}^{\overrightarrow{r_B}} \overrightarrow{E} \cdot \dif \overrightarrow{r}
+\end{align*}
+
+\begin{question}
+	An electric dipole with charges $q$ and $-q$ is placed on the $z$-axis with distance $d$ between the charges.
+	Find the field at a general point in space.
+	Find points at which the electric potential is zero.
+\end{question}
+
+\begin{solution}
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\d{6};
+			
+			\coordinate (+q) at (0,{\d/2});
+			\coordinate (-q) at (0,{-\d/2});
+			\coordinate (point) at (\d,0.3*\d);
+			
+			\begin{scope}[lightgray, -stealth]
+			\draw (0,0) -- (5,0) node [right] {$y$};
+			\draw (0,0) -- (0,5) node [above] {$z$};
+			\end{scope}
+			
+			\begin{scope}[red, -stealth]
+			\draw (0,0) -- (point) node [midway, fill = white] {$r$};
+			\draw (+q) -- (point) node [midway, fill = white] {$r_{+}$};
+			\draw (-q) -- (point) node [midway, fill = white] {$r_{-}$};
+			\end{scope}
+			
+			\filldraw (+q) circle (2pt) node [left] {$q$};
+			\filldraw (-q) circle (2pt) node [left] {$-q$};
+		\end{tikzpicture}
+	\end{figure}
+	Let the electric potential at infinity be zero.
+	\begin{align*}
+		\varphi \left( \overrightarrow{r} \right) &= \dfrac{1}{4 \pi \varepsilon_0} \left( \dfrac{q}{r_{+}} + \dfrac{-q}{r_{-}} \right)\\
+		&= \dfrac{1}{4 \pi \varepsilon_0} \dfrac{q (r_{-} - r_{+})}{r_{-} \cdot r_{+}}
+	\end{align*}
+	Therefore, the potential is zero only if $r_{+} = r_{-}$.
+	Therefore, for all points on the $x y$-plane, the potential is zero.
+\end{solution}
+
+\begin{question}
+	Find the electric potential at a point at distance $r$ on the equator of a line of charge of length $L$ and uniform line charge density $\lambda$.
+\end{question}
+
+\begin{solution}
+	Consider an elemental charge $\dif q$ with length $\dif z$ at a distance $z$ from the centre of the line.
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			
+		\end{tikzpicture}
+	\end{figure}
+	\begin{align*}
+		\dif q &= \lambda \dif z
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\varphi(r) &= \int \dfrac{1}{4 \pi \varepsilon_0} \dfrac{q}{\sqrt{z^2 + r^2}}\\
+		&= \int\limits_{-\sfrac{L}{2}}^{\sfrac{L}{2}} \dfrac{1}{4 \pi \varepsilon_0} \dfrac{\lambda \dif z}{\sqrt{z^2 + r^2}}\\
+		&= \dfrac{\lambda}{4 \pi \varepsilon_0} \ln \left( \dfrac{\sqrt{L^2 + 4 r^2} + L}{\sqrt{L^2 + 4 r^2} - L} \right)
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	Find the electric potential due to an infinite line of charge.
+\end{question}
+
+\begin{solution}
+	For an infinite line of charge, the charge at infinity is not zero.
+	Therefore, it is wrong to assume that the electric potential at infinity is zero.
+	Therefore, the result for a finite line of charge cannot be used to find the potential due to an infinite line of charge.\\
+	Therefore, the potential needs to be calculated using the electric field.
+	\begin{align*}
+		\varphi(r) - \varphi(r_0) &= -\int\limits_{r_0}^{r} \overrightarrow{E} \cdot \dif \overrightarrow{r}\\
+		&= - \int\limits_{r_0}^{r} E \dif r\\
+		&= - \int\limits_{r_0}^{r} \dfrac{\lambda}{2 \pi \varepsilon_0 r} \dif r\\
+		&= \left. - \dfrac{\lambda}{2 \pi \varepsilon_0} \ln r \right|_{r_0}^{r}\\
+		&= \dfrac{\lambda}{2 \pi \varepsilon_0} (\ln r_0 - \ln r)\\
+		\therefore \varphi(r) &= \varphi(r_0) + \dfrac{\lambda}{2 \pi \varepsilon_0} (\ln r_0 - \ln r)
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	Find the electric potential due to a hollow sphere with surface charge density $\sigma$ and radius $R$.
+\end{question}
+
+\begin{solution}
+	Let the electric potential at infinity be zero.\\
+	~\\
+	\begin{align*}
+		\overrightarrow{E} &=
+			\begin{cases}
+				0 &;\quad r < R\\
+				\dfrac{1}{4 \pi \varepsilon_0} \dfrac{q}{r^2} &;\quad r > R\\
+			\end{cases}
+	\end{align*}
+	Therefore, if $r > R$,
+	\begin{align*}
+		\varphi(r) - \cancelto{0}{\varphi(\infty)} &= - \int\limits_{\infty}^{r} \overrightarrow{E} \cdot \dif \overrightarrow{r}\\
+		&= \int\limits_{r}^{\infty} E \dif r\\
+		&= \int\limits_{r}^{\infty} \dfrac{1}{4 \pi \varepsilon_0} \dfrac{q}{r^2} \dif r\\
+		&= \left. - \dfrac{1}{4 \pi \varepsilon_0} \dfrac{q}{r^2} \right|_{r}^{\infty}\\
+		\therefore \varphi(r) &= \dfrac{1}{4 \pi \varepsilon_0} \dfrac{q}{r}
+	\end{align*}
+	~\\
+	If $r < R$,
+	\begin{align*}
+		\varphi(r) - \varphi(R) &= \int\limits_{R}^{r} \overrightarrow{E} \cdot \dif \overrightarrow{r}\\
+		&= \int\limits_{R}^{r} E \dif r\\
+		&= \int\limits_{R}^{r} 0 \dif r\\
+		\therefore \varphi(r) &= \varphi(R)\\
+		&= \dfrac{1}{4 \pi \varepsilon_0} \dfrac{q}{R}
+	\end{align*}
+	Therefore, the potential is constant.
+	~\\
+	Therefore,
+	\begin{align*}
+		\varphi &=
+			\begin{cases}
+				\dfrac{1}{4 \pi \varepsilon_0} \dfrac{q}{R} &;\quad r \le R\\
+				\dfrac{1}{4 \pi \varepsilon_0} \dfrac{q}{r} &;\quad r \ge R\\
+			\end{cases}
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	Find the electric potential due a ring of charge with radius $R$ and charge $q$, at a distance $z$ from its centre, on its axis of symmetry.
+\end{question}
+
+\begin{solution}
+	Let the electric potential at infinity be zero.\\
+	~\\
+	\begin{align*}
+		\varphi_{\textnormal{ring}} &= \int \dfrac{1}{4 \pi \varepsilon_0} \dfrac{\dif q}{r}\\
+		&= \int\limits_{0}^{q} \dfrac{1}{4 \pi \varepsilon_0} \dfrac{\dif q}{\sqrt{R^2 + z^2}}\\
+		&= \dfrac{1}{4 \pi \varepsilon_0} \dfrac{1}{\sqrt{R^2 + z^2}}
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	Find the electric potential due a disk of charge with radius $R$ and charge $q$, at a distance $z$ from its centre, on its axis of symmetry.
+\end{question}
+
+\begin{solution}
+	Let the electric potential at infinity be zero.\\
+	~\\
+	Consider an elemental ring of thickness $\dif r$ and radius $r$.
+	Therefore,
+	\begin{align*}
+		\varphi_{\textnormal{disk}} &= \int \dif \varphi_{\textnormal{ring}}\\
+		&= \int \dfrac{1}{4 \pi \varepsilon_0} \dfrac{\dif q_{\textnormal{ring}}}{\sqrt{r^2 + z^2}}\\
+		&= \int\limits_{0}^{R} \dfrac{1}{4 \pi \varepsilon_0} \dfrac{2 \pi r \dif r \sigma}{\sqrt{r^2 + z^2}}\\
+		&= \dfrac{\sigma}{2 \varepsilon} \left( \sqrt{R^2 + z^2} - |z| \right)
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	Three charges, $q$, $-4q$, $2q$ are placed on the vertices of an equilateral triangle of side $a$. Find the energy in the system.
+\end{question}
+
+\begin{solution}
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\a{3};
+			
+			\coordinate (q) at (0,0);
+			\coordinate (2q) at (0:\a);
+			\coordinate(-4q) at (60:\a);
+			
+			\filldraw (q) circle (2pt) node [below] {$q$};
+			\filldraw (2q) circle (2pt) node [below] {$2q$};
+			\filldraw (-4q) circle (2pt) node [above] {$-4q$};
+			
+			\draw [dashed] (q) -- node [midway, below] {$a$} (2q) -- node [midway, above right] {$a$} (-4q) -- node [midway, above left] {$a$} cycle;
+		\end{tikzpicture}
+	\end{figure}
+	The energy in the system is the amount of energy required to build the system by bringing each of the charges from infinity to its position, one by one.\\
+	Let the positions of $q$, $2q$ and $-4q$ be A, B and C respectively.\\
+	The energy required to bring the first charge, $q$, from infinity to A is zero, as there are no forces acting on it.\\
+	The energy required to bring the second charge, $2q$, from infinity to B is 
+	\begin{align*}
+		U_{2q} &= - \int\limits_{\infty}^{\overrightarrow{r_\textnormal{B}}} \overrightarrow{F} \cdot \dif \overrightarrow{r}\\
+		&= - \int\limits_{\infty}^{\overrightarrow{r_\textnormal{B}}} (2q) \cdot \overrightarrow{E} \cdot \dif \overrightarrow{r}\\
+		&= - (2q) \int\limits_{\infty}^{\overrightarrow{r_\textnormal{B}}} \overrightarrow{E} \cdot \dif \overrightarrow{r}\\
+		&= (2q) \left( \varphi(\textnormal{B}) - \varphi(\infty) \right)\\
+		&= (2q) \cdot \varphi(\textnormal{B})
+	\end{align*}
+	where $\varphi(\textnormal{B})$ is potential at point B due to the existing charges, i.e. $q$.
+	Similarly, the energy required to bring the third charge, $-4q$, from infinity to C is $(-4q) \cdot \varphi(\textnormal{C})$, where $\varphi(\textnormal{C})$ is the potential at point C due to the existing charges, i.e. $q$ and $2q$.\\
+	Therefore, the total energy required is
+	\begin{align*}
+		U &= \left( 0 \right) + (2q) \left( \dfrac{1}{4 \pi \varepsilon_0} \dfrac{q}{a^2} \right) + (-4q) \left( \dfrac{1}{4 \pi \varepsilon_0} \dfrac{q}{a^2} + \dfrac{1}{4 \pi \varepsilon_0} \dfrac{2q}{a^2} \right)
+	\end{align*}
+\end{solution}
+
 \end{document}
