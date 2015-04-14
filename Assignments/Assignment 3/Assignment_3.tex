@@ -1,4 +1,4 @@
-\documentclass[fleqn, a4paper, 10pt, oneside]{scrartcl}
+\documentclass[fleqn, a4paper, 12pt, oneside]{amsart}
 %\usepackage[top = 2cm, bottom = 1cm, left = 1cm, right = 1cm]{geometry}
 \usepackage{exsheets, tasks}
 \usepackage{amsmath, amssymb, amsthm} %standard AMS packages
@@ -18,9 +18,6 @@
 \usepackage{enumerate} %numbered lists
 \usepackage{float} %inserting floats
 \usepackage{circuitikz} %circuit diagrams
-\usepackage[urw-garamond]{mathdesign}% Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
-%\usepackage{calligra}
-\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}} %adds numbers to specific equations in non-numbered list of equations
 
@@ -44,42 +41,31 @@
 \renewcommand{\thesubsection}{(\arabic{subsection})}
 \renewcommand{\thesection}{(\arabic{section})}
 
-%%section headings on left
-%\makeatletter
-%\def\specialsection{\@startsection{section}{1}%
-%	\z@{\linespacing\@plus\linespacing}{.5\linespacing}%
-%	%  {\normalfont\centering}}% DELETED
-%	{\normalfont}}% NEW
-%\def\section{\@startsection{section}{1}%
-%	\z@{.7\linespacing\@plus\linespacing}{.5\linespacing}%
-%	%  {\normalfont\scshape\centering}}% DELETED
-%	{\normalfont\scshape}}% NEW
-%\makeatother
-%
-%%forces newline after subsection
-%\makeatletter
-%\def\subsection{\@startsection{subsection}{3}%
-%	\z@{.5\linespacing\@plus.7\linespacing}{.1\linespacing}%
-%	{\normalfont\itshape}}
-%\makeatother
+%section headings on left
+\makeatletter
+\def\specialsection{\@startsection{section}{1}%
+	\z@{\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\centering}}% DELETED
+	{\normalfont}}% NEW
+\def\section{\@startsection{section}{1}%
+	\z@{.7\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\scshape\centering}}% DELETED
+	{\normalfont\scshape}}% NEW
+\makeatother
+
+%forces newline after subsection
+\makeatletter
+\def\subsection{\@startsection{subsection}{3}%
+	\z@{.5\linespacing\@plus.7\linespacing}{.1\linespacing}%
+	{\normalfont\itshape}}
+\makeatother
 
 \settasks{counter-format = tsk[1].}
 
 \SetupExSheets{solution/print = true}
 
-\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
-
 %opening
-\title
-{	
-	\normalfont \normalsize 
-	\textsc{university, school or department name} \\ [25pt] % Your university, school and/or department name(s)
-	\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
-	\huge Physics 2 : Assignment 3 \\ % The assignment title
-	\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
-}
-
-%\title{Physics 2 : Assignment 3}
+\title{Physics 2 : Assignment 3}
 \author
 {
 	Aakash Jog\\
@@ -148,7 +134,7 @@
 	As $\varphi(\infty) = 0$, and as $E = \dod{\varphi}{r}$
 	\begin{align*}
 		\varphi(0) &= -\int\limits_{\infty}^{0} E \dif r\\
-		&= \int\limits_{0}^{a} 0 \dif r + \int\limits_{a}^{b} \left( \dfrac{k}{\varepsilon_0} \dfrac{b - a}{r^2} \right) \dif r + \int\limits_{b}^{\infty} \left( \dfrac{k}{\varepsilon_0} \dfrac{r - a}{r^2} \right) \dif r\\
+		&= \int\limits_{0}^{a} 0 \dif r + \int\limits_{a}^{b} \left( \dfrac{k}{\varepsilon_0} \dfrac{r - a}{r^2} \right) \dif r + \int\limits_{b}^{\infty} \left( \dfrac{k}{\varepsilon_0} \dfrac{b - a}{r^2} \right) \dif r\\
 		&= 0 + \dfrac{k}{\varepsilon_0} \dfrac{b - a}{b} - \dfrac{k}{\varepsilon_0} \left( \ln \left( \dfrac{a}{b} \right) + 1 - \dfrac{a}{b} \right)\\
 		&= \dfrac{k}{\varepsilon_0} \ln \dfrac{b}{a}
 	\end{align*}
@@ -173,11 +159,57 @@
 \begin{question}
 	A conical surface (an empty ice-cream cone) carries a uniform surface charge $\sigma$.
 	The height of the cone is $h$, as is the radius of the top.
-	Find the potential difference between points $a$ (the vertex) and $b$ (the centre of the top).
+	Find the potential difference between points $\mathrm{a}$ (the vertex) and $\mathrm{b}$ (the centre of the top).
 \end{question}
 
 \begin{solution}
-	content...
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\H{4};
+			\def\R{4};
+			\def\h{3};
+			\def\r{3};
+			
+			\coordinate (apex) at (0,0);
+			\coordinate (base centre) at (0,\H);
+			\coordinate (elemental ring centre) at (0,\h);
+			
+			\draw (base centre) circle [x radius = \R, y radius = 0.1*\R];
+			\draw ($ (base centre) + (-\H,0) $) -- (apex);
+			\draw ($ (base centre) + (\H,0) $) -- (apex);
+			
+			\draw (elemental ring centre) circle [x radius = \r, y radius = 0.1*\r];
+			
+			\begin{scope}[dashed, stealth-stealth]
+				\draw (base centre) -- ++(\R,0) node [midway, fill = white] {$h$};
+				\draw (elemental ring centre) -- ++(\r,0) node [midway, fill = white] {$r$};
+				\draw ($ (apex) + (1,0) $) -- ($ (elemental ring centre) + (\r,0) + (1,0) $) node [midway, fill = white] {$l$};
+				\draw (base centre) -- ($ (elemental ring centre) + (-\r,0) $) node [midway, fill = white] {$s$};
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+	Consider an elemental ring of radius $r$ and thickness $\dif r$ as shown.\\
+	Let $s$ be the distance from the centre of the base to any point on the elemental ring.\\
+	Therefore,
+	\begin{align*}
+		\varphi(a) &= \int \dfrac{k \dif q}{l}\\
+		&= \int\limits_{0}^{\sqrt{2} h} \dfrac{k \sigma \cdot 2 \pi r}{l} \dif l\\
+		&= \int\limits_{0}^{\sqrt{2} h} \dfrac{2 k \sigma \pi r}{\sqrt{2} r} \dif l\\
+		&= \dfrac{2 k \sigma \pi}{\sqrt{2}} \cdot \sqrt{2} h\\
+		&= \dfrac{\sigma h}{2 \varepsilon_0}
+	\end{align*}
+	\begin{align*}
+		\varphi(b) &= \int \dfrac{k \dif q}{s}\\
+		&= \int\limits_{0}^{\sqrt{2} h} \dfrac{k \sigma \cdot 2 \pi r}{\sqrt{h^2 + l^2 - \sqrt{2} h l}} \dif l\\
+		&= \left. \dfrac{2 k \sigma \pi}{\sqrt{2}} \left( \sqrt{h^2 + l^2 - \sqrt{2} h l} \right) \right|_{0}^{\sqrt{2}}\\
+		&\quad + \left. \dfrac{2 k \sigma \pi}{\sqrt{2}} \left( \dfrac{h}{\sqrt{2}} \ln \left( 2 \sqrt{h^2 + l^2 - \sqrt{2} h l} + 2 l - \sqrt{2} h \right) \right) \right|_{0}^{\sqrt{2}} \\
+		&= \dfrac{\sigma h}{4 \varepsilon_0} \ln \left( 3 + 2 \sqrt{2} \right)\\
+		&= \dfrac{\sigma h}{2 \varepsilon_0} \ln \left( 1 + \sqrt{2} \right)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\varphi(a) - \varphi(b) &= \dfrac{\sigma h}{2 \varepsilon_0} \left( 1 - \ln \left( 1 + \sqrt{2} \right) \right)
+	\end{align*}
 \end{solution}
 
 \begin{question}
@@ -186,8 +218,8 @@
 	Suppose that we changed the right-hand charge in the first figure to $-q$; what then is the potential at $\mathrm{P}$?
 	What field does that suggest?
 	Explain.
-	\begin{tasks}(2)
-		\task
+	\begin{enumerate}
+		\item
 			\begin{figure}[H]
 				\begin{tikzpicture}
 					\def\z{3};
@@ -213,7 +245,7 @@
 					\end{scope}
 				\end{tikzpicture}
 			\end{figure}
-		\task
+		\item
 			\begin{figure}[H]
 				\begin{tikzpicture}
 					\def\z{3};
@@ -237,7 +269,7 @@
 					\end{scope}
 				\end{tikzpicture}
 			\end{figure}
-		\task
+		\item
 			\begin{figure}[H]
 				\begin{tikzpicture}
 					\def\z{3};
@@ -261,12 +293,12 @@
 					\end{scope}
 				\end{tikzpicture}
 			\end{figure}
-	\end{tasks}
+	\end{enumerate}
 \end{question}
 
 \begin{solution}
-	\begin{tasks}
-		\task
+	\begin{enumerate}
+		\item
 			\begin{align*}
 				\varphi &= 2 \cdot \dfrac{1}{4 \pi \varepsilon_0} \dfrac{q}{\sqrt{\sfrac{d^2}{4} + z^2}}
 			\end{align*}
@@ -289,7 +321,7 @@
 				&= 0
 			\end{align*}\\
 			Therefore, $E_z = 0$, therefore, the field must be in the horizontal direction only.
-		\task
+		\item
 			\begin{align*}
 				\varphi &= \int\limits_{-L}^{L} \dfrac{1}{4 \pi \varepsilon_0} \dfrac{\lambda \dif x}{\sqrt{x^2 + z^2}}\\
 				&= \dfrac{\lambda}{4 \pi \varepsilon_0} \left. \ln \left( x + \sqrt{x^2 + z^2} \right) \right|_{-L}{L}\\
@@ -307,7 +339,7 @@
 				&= \dfrac{\lambda}{2 \pi \varepsilon_0} \dfrac{L}{z \sqrt{z^2 + L^2}}
 			\end{align*}
 			This is consistent with the known electric field.
-		\task
+		\item
 			Considering the ring to be made up of elemental rings,
 			\begin{align*}
 				\varphi &= \int\limits_{0}^{R} \dfrac{1}{4 \pi \varepsilon_0} \dfrac{\sigma \cdot 2 \pi r \dif r}{\sqrt{r^2 + z^2}}\\
@@ -326,7 +358,7 @@
 				&= \dfrac{\sigma}{2 \varepsilon_0} \left( 1 - \dfrac{z}{\sqrt{R^2 + z^2}} \right)
 			\end{align*}
 			This is consistent with the known electric field.
-	\end{tasks}
+	\end{enumerate}
 \end{solution}
 
 \end{document}
