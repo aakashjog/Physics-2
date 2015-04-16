@@ -15,7 +15,7 @@
 \usepackage{hyperref} %hyperlinks
 \usepackage{datetime} %date and time
 \usepackage{ulem} %underline for \emph{}
-\usepackage{xfrac} %inline fractions
+\usepackage{xfrac, lmodern} %inline fractions
 \usepackage{enumerate} %numbered lists
 \usepackage{float} %inserting floats
 \usepackage{circuitikz} %circuit diagrams
@@ -35,6 +35,8 @@
 \newtheorem{law}{Law}
 
 \newcommand{\curl}{\mathrm{curl\,}}
+
+\newcommand{\divergence}{\mathrm{div\,}}
 
 \makeatletter
 \@addtoreset{section}{part} %resets section numbers in new part
@@ -68,7 +70,7 @@
 		\includegraphics[height = 12pt]{sa.eps}
 	\end{figure}
 	This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
-} %CC-BY-NC-SA licencse
+} %CC-BY-NC-SA license
 
 \tableofcontents
 
@@ -670,6 +672,8 @@ Therefore,
 	\end{align*}
 \end{solution}
 
+\section{Electrical Potential Energy}
+
 \begin{question}
 	Three charges, $q$, $-4q$, $2q$ are placed on the vertices of an equilateral triangle of side $a$. Find the energy in the system.
 \end{question}
@@ -708,5 +712,123 @@ Therefore,
 		U &= \left( 0 \right) + (2q) \left( \dfrac{1}{4 \pi \varepsilon_0} \dfrac{q}{a^2} \right) + (-4q) \left( \dfrac{1}{4 \pi \varepsilon_0} \dfrac{q}{a^2} + \dfrac{1}{4 \pi \varepsilon_0} \dfrac{2q}{a^2} \right)
 	\end{align*}
 \end{solution}
+
+\begin{question}
+	Find the potential energy in a solid sphere of charge, with charge density $\rho$ and radius $R$.
+\end{question}
+
+\begin{solution}
+	Consider a solid sphere of charge with $\rho$ and $r$.
+	Consider an elemental shell of thickness $\dif r$ on this sphere.\\
+	Therefore,
+	\begin{align*}
+		\dif V &= 4 \pi r^2 \dif r\\
+		\therefore \dif q &= \rho \cdot \dif V\\
+		&= 4 \pi \rho r^2 \dif r
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\dif U &= \dfrac{1}{4 \pi \varepsilon_0} \dfrac{q_{\textnormal{inside}}}{r} \dif q\\
+		&= \dfrac{1}{4 \pi \varepsilon_0} \dfrac{\dfrac{4}{3} \pi r^3 \rho}{r} \cdot 4 \pi r^2 \dif r \rho\\
+		\therefore U &= \int\limits_{0}^{R} \dfrac{4 \pi \rho^2}{3 \varepsilon_0} r^4 \dif r\\
+		&= \dfrac{4 \pi \rho^2 R^5}{15 \varepsilon_0}
+	\end{align*}
+\end{solution}
+
+\section{Integral Form of Gauss' Law}
+
+The volume of the elemental body used for integration is denoted by $\dif^3 r$.\\
+For Cartesian coordinate systems, $\dif^3 r = \dif x \dif y \dif z$.\\
+For cylindrical coordinate systems, $\dif^3 r = r \dif \theta \dif \varphi \dif z$.\\
+For spherical coordinate systems, $\dif^3 r = r^2 \sin \theta \dif r \dif \theta \dif \varphi $.\\
+
+\begin{align*}
+	\iint\limits_{\partial V} \overrightarrow{E} \cdot \dif \overrightarrow{A} &= \dfrac{1}{\varepsilon_0} Q_{\textnormal{inside}}\\
+	&= \dfrac{1}{\varepsilon_0} \iiint\limits_{V} \rho \dif^3 r 
+	\footnotemark
+\end{align*}
+
+If a body with volume $V$ and surface area $S$ is cut into two parts, with volumes $V_1$ and $V_2$ and surface area $S_1$ and $S_2$ respectively,
+\begin{equation*}
+	V = V_1 + V_2
+\end{equation*}
+However, the surface area increases,
+\begin{equation*}
+	S = S_1 + S_2 + 2 A \neq S_1 + S_2
+\end{equation*}
+where $A$ is the area of the new surface created due to the cut.\\
+Therefore,
+\begin{align*}
+	\iint\limits_{S_1} \overrightarrow{E} \cdot \dif \overrightarrow{A} + \iint\limits_{S_2} \overrightarrow{E} \cdot \dif \overrightarrow{A} &= \iint\limits_{\partial V} \overrightarrow{E} \cdot \dif \overrightarrow{A}
+\end{align*}<++>
+
+\begin{figure}[H]
+	\begin{tikzpicture}
+		\def\xMAX{5};
+		\def\yMAX{5};
+		\def\zMAX{5};
+
+		\def\x{2};
+		\def\y{2};
+		\def\z{2};
+		\def\dx{1};
+		\def\dy{1};
+		\def\dz{1};
+		\def\F{1};
+
+		\begin{scope}[-stealth, lightgray]
+			\draw (0,0,0) -- (\xMAX,0,0);
+			\draw (0,0,0) -- (0,\yMAX,0);
+			\draw (0,0,0) -- (0,0,\zMAX);
+		\end{scope}
+
+		\begin{scope}
+			\draw (\x, \y, \z) -- (\x + \dx, \y, \z) -- (\x + \dx, \y + \dy, \z) -- (\x, \y + \dy, \z) -- cycle;
+			\draw (\x, \y, \z) -- (\x, \y, \z + \dz) -- (\x + \dx, \y, \z + \dz) -- (\x + \dx, \y, \z) -- cycle;
+			\draw (\x, \y, \z) -- (\x, \y + \dy, \z) -- (\x, \y + \dy, \z + \dz) -- (\x, \y, \z + \dz) -- cycle;
+
+			\draw (\x + \dx, \y + \dy, \z + \dz) -- (\x, \y + \dy, \z + \dz) -- (\x, \y, \z + \dz) -- (\x + \dx, \y, \z + \dz) -- cycle;
+			\draw (\x + \dx, \y + \dy, \z + \dz) -- (\x + \dx, \y + \dy, \z) -- (\x, \y + \dy, \z) -- (\x, \y + \dy, \z + \dz) -- cycle;
+			\draw (\x + \dx, \y + \dy, \z + \dz) -- (\x + \dx, \y, \z + \dz) -- (\x + \dx, \y, \z) -- (\x + \dx, \y + \dy, \z) -- cycle;
+		\end{scope}
+	\end{tikzpicture}
+\end{figure}
+
+\begin{align*}
+	\Phi &= \quad E_z \left( x + \dfrac{\dif x}{2}, y + \dfrac{\dif y}{2}, z + \dif z \right) \dif x \dif y\\
+	&\quad - E_z \left( x + \dfrac{\dif x}{2}, y + \dfrac{\dif y}{2}, z \right) \dif x \dif y\\
+	&\quad + E_y \left( x + \dfrac{\dif x}{2}, y + \dif y, z + \dfrac{\dif z}{2} \right) \dif x \dif z\\
+	&\quad  - E_y \left( x + \dfrac{\dif x}{2}, y, z + \dfrac{\dif z}{2} \right) \dif x \dif z\\
+	&\quad + E_x \left( x + \dif x, y + \dfrac{\dif y}{2}, z + \dfrac{\dif z}{2} \right) \dif y \dif z\\
+	&\quad  - E_x \left( x, y + \dfrac{\dif y}{2}, z + \dfrac{\dif z}{2} \right) \dif y \dif z\\
+	&= \quad \dfrac{E_z \left( x + \dfrac{\dif x}{2}, y + \dfrac{\dif y}{2}, z + \dif z \right) - E_z \left( x + \dfrac{\dif x}{2}, y + \dfrac{\dif y}{2}, z \right)}{\dif z} \dif x \dif y\\
+	&\quad + \dfrac{E_y \left( x + \dfrac{\dif x}{2}, y + \dif y, z + \dfrac{\dif z}{2} \right) - E_y \left( x + \dfrac{\dif x}{2}, y, z + \dfrac{\dif z}{2} \right)}{\dif y} \dif x \dif z\\
+	&\quad + \dfrac{E_x \left( x + \dif x, y + \dfrac{\dif y}{2}, z + \dfrac{\dif z}{2} \right) - E_x \left( x, y + \dfrac{\dif y}{2}, z + \dfrac{\dif z}{2} \right)}{\dif x} \dif y \dif z\\
+	&= \quad \left( \left. \dpd{E_x}{x} \right|_{\left( x + \frac{\dif x}{2}, y + \frac{\dif y}{2}, z \right)} \right.\\
+	&\quad \quad + \left. \dpd{E_y}{y} \right|_{\left( x + \frac{\dif x}{2}, y, z + \frac{\dif z}{2} \right)}\\
+	&\quad \quad + \left. \left. \dpd{E_z}{z} \right|_{\left( x + \frac{\dif x}{2}, y + \frac{\dif y}{2}, z \right)} \right) \dif x \dif y \dif z\\
+\end{align*}
+Therefore
+\begin{align*}
+	\divergence \overrightarrow{E} &= \lim\limits_{\dif x \to 0, \dif y \to 0, \dif z \to 0} \dfrac{\Phi}{\dif x \dif y \dif z}\\
+	&= \left. \left( \dpd{E_x}{x} + \dpd{E_y}{y} + \dpd{E_z}{z} \right) \right|_{(x,y,z)}\\
+	&= \overrightarrow{\nabla} \cdot \overrightarrow{E}
+\end{align*}
+
+\begin{align*}
+	\overrightarrow{E} &= -\overrightarrow{\nabla} \varphi\\
+	\therefore \divergence \overrightarrow{E} &= \overrightarrow{\nabla} \cdot \left( -\overrightarrow{\nabla} \varphi \right)\\
+	&= \dpd[2]{\varphi}{x} + \dpd[2]{\varphi}{y} + \dpd[2]{\varphi}{x}\\
+	&= \nabla^2 \varphi = \Delta \varphi
+\end{align*}
+
+\begin{definition}[Laplacian]
+	$\nabla^2$ is called the Laplacian.
+\end{definition}
+
+\section{Conductors}
+
+In an electrostatic condition, the field inside a conductor is zero.
+If it is not, as the conductor allows movement of charged particles, there will be a current and the condition will not be electrostatic.
 
 \end{document}
