@@ -6,6 +6,7 @@
 \usepackage[counter-within = recitationcount]{exsheets}
 \usepackage{tasks}
 \usepackage{amsmath, amssymb, amsthm} %standard AMS packages
+\usepackage{esint} %integral signs
 \usepackage{marginnote} %marginnotes
 \usepackage{gensymb} %miscellaneous symbols
 \usepackage{commath} %differential symbols
@@ -18,8 +19,8 @@
 \usepackage{hyperref} %hyperlinks
 \usepackage{datetime} %date and time
 \usepackage{ulem} %underline for \emph{}
-\usepackage{xfrac} %inline fractions
-\usepackage{enumerate} %numbered lists
+\usepackage{xfrac, lmodern} %inline fractions
+\usepackage{enumerate, enumitem} %numbered lists
 \usepackage{float} %inserting floats
 \usepackage{circuitikz} %circuit diagrams
 
@@ -397,6 +398,8 @@ E-mail: rms9999@gmail.com\\
 
 \recitation
 
+\section{Electric Potential}
+
 \setcounter{question}{1}
 
 \begin{question}
@@ -550,6 +553,151 @@ E-mail: rms9999@gmail.com\\
 				&= \dfrac{Q}{8 \pi R \varepsilon_0} \left( 1 - \dfrac{r^2}{R^2} \right)
 			\end{align*}
 	\end{tasks}
+\end{solution}
+
+\recitation
+
+\begin{question}
+	A point charge $Q$ is surrounded by a spherical grounded shell of radius $R_1$.
+	\begin{enumerate}
+		\item
+			What is the charge accumulated on the shell?
+			Where did it come from?
+		\item
+			The entire system is covered with another spherical shell of radius $R_2$ and charged with $q$.
+			What will be the charge accumulated on the grounded shell?
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin=*]
+		\item 
+			The charge accumulated on the shell comes from the ground.\\
+			Let the charge on the shell be $Q_1$.\\
+			As the shell is grounded, the net potential on it must be zero.
+			\begin{align*}
+				\varphi &= \text{$\varphi$ due to $Q$} + \text{$\varphi$ due to $Q'$}\\
+				\therefore 0 &= \dfrac{Q}{4 \pi \varepsilon_0 R_1} + \dfrac{Q_1}{4 \pi \varepsilon_0 R_1}\\
+				\therefore Q_1 &= -Q
+			\end{align*}
+		\item
+			Let the charge on the grounded shell be $Q_2$.\\			
+			\begin{align*}
+				\varphi &= \text{$\varphi$ due to $Q$} + \text{$\varphi$ due to $Q_2$} + \text{$\varphi$ due to $q$}\\
+				\therefore 0 &= \dfrac{Q}{4 \pi \varepsilon_0 R_1} + \dfrac{Q_2}{4 \pi \varepsilon_0 R_1} + \dfrac{q}{4 \pi \varepsilon_0 R_2}\\
+				\therefore Q_2 &= Q - \dfrac{q R_1}{R_2}
+			\end{align*}
+	\end{enumerate}
+\end{solution}
+
+\addtocounter{question}{1}
+
+\begin{question}
+	A point charge $Q$ is set in the center (same distance from all corners) of a perfect tetrahedron.
+	The bottom face of the tetrahedron is uniformly charged with charge density $\sigma$.
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin=*]
+		\item 
+			Consider a spherical Gaussian surface passing through the vertices of the tetrahedron.\\
+			Therefore by Gauss' Law, the total flux passing through the sphere, due to $Q$ is $\oiint \overrightarrow{E} \cdot \dif A$.\\
+			Hence, by symmetry, the flux through every surface of the tetrahedron, due to $Q$ is 
+			\begin{align*}
+				\Phi &= \dfrac{1}{4} \oiint \overrightarrow{E} \cdot \dif A\\
+				&= \dfrac{1}{4} \dfrac{Q}{\varepsilon_0}
+			\end{align*}
+			The flux on the bottom face due to the bottom face itself is zero.
+			Therefore the total flux through the bottom face is the flux due to $Q$ only.
+		\item
+			As the charge on $Q$ and the bottom face of the tetrahedron are similar in charge, the force between them is repulsive in nature.
+			Hence, the force on the bottom face is directed downwards.
+		\item
+			Let the area of the bottom face
+			\begin{align*}
+				F &= (\sigma A) E\\
+				&= \sigma (E A)\\
+				\intertext{As $Q$ is exactly above the centre of the bottom face, due to symmetry, $\oiint \overrightarrow{E} \cdot \overrightarrow{\dif A} = E A$}
+				\therefore F &= \sigma \left( \oiint \overrightarrow{E} \cdot \overrightarrow{\dif A} \right)\\
+				&= F \left( \dfrac{Q}{4 \varepsilon_0} \right)
+			\end{align*}
+	\end{enumerate}
+\end{solution}
+
+\begin{question}
+	The following electric field is given:
+	\begin{equation*}
+		\overrightarrow{E} = \alpha y^2 \hat{i} + \alpha (2 x y + z^2) \hat{j} + 2 \alpha y z \hat{k}
+	\end{equation*}
+	Calculate the potential at ⃗$r = (x,y,z)$, set the potential at the origin to be zero.
+\end{question}
+
+\begin{solution}
+	Let $\varphi(0,0,0) = 0$.\\
+	Therefore,
+	\begin{align*}
+		E_x &= -\dod{\varphi}{x}\\
+		&= \alpha y^2\\
+		\therefore \varphi &= -\alpha x y^2 + f_1(y,z)\\
+		E_y &= -\dod{\varphi}{y}\\
+		&= \alpha (2 x y + z^2)\\
+		\therefore \varphi &= -\alpha x y^2 - \alpha z^2 y + f_1(x,z)\\
+		E_z &= -\dod{\varphi}{z}\\
+		&= 2 \alpha y z\\
+		\therefore \varphi &= -\alpha y z^2 + f_2(x,y)
+	\end{align*}
+	Comparing the three expressions of $\varphi$,
+	\begin{align*}
+		\varphi &= -\alpha x y^2 - \alpha y z^2 + c
+	\end{align*}
+	As $\varphi(0,0,0) = 0$, $c = 0$.\\
+	Therefore,
+	\begin{align*}
+		\varphi &= -\alpha x y^2 - \alpha y z^2
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	A thin rod of length $L$ is charged with a uniform charge density $\lambda$ is laid along the $x$-axis.
+	\begin{enumerate}
+		\item
+			Calculate the electric potential along the $x$-axis (where $x > L$)
+		\item
+			Calculate the electric field along the $x$-axis (where $x > L$)
+		\item
+			A second identical thin rod is placed along the $x$-axis at distance $L$ from the edge of the first rod.
+			Calculate the force due to left rod, acting on the right one.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin=*]
+		\item 
+			Consider an elemental charge $\dif q$ with length $\dif x$ at a distance $x$ from the origin.\\
+			Therefore, the potential at a distance $d$ from the origin is
+			\begin{align*}
+				\dif \varphi &= \dfrac{\dif q}{4 \pi \varepsilon_0 (L + d - x}\\
+				\therefore \int \dif \varphi &= \int\limits_{0}^{L} \dfrac{\lambda \dif x}{4 \pi \varepsilon_0 (L + d - x)}\\
+				\therefore \varphi &= \dfrac{\lambda}{4 \pi \varepsilon_0} \ln \left( \dfrac{L + d}{d} \right)
+			\end{align*}
+		\item
+			\begin{align*}
+				\dif E &= \dod{\varphi}{r}\\
+				\therefore \dif E &= \dfrac{\dif q}{4 \pi \varepsilon_0 (L + d - x)^2}\\
+				\therefore E &= \dfrac{\lambda}{4 \pi \varepsilon_0} \int\limits_{L + d}^{d} \dfrac{\dif u}{u^2}\\
+				&= \dfrac{\lambda}{4 \pi \varepsilon_0} \left( \dfrac{L}{(L + d) (d)} \right)
+			\end{align*}
+		\item
+			Consider an elemental charge $\dif q$with length $\dif x$, on the second rod, at a distance $x$ from the end of the first rod.\\
+			\begin{align*}
+				\dif F &= \dfrac{\lambda}{4 \pi \varepsilon_0} \left( \dfrac{L}{(L + x) (x)} \right) \dif q\\
+				&= \dfrac{\lambda}{4 \pi \varepsilon_0} \left( \dfrac{L}{(L + x) (x)} \right) \lambda \dif x\\
+				\therefore F &= \int\limits_{L}^{2 L} \dfrac{\lambda^2}{4 \pi \varepsilon_0} \left( \dfrac{L}{(L + x) (x)} \right) \dif x\\
+				&= \dfrac{\lambda^2}{4 \pi \varepsilon_0} \left. \ln \dfrac{x}{L + x} \right|_{L}^{2 L}\\
+				&= \dfrac{\lambda^2}{4 \pi \varepsilon_0} \left( \ln \dfrac{2}{3} - \ln \dfrac{1}{2} \right)\\
+				&= \dfrac{\lambda^2}{4 \pi \varepsilon_0} \left( \ln \dfrac{4}{3} \right)
+			\end{align*}
+	\end{enumerate}
 \end{solution}
 
 \end{document}
