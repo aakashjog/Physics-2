@@ -296,6 +296,56 @@ Charge is defined according to this law.\\
 	Infinite plane of charge & $\dfrac{\sigma}{2 \varepsilon_0}$
 \end{tabular}
 
+\subsection{Capacitors}
+
+A parallel plate capacitor is constructed by arranging two infinite plates with surface charge density $\sigma$ and $-\sigma$ respectively.
+\begin{figure}[H]
+	\begin{tikzpicture}
+		\def\l{4};
+		\def\d{2};
+		
+		\draw [blue] ({-\l/2}, {-\d/2}) -- ({\l/2}, {-\d/2}) node [right] {$\sigma$};
+		\draw [red] ({-\l/2}, {\d/2}) -- ({\l/2}, {\d/2}) node [right] {$-\sigma$};
+		
+		\begin{scope}[blue, -stealth]
+			\foreach \i in {-1.5,...,1.5}
+				\draw (\i,{-\d/4}) -- ++(0,1);
+		\end{scope}
+		
+		\begin{scope}[blue, -stealth]
+			\foreach \i in {-1.5,...,1.5}
+				\draw (\i,{\d/2}) -- ++(0,1);
+		\end{scope}
+		
+		\begin{scope}[blue, -stealth]
+			\foreach \i in {-1.5,...,1.5}
+				\draw (\i,{-\d/2}) -- ++(0,-1);
+		\end{scope}
+		
+		\begin{scope}[red, stealth-]
+			\foreach \i in {-2,...,2}
+				\draw (\i,{\d/4}) -- ++(0,-1);
+		\end{scope}
+		
+		\begin{scope}[red, stealth-]
+			\foreach \i in {-2,...,2}
+				\draw (\i,{\d/2}) -- ++(0,1);
+		\end{scope}
+		
+		\begin{scope}[red, stealth-]
+			\foreach \i in {-2,...,2}
+				\draw (\i,{-\d/2}) -- ++(0,-1);
+		\end{scope}
+	\end{tikzpicture}
+\end{figure}
+
+The electric field due to the plates are as shown. 
+Therefore, the fields between the plates add up and the fields outside the plates cancel out.\\
+Therefore, the net field inside the capacitor is 
+\begin{equation*}
+	{\color{red} \dfrac{\sigma}{2 \varepsilon_0}} + {\color{blue} \dfrac{\sigma}{2 \varepsilon_0}} = \dfrac{\sigma}{\varepsilon_0}
+\end{equation*}
+
 \section{Electric Dipoles}
 
 \begin{definition}[Electric dipole]
@@ -366,56 +416,6 @@ Charge is defined according to this law.\\
 	&= 2 \cdot \dfrac{1}{4 \pi \varepsilon_0} \dfrac{q}{\left( \dfrac{d}{2} \right)^2 + x^2} \cdot \dfrac{\dfrac{d}{2}}{\left( \left( \dfrac{d}{2} \right)^2 + x^2 \right)^{\sfrac{1}{2}}} (- \hat{z})\\
 	&= - \dfrac{1}{4 \pi \varepsilon_0} \dfrac{\overrightarrow{P}}{\left( \left( \dfrac{d}{2} \right)^2 + x^2 \right)^{\sfrac{3}{2}}}
 \end{align*}
-
-\section{Capacitors}
-
-A parallel plate capacitor is constructed by arranging two infinite plates with surface charge density $\sigma$ and $-\sigma$ respectively.
-\begin{figure}[H]
-	\begin{tikzpicture}
-		\def\l{4};
-		\def\d{2};
-		
-		\draw [blue] ({-\l/2}, {-\d/2}) -- ({\l/2}, {-\d/2}) node [right] {$\sigma$};
-		\draw [red] ({-\l/2}, {\d/2}) -- ({\l/2}, {\d/2}) node [right] {$-\sigma$};
-		
-		\begin{scope}[blue, -stealth]
-			\foreach \i in {-1.5,...,1.5}
-				\draw (\i,{-\d/4}) -- ++(0,1);
-		\end{scope}
-		
-		\begin{scope}[blue, -stealth]
-			\foreach \i in {-1.5,...,1.5}
-				\draw (\i,{\d/2}) -- ++(0,1);
-		\end{scope}
-		
-		\begin{scope}[blue, -stealth]
-			\foreach \i in {-1.5,...,1.5}
-				\draw (\i,{-\d/2}) -- ++(0,-1);
-		\end{scope}
-		
-		\begin{scope}[red, stealth-]
-			\foreach \i in {-2,...,2}
-				\draw (\i,{\d/4}) -- ++(0,-1);
-		\end{scope}
-		
-		\begin{scope}[red, stealth-]
-			\foreach \i in {-2,...,2}
-				\draw (\i,{\d/2}) -- ++(0,1);
-		\end{scope}
-		
-		\begin{scope}[red, stealth-]
-			\foreach \i in {-2,...,2}
-				\draw (\i,{-\d/2}) -- ++(0,-1);
-		\end{scope}
-	\end{tikzpicture}
-\end{figure}
-
-The electric field due to the plates are as shown. 
-Therefore, the fields between the plates add up and the fields outside the plates cancel out.\\
-Therefore, the net field inside the capacitor is 
-\begin{equation*}
-	{\color{red} \dfrac{\sigma}{2 \varepsilon_0}} + {\color{blue} \dfrac{\sigma}{2 \varepsilon_0}} = \dfrac{\sigma}{\varepsilon_0}
-\end{equation*}
 
 \section{Gauss' Law}
 
@@ -760,40 +760,11 @@ where $A$ is the area of the new surface created due to the cut.\\
 Therefore,
 \begin{align*}
 	\iint\limits_{S_1} \overrightarrow{E} \cdot \dif \overrightarrow{A} + \iint\limits_{S_2} \overrightarrow{E} \cdot \dif \overrightarrow{A} &= \iint\limits_{\partial V} \overrightarrow{E} \cdot \dif \overrightarrow{A}
-\end{align*}<++>
+\end{align*}
 
-\begin{figure}[H]
-	\begin{tikzpicture}
-		\def\xMAX{5};
-		\def\yMAX{5};
-		\def\zMAX{5};
-
-		\def\x{2};
-		\def\y{2};
-		\def\z{2};
-		\def\dx{1};
-		\def\dy{1};
-		\def\dz{1};
-		\def\F{1};
-
-		\begin{scope}[-stealth, lightgray]
-			\draw (0,0,0) -- (\xMAX,0,0);
-			\draw (0,0,0) -- (0,\yMAX,0);
-			\draw (0,0,0) -- (0,0,\zMAX);
-		\end{scope}
-
-		\begin{scope}
-			\draw (\x, \y, \z) -- (\x + \dx, \y, \z) -- (\x + \dx, \y + \dy, \z) -- (\x, \y + \dy, \z) -- cycle;
-			\draw (\x, \y, \z) -- (\x, \y, \z + \dz) -- (\x + \dx, \y, \z + \dz) -- (\x + \dx, \y, \z) -- cycle;
-			\draw (\x, \y, \z) -- (\x, \y + \dy, \z) -- (\x, \y + \dy, \z + \dz) -- (\x, \y, \z + \dz) -- cycle;
-
-			\draw (\x + \dx, \y + \dy, \z + \dz) -- (\x, \y + \dy, \z + \dz) -- (\x, \y, \z + \dz) -- (\x + \dx, \y, \z + \dz) -- cycle;
-			\draw (\x + \dx, \y + \dy, \z + \dz) -- (\x + \dx, \y + \dy, \z) -- (\x, \y + \dy, \z) -- (\x, \y + \dy, \z + \dz) -- cycle;
-			\draw (\x + \dx, \y + \dy, \z + \dz) -- (\x + \dx, \y, \z + \dz) -- (\x + \dx, \y, \z) -- (\x + \dx, \y + \dy, \z) -- cycle;
-		\end{scope}
-	\end{tikzpicture}
-\end{figure}
-
+Consider a small cuboid of sides $\dif x$, $\dif y$, $\dif z$.
+Let the vertex of the cube, nearest to the origin be $(x,y,z)$.\\
+Therefore,
 \begin{align*}
 	\Phi &= \quad E_z \left( x + \dfrac{\dif x}{2}, y + \dfrac{\dif y}{2}, z + \dif z \right) \dif x \dif y\\
 	&\quad - E_z \left( x + \dfrac{\dif x}{2}, y + \dfrac{\dif y}{2}, z \right) \dif x \dif y\\
@@ -826,9 +797,208 @@ Therefore
 	$\nabla^2$ is called the Laplacian.
 \end{definition}
 
+\section{Vector Analyses in Cylindrical and Spherical Coordinate Systems}
+
+\subsection{Cylindrical Coordinates}
+
+\begin{align*}
+	\overrightarrow{\nabla} f &= \dpd{f}{r} \hat{r} + \dfrac{1}{r} \dpd{f}{\theta} \hat{\theta} + \dpd{f}{z} \hat{z}\\
+	\overrightarrow{\nabla} \cdot \overrightarrow{F} &= \dfrac{1}{r} \dpd{}{r} (r F_r) + \dfrac{1}{r} \dpd{F_{\theta}}{\theta} + \dpd{F_z}{z}\\
+	\overrightarrow{\nabla} \times \overrightarrow{F} &= \left( \dfrac{1}{r} \dpd{F_z}{\theta} - \dpd{F_{\theta}}{z} \right) \hat{r} + \left( \dpd{F_r}{z} - \dpd{F_z}{r} \right) \hat{\theta} + \dfrac{1}{r} \left( \dpd{}{r} (r F_{\theta}) - \dpd{F_r}{\theta} \right) \hat{z}\\
+	\nabla^2 f &= \dfrac{1}{r} \dpd{}{r} \left( r \dpd{f}{r} \right) + \dfrac{1}{r^2} \dpd[2]{f}{\theta} + \dpd[2]{f}{z}
+\end{align*}
+
+\subsection{Spherical Coordinates}
+
+\begin{align*}
+	\overrightarrow{\nabla} f &= \dpd{f}{r} \hat{r} + \dfrac{1}{r} \dpd{f}{\theta} \hat{\theta} + \dfrac{1}{r \sin \theta} \dpd{f}{\varphi} \hat{\varphi}\\
+	\overrightarrow{\nabla} \cdot \overrightarrow{F} &= \dfrac{1}{r^2} \dpd{}{r} (r^2 F_r) + \dfrac{1}{r \sin \theta} \dpd{}{\theta} (F_{\theta} \sin \theta) + \dfrac{1}{r \sin \theta} \dpd{F_{\varphi}}{f}\\
+	\overrightarrow{\nabla} \times \overrightarrow{F} &= \quad \dfrac{1}{r \sin \theta} \left( \dpd{}{\theta} (F_{\varphi} \sin \theta) - \dpd{F_{\theta}}{\varphi} \right) \hat{r}\\
+	&\quad + \dfrac{1}{r} \left( \dfrac{1}{\sin \theta} \dpd{F_r}{\varphi} - \dpd{}{r} (r F_{\varphi}) \right) \hat{\theta}\\
+	&\quad + \dfrac{1}{r} \left( \dpd{}{r} (r F_{\theta}) - \dpd{F_r}{\theta} \right) \hat{\varphi}\\
+	\nabla^2 f &= \dfrac{1}{r^2} \dpd{}{r} \left( r^2 \dpd{f}{r} \right) + \dfrac{1}{r^2 \sin \theta} \dpd{}{\theta} \left( \sin \theta \dpd{f}{\theta} \right) + \dfrac{1}{r^2 \sin^2 \theta} \dpd[2]{f}{\varphi}
+\end{align*}
+
 \section{Conductors}
 
 In an electrostatic condition, the field inside a conductor is zero.
 If it is not, as the conductor allows movement of charged particles, there will be a current and the condition will not be electrostatic.
+
+\begin{question}
+	A point charge $q$ is kept inside a cavity in a conducting sphere.
+	Find the charge on the surfaces of the sphere.
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\R{3};
+
+			\coordinate (cavity centre) at ({(\R/4)*rand()},{(\R/4)*rand()});
+
+			\draw (0,0) circle (\R);
+			\draw (cavity centre) circle (\R/4);
+
+			\fill (cavity centre) circle (2pt) node [left] {$q$};
+		\end{tikzpicture}
+	\end{figure}
+\end{question}
+
+\begin{solution}
+	As the sphere is neutral, $\varphi = 0$.\\
+	Therefore, $-\dfrac{\rho}{\varepsilon_0} = 0$.\\
+	Therefore, by the Poisson equation,
+	\begin{align*}
+		\nabla^2 \varphi &= 0\\
+		\therefore \dfrac{1}{r^2} \dpd{}{r} \left( r^2 \dpd{\varphi}{r} \right) &= 0\\
+		\therefore \dpd{}{r} \left( r^2 \dpd{\varphi}{r} \right) &= 0\\
+		\therefore r^2 \dpd{\varphi}{r} &= c\\
+		\therefore \dpd{\varphi}{r} &= \dfrac{c}{r^2}\\
+		\therefore \varphi &= \int \dfrac{c}{r^2} \dif r\\
+		&= -\dfrac{c}{r} + d\\
+		\intertext{As $\varphi(\infty) = 0$, $d = 0$. Therefore,}
+		\varphi &= -\dfrac{c}{r}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\varphi(R) = -\dfrac{c}{R}\\
+		\therefore c &= -R \varphi(R)\\
+		\therefore \overrightarrow{E} &= -\overrightarrow{\nabla} \varphi(r)\\
+		&= -\dpd{\varphi}{r} \hat{r}\\
+		&= -\left( -\dfrac{R \varphi(R)}{r^2} \right) \hat{r}\\
+		&= \dfrac{R \varphi(R)}{r^2} \hat{r}
+	\end{align*}
+	Therefore, the field is constant all over the outer surface.\\
+	Therefore, 
+	\begin{align*}
+		\therefore \sigma &= \dfrac{q}{4 \pi R^2}
+	\end{align*}
+\end{solution}
+
+\section{Capacitors}
+
+A capacitor is constructed by arranging two conductors, charged with opposite charges.\\
+Suppose the charges on the conductors are $+Q$ and $-Q$.
+Therefore,
+\begin{align*}
+	V &= \varphi(+) - \varphi(-)\\
+	&= -\int\limits_{(-)}^{(+)} \overrightarrow{E} \cdot \dif \overrightarrow{l}\\
+	&= \int\limits_{(+)}^{(-)} \overrightarrow{E} \cdot \dif \overrightarrow{l}\\
+	\therefore V &\propto Q
+\end{align*}
+
+\begin{definition}[Capacitance]
+	Let the charges on the opposite terminals of a capacitor be $+Q$ and $-Q$ respectively.
+	The ratio between $Q$ and the potential difference between the terminals is called the capacitance of the capacitor.
+	\begin{equation*}
+		C = \dfrac{Q}{V}
+	\end{equation*}
+\end{definition}
+
+\subsection{Parallel Plate Capacitors}
+
+Consider a capacitor made of two conducting plates of surface area $A$ each.
+Let the distance between them be $d$.
+Let the charge distribution on the plates be $\sigma$ and $-\sigma$ respectively.\\
+\begin{figure}[H]
+	\begin{tikzpicture}
+		\def\d{1};
+		\def\l{3};
+
+		\def\xMIN{-\l/2 - 1};
+		\def\xMAX{\l/2 + 1};
+
+		\def\yMIN{-1};
+		\def\yMAX{\d + 1};
+
+		\begin{scope}[lightgray, stealth-stealth]
+			\draw (\xMIN,0) -- (\xMAX,0) node [right] {$y$};
+			\draw (0,\yMIN) -- (0,\yMAX) node [above] {$z$};
+		\end{scope}
+
+		\begin{scope}[thick]
+			\draw ({-\l/2},0) -- ({\l/2},0);
+			\draw ({-\l/2},\d) -- ({\l/2},\d);
+		\end{scope}
+	\end{tikzpicture}
+\end{figure}
+If $d$ is very small compared to $A$, the plates can be considered to be infinite.\\
+Therefore,
+\begin{equation*}
+	\overrightarrow{E} = 
+		\begin{cases}
+			\dfrac{\sigma}{\varepsilon_0} \hat{z} &;\quad 0 < z < d\\
+			0                                     &;\quad z < 0 \text{ or } z > d\\
+		\end{cases}
+\end{equation*}
+Therefore,
+\begin{align*}
+	C &= \dfrac{Q}{V}\\
+	  &= \dfrac{\sigma A}{E d}\\
+	  &= \dfrac{\sigma A}{\dfrac{\sigma}{\varepsilon_0} \cdot d}\\
+	  &= \dfrac{A \varepsilon_0}{d}
+\end{align*}
+
+\subsection{Concentric Spherical Capacitor}
+
+Consider a conducting sphere, with radius $R_1$ and charge $+Q$, surrounded by a concentric conducting shell of radius $R_2$ and charge $-Q$.
+Therefore, the potential difference between the any point at $R_1$ from the centre and any point at $R_2$ from the centre is
+\begin{align*}
+	           V &= \varphi(R_1) - \varphi(R_2)\\
+	             &= -\int\limits_{R_2}^{R_1} \overrightarrow{E} \cdot \dif \overrightarrow{r}\\
+	             &= \int\limits_{R_1}^{R_2} \overrightarrow{E} \cdot \dif \overrightarrow{r}\\
+	             &= \int\limits_{R_1}^{R_2} E \dif r\\
+	             &= \int\limits_{R_1}^{R_2} \dfrac{Q}{4 \pi \varepsilon_0 r^2} \dif r\\
+	             &= \left. -\dfrac{Q}{4 \pi \varepsilon_0 r} \right|_{R_1}^{R_2}\\
+	             &= \dfrac{Q}{4 \pi \varepsilon_0} \left( \dfrac{1}{R_1} - \dfrac{1}{R_2} \right)\\
+	\therefore C &= \dfrac{Q}{V}\\
+	             &= \dfrac{4 \pi \varepsilon_0}{\dfrac{1}{R_1} - \dfrac{1}{R_2}}\\
+	             &= 4 \pi \varepsilon_0 \dfrac{R_1 R_2}{R_2 - R_1}
+\end{align*}
+
+\subsection{Capacitors in Series}
+
+\begin{figure}[H]
+	\begin{circuitikz}
+		\draw 
+			(0,0) to             (1,0)
+			(1,0) to [C = $C_1$] (3,0)
+			(3,0) to             (4,0)
+			(4,0) to [C = $C_2$] (6,0)
+			(6,0) to             (7,0);
+
+		\node [below left] at (2,0) {$+Q$};
+		\node [below right] at (2,0) {$-Q$};
+		\node [below left] at (5,0) {$+Q$};
+		\node [below right] at (5,0) {$-Q$};
+
+		\node [left] at (0,0) {$\varphi_A$};
+		\node [right] at (7,0) {$\varphi_B$};
+		\node [above] at (3.5,0) {$\varphi_C$};
+	\end{circuitikz}
+\end{figure}
+
+\begin{align*}
+	           V                              &= (\varphi_A - \varphi_C) + (\varphi_C - \varphi_B)\\
+	                                          &= \dfrac{Q}{C_1} + \dfrac{Q}{C_2}\\
+	\therefore \dfrac{Q}{C_{\textnormal{eq}}} &= \dfrac{Q}{C_1} + \dfrac{Q}{C_2}\\
+	\therefore \dfrac{1}{C_{\textnormal{eq}}} &= \dfrac{1}{C_1} + \dfrac{1}{C_2}
+\end{align*}
+
+\subsection{Capacitors in Parallel}
+
+\begin{align*}
+	C_{\textnormal{eq}} &= C_1 +C_2
+\end{align*}
+
+\subsection{Energy Stored in a Capacitor}
+
+Consider a capacitor with potential difference $V$ and charge $Q$.\\
+The energy required to move an elemental charge $\dif q$ from the negatively charged plate to the positively charged plate is
+\begin{align*}
+	           \dif U &= V \dif q\\
+	                  &= \dfrac{q}{C} \dif q\\
+	\therefore U      &= \int\limits_{0}^{Q} \dfrac{q}{C} \dif q\\
+	                  &= \dfrac{Q^2}{2 C}\\
+			  &= \dfrac{1}{2} Q V\\
+			  &= \dfrac{1}{2} C V^2
+\end{align*}
 
 \end{document}
