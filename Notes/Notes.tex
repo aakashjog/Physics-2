@@ -1001,4 +1001,218 @@ The energy required to move an elemental charge $\dif q$ from the negatively cha
 			  &= \dfrac{1}{2} C V^2
 \end{align*}
 
+\subsection{Energy Density}
+
+Consider a parallel plate capacitor, with plates of area $A$, with distance $d$ between them and charge $+Q$ and $-Q$ respectively.
+The electric field between them is
+\begin{align*}
+	E                                     & = \dfrac{\sigma}{\varepsilon_0} \\
+                                              & = \dfrac{Q}{\varepsilon_0 A}    \\
+	\therefore E d                        & = \dfrac{Q d}{\varepsilon_0 A}  \\
+	\intertext{As $V = E d$,}
+	V                                     & = \dfrac{Q d}{\varepsilon_0 A}  \\
+	\therefore \dfrac{A \varepsilon_0}{d} & = \dfrac{Q}{V}                  \\
+	\therefore \dfrac{A \varepsilon_0}{d} & = C
+\end{align*}
+Therefore,
+\begin{align*}
+	U                         & = \dfrac{1}{2} C V^2                              \\
+                                  & = \dfrac{1}{2} \varepsilon_0 \dfrac{A}{d} E^2 d^2 \\
+                                  & = \dfrac{1}{2} (A d) \varepsilon_0 E^2            \\
+	\therefore \dfrac{U}{A d} & = \dfrac{1}{2} \varepsilon_0 E^2                  \\
+	\intertext{Therefore, as $A d$ is the volume of the space between the plates of the capacitor, $\dfrac{U}{A d}$ is called the energy density. Therefore,}
+	u                         & = \dfrac{1}{2} \varepsilon_0 E^2
+\end{align*}
+
+In general, for a charged body with volume charge density $\rho$, assuming $\varphi(\infty) = 0$,
+\begin{align*}
+	U & = \iiint\limits_{V} \dfrac{1}{2} \rho \varphi \dif^3 r \\
+	\intertext{As $\rho = -\varepsilon_0 \nabla^2 \varphi$,}
+	U & = \iiint\limits_{V} \dfrac{1}{2} (-\varepsilon_0 \nabla^2 \varphi) \varphi \dif^3 r
+\end{align*}
+\begin{align*}
+	\overrightarrow{E}                                 & = -\overrightarrow{\nabla} \varphi                                                     \\
+	\therefore \nabla^2 \varphi                        & = \overrightarrow{\nabla} \cdot \left( \overrightarrow{\nabla} \varphi \right)         \\
+	\therefore \left( \nabla^2 \varphi \right) \varphi & = \overrightarrow{\nabla} \cdot \left( \overrightarrow{\nabla} \varphi \right) \varphi \\
+\end{align*}
+\begin{align*}
+	\overrightarrow{\nabla} \cdot \left( \varphi \left( \overrightarrow{\nabla} \varphi \right) \right) & = \left( \overrightarrow{\nabla} \varphi \right) \left( \overrightarrow{\nabla} \varphi \right) + \varphi \overrightarrow{\nabla} \cdot \left( \overrightarrow{\nabla} \varphi \right) \\
+                                                                                                            & = \left( -\overrightarrow{E} \right) \left( -\overrightarrow{E} \right) + \varphi \nabla^2 \varphi                                                                                     \\
+	\therefore \nabla^2 \varphi                                                                         & = \overrightarrow{\nabla} \cdot \left( -\varphi \overrightarrow{E} \right) - E^2
+\end{align*}
+Therefore, substituting in $U$,
+\begin{align*}
+	U            & = \iiint\limits_{V} \left( -\dfrac{1}{2} \varepsilon_0 \right) \left( \overrightarrow{\nabla} \cdot \left( -\varphi \overrightarrow{E} \right) - E^2 \right) \dif^3 r                       \\
+                     & = \dfrac{1}{2} \varepsilon_0 \iiint\limits_{V} \overrightarrow{\nabla} \cdot \left( \varphi \overrightarrow{E} \right) \dif^3 r + \iiint\limits_{V} \dfrac{1}{2} \varepsilon_0 E^2 \dif^3 r \\
+                     & = \dfrac{1}{2} \varepsilon_0 \iint\limits_{\partial V} \varphi \overrightarrow{E} \cdot \dif \overrightarrow{A} + \iiint\limits_{V} \dfrac{1}{2} \varepsilon_0 E^2 \dif^3 r                 \\
+	\intertext{As there are no charges at infinity, the electric field at infinity is zero. Therefore, the flux through the large surface is zero. Therefore, $\varepsilon_0 \iint\limits_{\partial V} \varphi \overrightarrow{E} \cdot \dif \overrightarrow{A} = 0$. Also, according to the initial assumption, $\varphi(\infty) = 0$.}
+	\therefore U & = \iiint\limits_{V} \dfrac{1}{2} \varepsilon_0 E^2 \dif^3 r                                                                                                                                 \\
+	\therefore u & = \dfrac{1}{2} \varepsilon_0 E^2
+\end{align*}
+
+\begin{question}
+	Find the potential energy contained in a sphere of charge with radius $R$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		E &= 
+			\begin{cases}
+				\dfrac{\rho r}{3 \varepsilon_0}                            & ;\quad r < R \\
+				\dfrac{\dfrac{4}{3} \pi R^3 \rho}{4 \pi \varepsilon_0 r^2} & ;\quad r > R \\
+			\end{cases}
+	\end{align*}
+	Therefore
+	\begin{align*}
+		U & = \iiint\limits_{V} \dfrac{1}{2} \varepsilon_0 E^2 \dif^3 r                                                                                                                                                                                          \\
+                  & = \int\limits_{0}^{R} \dfrac{1}{2} \varepsilon_0 \left( \dfrac{\rho r}{3 \varepsilon_0} \right)^2 \cdot 4 \pi r^2 \dif r + \int\limits_{R}^{\infty} \dfrac{1}{2} \varepsilon_0 \left( \dfrac{R^3 \rho}{3 \varepsilon_0 r^2} \right) 4 \pi r^2 \dif r \\
+                  & = \dfrac{2 \pi \rho^2}{9 \varepsilon_0} \int\limits_{0}^{R} r^4 \dif r + \dfrac{2 \pi \rho^2 R^6}{9 \varepsilon_0} \int\limits_{R}^{\infty} \dfrac{1}{r^2} \dif r                                                                                    \\
+                  & = \dfrac{2 \pi \rho^2}{9 \varepsilon_0} \left( \dfrac{R^5}{5} \right) + \dfrac{2 \pi \rho^2 R^6}{9 \varepsilon_0} \left. \left( -\dfrac{1}{r} \right) \right|_{R}^{\infty}                                                                           \\
+                  & = \dfrac{2 \pi \rho^2 R^5}{9 \varepsilon_0} \left( \dfrac{1}{5} + 1 \right)                                                                                                                                                                          \\
+                  & = \dfrac{2 \pi \rho^2 R^5}{9 \varepsilon_0} \cdot \dfrac{6}{5}                                                                                                                                                                                       \\
+                  & = \dfrac{4 \pi \rho^2 R^5}{15 \varepsilon_0}
+	\end{align*}
+\end{solution}
+
+\section{Dielectric Materials}
+
+\begin{definition}[Dielectric constant or relative permittivity]
+	If the electric field in a dielectric material across some voltage and some distance is $E$, and the electric field in an identical setup, with a vacuum is $E_0$, the ratio between $E_0$ and $E$ is called the dielectric constant of the material or the relative permittivity of the material.
+	\begin{equation*}
+		\kappa_E = \dfrac{E_0}{E}
+	\end{equation*}
+\end{definition}
+
+Consider a parallel plate capacitor with a dielectric slab of $\kappa_E$ inserted between its plates.\\
+Let the surface charge densities on each of the plates be $+\sigma_{\textnormal{free}}$ and $-\sigma_{\textnormal{free}}$, and charges $+Q$ and $-Q$.\\
+Let the field inside the capacitor, if it the dielectric slab is absent, be $E_0$, and the field inside the capacitor, if the dielectric slab is present be $E$.\\
+Consider a cuboid Gaussian surface at the interface of the dielectric slab and the plate with charge density $+\sigma_{\textnormal{free}}$.\\
+As the electric field entering the Gaussian surface is more than the electric field exiting it, there must be some negative charge on the interface.\\
+Let the surface charge density of this bound charge be $-\sigma_{\textnormal{bound}}$.\\
+Therefore, the net field inside the capacitor is
+\begin{equation*}
+	E = \dfrac{\sigma_{\textnormal{free}} - \sigma_{\textnormal{bound}}}{\varepsilon_0}
+\end{equation*}
+
+\begin{definition}[Permittivity of a dielectric]
+	\begin{align*}
+		\dfrac{C}{C_0} & = \dfrac{\dfrac{Q}{V}}{\dfrac{Q}{V_0}} \\
+                               & = \dfrac{V_0}{V}                       \\
+                               & = \dfrac{E_0 d}{E d}                   \\
+                               & = \dfrac{E_0}{E}                       \\
+                               & = \kappa_E                             \\
+		\therefore C   & = C_0 \kappa_E                         \\
+                               & = \varepsilon_0 \kappa_E \dfrac{A}{d}
+	\end{align*}
+	$\varepsilon = \varepsilon_0 \kappa_E$ is called the permittivity of the dielectric.
+\end{definition}
+
+\subsection{Gauss' Law in Dielectric Materials}
+
+\begin{align*}
+	\iint \overrightarrow{E_0} \cdot \dif \overrightarrow{A}                                 & = \dfrac{Q_{\textnormal{free}}}{\varepsilon_0} \\
+	\therefore \iint \kappa_E \overrightarrow{E} \cdot \dif \overrightarrow{A}               & = \dfrac{Q_{\textnormal{free}}}{\varepsilon_0} \\
+	\therefore \iint \kappa_E \varepsilon_0 \overrightarrow{E} \cdot \dif \overrightarrow{A} & = Q_{\textnormal{free}}
+\end{align*}
+
+\begin{definition}[Electric displacement field]
+	\begin{equation*}
+		\overrightarrow{D} = \varepsilon_0 \kappa_E \overrightarrow{E} = \varepsilon \overrightarrow{E}
+	\end{equation*}
+	is called the electric displacement field.
+\end{definition}
+
+Therefore,
+\begin{align*}
+	\iint\limits_{\partial V} \overrightarrow{D} \cdot \dif \overrightarrow{A}             & = Q_{\textnormal{free}}    \\
+	\therefore \iiint\limits_{V} \overrightarrow{\nabla} \cdot \overrightarrow{D} \dif^3 r & = \rho_{\textnormal{free}} \\
+	\therefore \overrightarrow{\nabla} \cdot \overrightarrow{D}                            & = \rho_{\textnormal{free}}
+\end{align*}
+
+\begin{question}
+	A slab of dielectric material is inserted in a parallel plate capacitor as shown.
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\d{4};
+			\def\x{2};
+			\def\l{4};
+
+			\begin{scope}[ultra thick]
+				\draw (-\l/2,0) -- (\l/2,0) node [right] {$-Q$};
+				\draw (-\l/2,\d) -- (\l/2,\d) node [right] {$+Q$};
+			\end{scope}
+
+			\begin{scope}
+				\fill [blue, opacity = 0.4] (-\l/2,\d) rectangle (\l/2,\d-\x);
+				\node at (0,\d-\x) {$\kappa_E$};
+			\end{scope}
+
+
+		\end{tikzpicture}<++>
+	\end{figure}<++>
+	Find the charge density on the interface of the dielectric slab and the effective capacitance.
+\end{question}<++>
+
+\begin{solution}
+	As the charge on the plates is $+Q$ and $-Q$ respectively, and as the area of the plates is $A$,
+	\begin{align*}
+		\sigma_{\textnormal{free}} & = \dfrac{Q}{A}
+	\end{align*}
+	Consider a cuboid Gaussian surface at the interface the dielectric slab and the free space, inside the capacitor.
+	As the field entering the Gaussian surface is less than the field exiting it, there must a bound positive charge at the interface.
+	Let the surface charge density of this bound charge be $+\sigma_b$.
+	\begin{align*}
+		E_2 S - E_1 S                                                               & = \dfrac{\sigma_b A}{\varepsilon_0}                   \\
+		\therefore \dfrac{Q}{\varepsilon_0 A} - \dfrac{Q}{\varepsilon_0 \kappa_E A} & = \dfrac{\sigma_b}{\varepsilon_0}                     \\
+		\therefore \sigma_b                                                         & = \dfrac{Q}{A} \left( 1 - \dfrac{1}{\kappa_E} \right) \\
+                                                                                            & = \dfrac{Q}{A} \cdot \dfrac{\kappa_E - 1}{\kappa_E}   \\
+		\therefore \sigma_b                                                         & \le \sigma_{\textnormal{free}}
+	\end{align*}
+	~\\
+	\begin{align*}
+		C & = \dfrac{Q}{V}                                                                                                   \\
+                  & = \dfrac{Q}{E_1 x + E_2 (d - x)}                                                                                 \\
+                  & = \dfrac{\cancel{Q}}{\dfrac{\cancel{Q}}{\varepsilon_0 \kappa A} x + \dfrac{\cancel{Q}}{\varepsilon_0 A} (d - x)} \\
+                  & = \dfrac{\varepsilon_0 A}{\dfrac{x}{k} + d - x}                                                                  \\
+                  & = \varepsilon_0 \dfrac{A}{d - x \left( 1 - \dfrac{1}{k} \right)}
+	\end{align*}
+\end{solution}
+
+\newpage
+\part{Electrodynamics}
+
+\section{Currents}
+
+\begin{definition}[Current]
+	Current is defined as the rate of charge passing through a cross-sectional area.
+	\begin{equation*}
+		I = \dod{q}{t}
+	\end{equation*}
+\end{definition}
+
+\begin{definition}[Current density]
+	\begin{equation*}
+		\overrightarrow{j} = \dfrac{I}{A}
+	\end{equation*}
+	$\overrightarrow{j}$ is called the current density.
+\end{definition}
+
+\subsection{Continuity Law}
+
+\begin{align*}
+	Q                     & = \iiint\limits_{V} \rho(x,y,z,t) \dif^3 r           \\
+	\therefore \dod{Q}{t} & = \dod{}{t} \iiint\limits_{V} \rho(x,y,z,t) \dif^3 r \\
+                              & = \iiint\limits_{V} \dod{\rho}{t} \dif^3 r
+\end{align*}
+\begin{align*}
+	I & = \iint\limits_{\partial V} \overrightarrow{j} \dif \overrightarrow{a}
+\end{align*}
+\begin{align*}
+	I                                                                                     & = - \dod{Q}{t}                              \\
+	\therefore \iint\limits_{\partial V} \overrightarrow{j} \cdot \dif \overrightarrow{A} & = \iiint\limits_{V} -\dpd{\rho}{t} \dif^3 r \\
+	\intertext{Therefore, by the divergence theorem,}
+	\iiint\limits_{V} \overrightarrow{\nabla} \cdot \overrightarrow{j} \dif^3 r           & = \iiint\limits_{V} -\dpd{\rho}{t} \dif^3 r \\
+	\therefore \overrightarrow{\nabla} \cdot \overrightarrow{j}                           & = -\dpd{\rho}{t}
+\end{align*}<++>
+
 \end{document}
