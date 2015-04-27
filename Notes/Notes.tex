@@ -1130,7 +1130,7 @@ Therefore,
 \end{align*}
 
 \begin{question}
-	A slab of dielectric material is inserted in a parallel plate capacitor as shown.
+	A slab of dielectric material, with thickness $x$ is inserted in a parallel plate capacitor, with plates of surface area $A$ and distance $d$ between them, as shown.
 	\begin{figure}[H]
 		\begin{tikzpicture}
 			\def\d{4};
@@ -1144,14 +1144,12 @@ Therefore,
 
 			\begin{scope}
 				\fill [blue, opacity = 0.4] (-\l/2,\d) rectangle (\l/2,\d-\x);
-				\node at (0,\d-\x) {$\kappa_E$};
+				\node at (0,\d-\x/2) {$\kappa_E$};
 			\end{scope}
-
-
-		\end{tikzpicture}<++>
-	\end{figure}<++>
+		\end{tikzpicture}
+	\end{figure}
 	Find the charge density on the interface of the dielectric slab and the effective capacitance.
-\end{question}<++>
+\end{question}
 
 \begin{solution}
 	As the charge on the plates is $+Q$ and $-Q$ respectively, and as the area of the plates is $A$,
@@ -1213,6 +1211,6 @@ Therefore,
 	\intertext{Therefore, by the divergence theorem,}
 	\iiint\limits_{V} \overrightarrow{\nabla} \cdot \overrightarrow{j} \dif^3 r           & = \iiint\limits_{V} -\dpd{\rho}{t} \dif^3 r \\
 	\therefore \overrightarrow{\nabla} \cdot \overrightarrow{j}                           & = -\dpd{\rho}{t}
-\end{align*}<++>
+\end{align*}
 
 \end{document}
