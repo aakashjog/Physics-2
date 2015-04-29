@@ -700,4 +700,239 @@ E-mail: rms9999@gmail.com\\
 	\end{enumerate}
 \end{solution}
 
+\recitation
+
+\begin{question}
+	An electric dipole is comprised of two opposite charges $q$ and $-q$ positioned at distance $a$ from each other as shown.
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\a{3};
+			\def\xMIN{-1};
+			\def\xMAX{1};
+			\def\yMIN{-\a/2 - 1};
+			\def\yMAX{\a/2 + 1};
+
+			\begin{scope}[stealth-stealth]
+				\draw (\xMIN,0) -- (\xMAX,0) node [right] {$x$};
+				\draw (0,\yMIN) -- (0,\yMAX) node [above] {$y$};
+			\end{scope}
+
+			\begin{scope}
+				\fill (0,\a/2) circle (2pt) node [right] {$+q$};
+				\fill (0,-\a/2) circle (2pt) node [right] {$-q$};
+			\end{scope}
+
+			\begin{scope}[|<->|]
+				\draw [xshift = 10] (0,-\a/2) -- (0,\a/2) node [midway, fill = white] {$a$};
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+	\begin{enumerate}
+		\item Calculate the electric field along the $y$-axis.
+		\item What is the electric field when $y >> a$?
+		\item Repeat the previous sub-questions for points along the $x$-axis.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin=*]
+		\item 
+			\begin{align*}
+				\overrightarrow{E_y} & = \frac{q}{4 \pi \varepsilon_0 \left( y - \frac{a}{2} \right)^2} \hat{j} - \frac{q}{4 \pi \varepsilon_0 \left( y + \frac{a}{2} \right)^2} \hat{j} \\
+                                                     & = \frac{q}{4 \pi \varepsilon_0 y^2} \left( \left( 1 - \frac{d}{2 y} \right)^{-2} - \left( 1 - \frac{d}{2 y} \right)^{-2} \right) \hat{j}
+			\end{align*}
+		\item
+			By the Binomial theorem, if $x << 1$, $(1 \pm x)^n \approx 1 \pm n x)$.\\
+			Therefore, as $y << d$,
+			\begin{align*}
+				\left( 1 \pm \frac{d}{2 y} \right)^2 & = \left( 1 \pm \frac{2 d}{2 y} \right)
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\overrightarrow{E_y} & = \frac{q}{4 \pi \varepsilon_0 y^2} \left( 1 + \frac{d}{y} - 1 + \frac{d}{y} \right) \hat{j} \\
+                                                     & = \frac{2 \left( q \hat{j} d \right)}{4 \pi \varepsilon_0 y^2 \cdot y}                        \\
+                                                     & = \frac{2 \overrightarrow{p}}{4 \pi \varepsilon_0 y^3}
+			\end{align*}
+		\item
+			Let the distance between a point $(x,0)$ and each of the charges be $r$.
+			Let the angle between the $x$-axis and the line joining a point $(x,0)$ and $+q$ or $-q$ be $\theta$.\\
+			Therefore,
+			\begin{align*}
+				\sin(\theta) & = \frac{d}{2 r}
+			\end{align*}
+			\begin{align*}
+				\overrightarrow{E_x} & = -2 \frac{q}{4 \pi \varepsilon_0 r^2} \sin(\theta) \hat{j} \\
+                                                     & = -\frac{q d}{4 \pi \varepsilon_0 r^3} \hat{j}             \\
+                                                     & = -\frac{\overrightarrow{p}}{4 \pi \varepsilon_0 r^3}
+			\end{align*}
+			If $x >> d$, $r = d$.
+			Therefore,
+			\begin{align*}
+				\overrightarrow{E_x} & = -\frac{\overrightarrow{p}}{4 \pi \varepsilon_0 r^3}
+			\end{align*}
+	\end{enumerate}
+\end{solution}
+
+\begin{question}
+	Calculate the following expressions using both spherical and Cartesian coordinates
+	\begin{enumerate}
+		\item $\overrightarrow{\nabla} r = \hat{r}$
+		\item $\overrightarrow{\nabla} \frac{1}{r} = -\frac{\hat{r}}{r^2}$
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin=*]
+		\item
+			Using Cartesian coordinates,
+			\begin{align*}
+				\overrightarrow{r} & = x \hat{i} + y \hat{j} + z \hat{k} \\
+				\therefore r       & = \sqrt{x^2 + y^2 + z^2}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\overrightarrow{\nabla} (r) & = \hat{i} \dpd{r}{x} + \hat{j} \dpd{r}{y} + \hat{k} \dpd{r}{z}                                                                      \\
+                                                            & = \hat{i} \dpd{\sqrt{x^2 + y^2 + z^2}}{x} + \hat{j} \dpd{\sqrt{x^2 + y^2 + z^2}}{y} + \hat{k} \dpd{\sqrt{x^2 + y^2 + z^2}}{z}       \\
+                                                            & = \hat{i} \frac{x}{\sqrt{x^2 + y^2 + z^2}} + \hat{j} \frac{y}{\sqrt{x^2 + y^2 + z^2}} + \hat{k} \frac{z}{\sqrt{x^2 + y^2 + z^2}} \\
+                                                            & = \frac{\overrightarrow{r}}{r}                                                                                                   \\
+                                                            & = \hat{r}
+			\end{align*}
+			~\\
+			Using spherical coordinates,
+			\begin{align*}
+				\overrightarrow{\nabla} (r) & = \hat{r} \cancelto{1}{\dpd{r}{r}} + \hat{\theta} \frac{1}{r} \cancelto{0}{\dpd{r}{\theta}} + \hat{\varphi} \frac{1}{r \sin \theta} \cancelto{0}{\dpd{r}{\varphi}} \\
+                                                            & = \hat{r}
+			\end{align*}
+		\item
+			Using Cartesian coordinates,
+			\begin{align*}
+				\overrightarrow{\nabla} \left( \frac{1}{r} \right) & = \hat{i} \dpd{}{x} \left( \frac{1}{\sqrt{x^2 + y^2 + z^2}} \right) + \hat{j} \dpd{}{y} \left( \frac{1}{\sqrt{x^2 + y^2 + z^2}} \right) + \hat{k} \dpd{}{z} \left( \frac{1}{\sqrt{x^2 + y^2 + z^2}} \right)         \\
+                                                                                   & = - \left( \hat{i} \frac{x}{\left( x^2 + y^2 + z^2 \right)^{\frac{3}{2}}} + \hat{j} \frac{y}{\left( x^2 + y^2 + z^2 \right)^{\frac{3}{2}}} + \hat{k} \frac{z}{\left( x^2 + y^2 + z^2 \right)^{\frac{3}{2}}} \right) \\
+                                                                                   & = -\frac{\overrightarrow{r}}{r^3}                                                                                                                                                                                   \\
+                                                                                   & = -\frac{\hat{r}}{r^2}
+			\end{align*}
+			~\\
+			Using spherical coordinates,
+			\begin{align*}
+				\overrightarrow{\nabla} \left( \frac{1}{r} \right) & = \hat{r} \dpd{}{r} \left( \frac{1}{r} \right) + \hat{\theta} \dfrac{1}{r} \cancelto{0}{\dpd{}{\theta} \left( \frac{1}{r} \right)} + \hat{\varphi} \frac{1}{r \sin \theta} \cancelto{0}{\dpd{}{\varphi} \left( \frac{1}{r} \right)} \\
+                                                                                   & = \hat{r} \frac{-1}{r^2}                                                                                                                                                                                \\
+                                                                                   & = -\frac{\hat{r}}{r^2}
+			\end{align*}
+	\end{enumerate}
+\end{solution}
+
+\section{Differential Form of Gauss' Law}
+
+\begin{question}
+	The following potential is given in cylindrical coordinates
+	\begin{equation*}
+		\varphi(r) =
+			\begin{cases}
+				-\frac{\rho_0 r^2}{8 \varepsilon_0} - \frac{\rho_0 r R}{4 \varepsilon_0} & ;\quad r < R \\
+				-\frac{\rho_0 R^2}{2 \varepsilon_0} \ln \left( \frac{r}{R} \right) + c   & ;\quad r > R \\
+			\end{cases}
+	\end{equation*}
+	\begin{enumerate}
+		\item Find the constant $c$.
+		\item Calculate the electric field $\overrightarrow{E}$ everywhere.
+		\item Calculate the total charge, $Q$, inside a section with height $H$.
+		\item Calculate the charge density $\rho$ using the differential Gauss' Law.
+		\item Show that an integral on the density you found , i.e. $\rho$, gives the total charge you calculated above.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin=*]
+		\item 
+			In cylindrical coordinates,
+			\begin{align*}
+				x & = r \cos \varphi \\
+				y & = r \sin \varphi \\
+				z & = z
+			\end{align*}
+			where $\varphi$ is the angle between $\overrightarrow{r}$ and the $x$-axis.\\
+			Let
+			\begin{align*}
+				-\frac{\rho_0 r^2}{8 \varepsilon_0} - \frac{\rho_0 r R}{4 \varepsilon_0} & = \varphi_1(r) \\
+				-\frac{\rho_0 R^2}{2 \varepsilon_0} \ln \left( \frac{r}{R} \right) + c   & = \varphi_2(r)
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\varphi(r) &= 
+					\begin{cases}
+						\varphi_1(r) & ;\quad r < R \\
+						\varphi_2(r) & ;\quad r > R \\
+					\end{cases}
+			\end{align*}
+			At the surface the values of $\varphi_1$ and $\varphi_2$ must be equal.
+			Therefore,
+			\begin{align*}
+				\varphi_1(R)                                                                              & = \varphi_2(R)                                                           \\
+				\therefore -\frac{\rho_0 R^2}{8 \varepsilon_0} - \frac{\rho_0 R \cdot R}{4 \varepsilon_0} & = -\frac{\rho_0 R^2}{2 \varepsilon_0} \ln \left( \frac{R}{R} \right) + c \\
+				\therefore c                                                                              & = -\frac{3 \rho_0 R^2}{8 \varepsilon_0}
+			\end{align*}
+		\item
+			\begin{align*}
+				E_1 & = -\dod{\varphi_1}{r}                    \\
+                                    & = \frac{\rho_0 (r + R)}{4 \varepsilon_0} \\
+				E_2 & = -\dod{\varphi_2}{r}                    \\
+                                    & = \frac{\rho_0 R^2}{2 \varepsilon_0 r}
+			\end{align*}
+		\item
+			Consider a cylindrical Gaussian surface with radius just larger than $R$ and height $H$.\\
+			Therefore by Gauss' Law,
+			\begin{align*}
+				\oiint \overrightarrow{E} \dif \overrightarrow{S}                 & = \frac{Q}{\varepsilon_0} \\
+				\therefore \frac{\rho_0 R^2}{2 \varepsilon_0 R} \cdot 2 \pi R^2 H & = \frac{Q}{\varepsilon_0} \\
+				\therefore Q                                                      & = \frac{\rho_0 \pi R^2 H}{\varepsilon_0}
+			\end{align*}
+		\item
+			By the differential form of Gauss' Law,
+			\begin{align*}
+				\overrightarrow{\nabla} \cdot \overrightarrow{E}              & = \frac{\rho}{\varepsilon_0}                                                                                                                                              \\
+				\overrightarrow{\nabla} \cdot \overrightarrow{E}              & = \frac{1}{r} \dpd{}{r} (r E_r) + \frac{1}{r} \dpd{}{\varphi} (E_{\varphi}) + \dpd{}{z} (E_z)                                                                             \\
+				\therefore \overrightarrow{\nabla} \cdot \overrightarrow{E_1} & = \frac{1}{r} \dpd{}{r} \left( r \frac{\rho_0}{4 \varepsilon_0} (r + R) \right) + \frac{1}{r} \dpd{}{\varphi} \cancelto{0}{(E_{\varphi})} + \dpd{}{z} \cancelto{0}{(E_z)} \\
+				\therefore \frac{\rho}{\varepsilon_0}                         & = \frac{\rho_0}{4 \varepsilon_0 r} (2 r + R)                                                                                                                              \\
+				\therefore \rho                                               & = \frac{\rho_0}{4} \left( 2 + \frac{R}{h} \right)
+			\end{align*}
+		\item
+			\begin{align*}
+				Q & = \int\limits_{0}^{R} \rho(r) \cdot 2 \pi r H \dif r                                     \\
+                                  & = \frac{2 \rho_0 \pi H}{4} \left. \left( \frac{(2 r)^2}{2} + R r \right) \right|_{0}^{R} \\
+                                  & = \pi R^2 H \rho_0
+			\end{align*}
+	\end{enumerate}
+\end{solution}
+
+\begin{question}
+	\begin{enumerate}
+		\item Calculate the potential resulting from a solid ball of radius $R$ charged uniformly with constant distribution $\rho$.
+		\item Calculate the potential along the $z$-axis resulting from a solid cylinder of radius $a$ and height $L$ charged uniformly with constant distribution $-\rho$.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin=*]
+		\item
+			\begin{align*}
+				q(r) &= 
+					\begin{cases}
+						\rho_0 \cdot \frac{4}{3} \pi r^3 & ;\quad r < R \\
+						\rho_0 \cdot \frac{4}{3} \pi R^3 & ;\quad r > R \\
+					\end{cases}
+				\therefore \varphi(r) &= 
+					\begin{cases}
+						\frac{Q}{4 \pi \varepsilon_0 r}                & ;\quad r > R \\
+						\frac{Q}{8 \pi \varepsilon_0 R^3} (3 R^2 - r^2 & ;\quad r < R \\
+					\end{cases}
+			\end{align*}
+		\item
+			Consider an elemental disk of charge $\dif^2 q$ at height $z$ from the centre of the cylinder.\\
+			Therefore, the potential along the $z$-axis is
+			\begin{align*}
+				V(z') &= \int\limits_{r = 0}^{r = a} \int\limits_{z = -\frac{L}{2}}^{z = +\frac{L}{2}} \frac{\dif^2 q}{4 \pi \varepsilon_0 (z' - z)}
+			\end{align*}
+	\end{enumerate}
+\end{solution}
+
 \end{document}
