@@ -14,7 +14,7 @@
 \usepackage{cancel} %cancelling terms
 \usepackage{siunitx} %formatting units
 \usepackage{tikz, pgfplots} %diagrams
-	\usetikzlibrary{calc, hobby, patterns, intersections}
+	\usetikzlibrary{calc, hobby, patterns, intersections, angles}
 \usepackage{graphicx} %inserting graphics
 \usepackage{hyperref} %hyperlinks
 \usepackage{datetime} %date and time
@@ -41,6 +41,68 @@
 
 \makeatletter
 \@addtoreset{section}{part} %resets section numbers in new part
+\makeatother
+
+\makeatletter
+% Helper macros
+\def\tikz@lib@angle@def@coord#1{%
+  \ifx(#1\relax
+    \coordinate(tikz@lib@angle@tmp)at#1;%
+  \else
+    \coordinate(tikz@lib@angle@tmp)at(#1);%
+  \fi
+}
+\def\tikz@lib@angle@coord#1{%
+  \pgf@process{% 
+    \ifx(#1\relax
+      \tikz@scan@one@point\@firstofone#1\relax
+    \else
+      \pgfpointanchor{#1}{center}%
+    \fi
+  }%
+}
+% Patching
+\patchcmd\tikz@lib@angle@background{#2}{tikz@lib@angle@tmp}{}{%
+  \errmessage{Cannot patch \string\tikz@lib@angle@background}%
+}
+\patchcmd\tikz@lib@angle@foreground{#2}{tikz@lib@angle@tmp}{}{%
+  \errmessage{Cannot patch \string\tikz@lib@angle@foreground}%
+}
+\pretocmd\tikz@lib@angle@background{\tikz@lib@angle@def@coord{#2}}{}{%
+  \errmessage{Cannot prepend \string\tikz@lib@angle@background}%
+}
+\pretocmd\tikz@lib@angle@foreground{\tikz@lib@angle@def@coord{#2}}{}{%
+  \errmessage{Cannot prepend \string\tikz@lib@angle@foreground}%
+}
+\patchcmd\tikz@lib@angle@parse{%
+  \pgf@process{\pgfpointanchor{#2}{center}}%
+}{%
+  \tikz@lib@angle@coord{#2}%
+}{}{%
+  \errmessage{Cannot patch \string\tikz@lib@angle@parse}%
+}
+\patchcmd\tikz@lib@angle@parse{%
+  \pgf@process{\pgfpointanchor{#1}{center}}%
+}{%
+  \tikz@lib@angle@coord{#1}%
+}{}{%
+  \errmessage{Cannot patch \string\tikz@lib@angle@parse}%
+}
+\patchcmd\tikz@lib@angle@parse{%
+  \pgf@process{\pgfpointanchor{#3}{center}}%
+}{%
+  \tikz@lib@angle@coord{#3}%
+}{}{%
+  \errmessage{Cannot patch \string\tikz@lib@angle@parse}%
+}
+% Better support for the comma in the value for angle:
+\tikzset{
+  pics/angle/.style = {
+    setup code  = {\tikz@lib@angle@parse#1\pgf@stop},
+    background code = {\tikz@lib@angle@background#1\pgf@stop},
+    foreground code = {\tikz@lib@angle@foreground#1\pgf@stop},
+  },
+}
 \makeatother
 
 \newcommand\blfootnote[1]{%
@@ -933,6 +995,235 @@ E-mail: rms9999@gmail.com\\
 				V(z') &= \int\limits_{r = 0}^{r = a} \int\limits_{z = -\frac{L}{2}}^{z = +\frac{L}{2}} \frac{\dif^2 q}{4 \pi \varepsilon_0 (z' - z)}
 			\end{align*}
 	\end{enumerate}
+\end{solution}
+
+\recitation
+
+\begin{question}
+	A plate capacitor which is made of square plates of sides $a$ fell and a little angle $\theta$ formed between its plates as shown.
+	The smallest distance between the plates is $d$.
+	Calculate the new capacitance.
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\a{4};
+			\def\d{2};
+			\def\angle{30};
+
+			\draw (-\a/2,0) -- (\a/2,0);
+			\draw (-\a/2,\d) -- (\a/2,{\d + \a/2*tan(\angle)});
+
+			\draw[dashed] (\a/2,\d) -- (-\a/2,\d);
+
+			\pic[draw]{angle = {(\a/2,\d)--(-\a/2,\d)--(\a/2,{\d + \a/2*tan(\angle)})}};
+		\end{tikzpicture}
+	\end{figure}
+\end{question}
+
+\begin{solution}
+	The tilted capacitor plate can be considered to be approximately equivalent to a parallel plate at height $d + \frac{a \tan \theta}{2}$, i.e. the tilted plate can be considered to be made parallel to the other plate by pivoting it at the axis through its midpoint.
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\a{4};
+			\def\d{2};
+			\def\angle{30};
+
+			\draw (-\a/2,0) -- (\a/2,0);
+			\draw (-\a/2,\d) -- (\a/2,{\d + \a/2*tan(\angle)});
+
+			\draw[dashed] (-\a/2, {\d + (\a/2 * tan(\angle) / 2)}) -- (\a/2, {\d + \a/2 * tan(\angle) / 2});
+
+			\draw[dashed] (\a/2,\d) -- (-\a/2,\d);
+		\end{tikzpicture}
+	\end{figure}
+	The capacitance of the original capacitor is
+	\begin{align*}
+		C & = \frac{Q}{V} \\
+                  & = \frac{\varepsilon_0 A}{d}
+	\end{align*}
+	Therefore, the capacitance of the tilted capacitor is
+	\begin{align*}
+		C'            & = \frac{\varepsilon_0 a^2}{\left( d + \frac{a \tan \theta}{2} \right)} \\
+		\intertext{As $\theta << 1$, $\tan \theta \approx \theta$.}
+		\therefore C' & = \frac{\varepsilon_0 A}{d} \left( 1 + \frac{a \theta}{2 d} \right)^{-1}
+	\end{align*}
+	~\\
+	Alternatively, the tilted capacitor can be considered to be a capacitor with capacitance varying with $x$.\\
+	Considering the origin to be at the left end of the lower plate, the equation of the tilted plate is
+	\begin{align*}
+		y & = d + m x           \\
+                  & = d + \tan \theta x \\
+		\intertext{As $\theta << 1$,}
+		y & = d + \theta x
+	\end{align*}
+	Thererefore,
+	\begin{align*}
+		C & = \frac{\int\limits_{0}^{L} \frac{\varepsilon_0 A}{y}}{\int\limits_{0}^{L} \dif x}                                                     \\
+                  & = \frac{\int\limits_{0}^{L} \frac{\varepsilon_0 a \dif x}{d + \theta x}}{L}                                                            \\
+                  & = \frac{\frac{\varepsilon_0 A}{\theta} \int\limits_{0}^{L} \frac{\dif u}{u}}{L}                                                        \\
+                  & = \frac{\varepsilon_0 A}{a \theta} \ln \left( \frac{d + a \theta}{d} \right)                                                           \\
+                  & = \frac{\varepsilon_0 A}{d} \left( \left( \frac{a \theta}{d} \right) - \frac{1}{2} \left( \frac{a \theta}{d} \right)^2 + \dots \right) \\
+                  & = \frac{\varepsilon_0 A}{d} - \frac{\varepsilon_A}{2} \frac{a \theta}{d^2} + \dots
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	A cylindrical capacitor is comprised of two concentric cylinders of length $L$ and radii $a$ and $b$ (where $L >> a$, $b$ and $a < b$).
+	The inner cylinder (radius $a$) carries total charge $Q$ and the outer cylinder (radius $b$) is grounded.
+	Assume vacuum inside the system and all bodies to be conducting.
+	\begin{enumerate}
+		\item Calculate the electric field everywhere.
+		\item Calculate the capacitance per unit length.
+		\item Calculate the energy density everywhere.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin=*]
+		\item
+			As the bodies are condicting, the field inside the inner cylinder is $0$.
+			~\\
+			Consider a cylindrical Gaussian surface with radius $a < r < b$.
+			Therefore, by Gauss' Law,
+			\begin{align*}
+				\oiint \overrightarrow{E} \cdot \overrightarrow{\dif S} & = \frac{Q}{\varepsilon_0} \\
+				\therefore E                                            & = \frac{Q}{2 \pi \varepsilon_0 L r}
+			\end{align*}
+			~\\
+			As the outer cylinder is grounded, and due to the charge on the inner cylinder, the charge on its inner surface is $-Q$.\\
+			Therefore, by Gauss's Law, the field outside must be $0$.
+		\item
+			\begin{align*}
+				E &= \frac{Q}{2 \pi \varepsilon_0 L r}\\
+				\therefore V &= \int\limits_{a}^{b} \frac{Q}{2 \pi \varepsilon_0 L r} \dif r\\
+				&= \frac{Q}{2 \pi \varepsilon_0 L} \ln \left( \frac{b}{a} \right)\\
+				\therefore C &= \frac{2 \pi \varepsilon_0 L}{\ln \left( \frac{b}{a} \right)}
+			\end{align*}
+		\item
+			\begin{align*}
+				U &= \frac{C V^2}{2}\\
+				&= \frac{1}{2} \frac{2 \pi \varepsilon_0 L}{\ln \left( \frac{b}{a} \right)} \left( \frac{Q}{2 \pi \varepsilon_0 L} \ln \left( \frac{b}{a} \right) \right)^2
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				u &= \frac{U}{\pi L (b^2 - a^2)}
+			\end{align*}
+	\end{enumerate}
+\end{solution}
+
+\begin{question}
+	The capacitance of an empty plate capacitor (vacuum between the plates) is $C_0$.
+	Half of the capacitor volume is filled with a dielectric material of constant $\kappa$ in two different ways as shown.
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\a{3};
+			\def\d{2};
+
+			\begin{scope}
+				\draw (-\a/2,0) -- (\a/2,0);
+				\draw (-\a/2,\d) -- (\a/2,\d);
+
+				\draw (0,0) -- ++(0,-\d/2);
+				\draw (0,\d) -- ++(0,\d/2);
+			\end{scope}
+
+			\begin{scope}
+				\fill [blue, opacity = 0.3] (-\a/2,0) rectangle (\a/2,\d/2);
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\a{3};
+			\def\d{2};
+
+			\begin{scope}
+				\draw (-\a/2,0) -- (\a/2,0);
+				\draw (-\a/2,\d) -- (\a/2,\d);
+
+				\draw (0,0) -- ++(0,-\d/2);
+				\draw (0,\d) -- ++(0,\d/2);
+			\end{scope}
+
+			\begin{scope}
+				\fill [blue, opacity = 0.3] (-\a/2,0) rectangle (0,\d);
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+	Calculate the new capacitance in the two cases.
+\end{question}
+
+\begin{solution}
+	The arrangements are equivalent to connection of capacitors in series and parallel respectively.
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\a{3};
+			\def\d{2};
+
+			\begin{scope}
+				\draw (-\a/2,0) -- (\a/2,0);
+				\draw (-\a/2,\d) -- (\a/2,\d);
+
+				\draw (0,0) -- ++(0,-\d/2);
+				\draw (0,\d) -- ++(0,\d/2);
+			\end{scope}
+
+			\begin{scope}
+				\fill [blue, opacity = 0.3] (-\a/2,0) rectangle (\a/2,\d/2);
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+	$\equiv$
+	\begin{figure}[H]
+		\begin{circuitikz}
+			\draw (0,0) to [C = $C_1$] (3,0) to [C = $C_2$] (6,0);
+		\end{circuitikz}
+	\end{figure}
+	In this case,
+	\begin{align*}
+		C_1 & = \frac{\varepsilon_0 A}{\frac{d}{2}} \\
+		C_2 & = \frac{\kappa \varepsilon_0 A}{\frac{d}{2}}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		C_{\textnormal{equivalent}} &= \frac{C_1 C_2}{C_1 + C_2}
+	\end{align*}
+	~\\
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\a{3};
+			\def\d{2};
+
+			\begin{scope}
+				\draw (-\a/2,0) -- (\a/2,0);
+				\draw (-\a/2,\d) -- (\a/2,\d);
+
+				\draw (0,0) -- ++(0,-\d/2);
+				\draw (0,\d) -- ++(0,\d/2);
+			\end{scope}
+
+			\begin{scope}
+				\fill [blue, opacity = 0.3] (-\a/2,0) rectangle (0,\d);
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+	$\equiv$
+	\begin{figure}[H]
+		\begin{circuitikz}
+			\draw (0,0) -- (1,0);
+			\draw (1,0) to (2,1) to [C = $C_1$] (4,1) to (5,0);
+			\draw (1,0) to (2,-1) to [C = $C_2$] (4,-1) to (5,0);
+			\draw (5,0) -- (6,0);
+		\end{circuitikz}
+	\end{figure}
+	In this case,
+	\begin{align*}
+		C_1 & = \frac{\varepsilon_0 \frac{A}{2}}{d} \\
+		C_2 & = \frac{\kappa \varepsilon_0 \frac{A}{2}}{d}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		C_{\textnormal{equivalent}} &= C_1 + C_2
+	\end{align*}
 \end{solution}
 
 \end{document}
