@@ -16,9 +16,9 @@
 \usepackage{datetime} %date and time
 \usepackage{ulem} %underline for \emph{}
 \usepackage{xfrac, lmodern} %inline fractions
-\usepackage{enumerate} %numbered lists
+\usepackage{enumerate, enumitem} %numbered lists
 \usepackage{float} %inserting floats
-\usepackage{circuitikz} %circuit diagrams
+\usepackage[american voltages]{circuitikz} %circuit diagrams
 
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}} %adds numbers to specific equations in non-numbered list of equations
 
@@ -1190,9 +1190,10 @@ Therefore,
 
 \begin{definition}[Current density]
 	\begin{equation*}
-		\overrightarrow{j} = \dfrac{I}{A}
+		\overrightarrow{J} = \dfrac{I}{A}
 	\end{equation*}
-	$\overrightarrow{j}$ is called the current density.
+	$\overrightarrow{J}$ is called the current density.\\
+	Therefore, the current is the flux of $\overrightarrow{J}$.
 \end{definition}
 
 \subsection{Continuity Law}
@@ -1203,14 +1204,292 @@ Therefore,
                               & = \iiint\limits_{V} \dod{\rho}{t} \dif^3 r
 \end{align*}
 \begin{align*}
-	I & = \iint\limits_{\partial V} \overrightarrow{j} \dif \overrightarrow{a}
+	I & = \iint\limits_{\partial V} \overrightarrow{J} \dif \overrightarrow{a}
 \end{align*}
 \begin{align*}
 	I                                                                                     & = - \dod{Q}{t}                              \\
-	\therefore \iint\limits_{\partial V} \overrightarrow{j} \cdot \dif \overrightarrow{A} & = \iiint\limits_{V} -\dpd{\rho}{t} \dif^3 r \\
+	\therefore \iint\limits_{\partial V} \overrightarrow{J} \cdot \dif \overrightarrow{A} & = \iiint\limits_{V} -\dpd{\rho}{t} \dif^3 r \\
 	\intertext{Therefore, by the divergence theorem,}
-	\iiint\limits_{V} \overrightarrow{\nabla} \cdot \overrightarrow{j} \dif^3 r           & = \iiint\limits_{V} -\dpd{\rho}{t} \dif^3 r \\
-	\therefore \overrightarrow{\nabla} \cdot \overrightarrow{j}                           & = -\dpd{\rho}{t}
+	\iiint\limits_{V} \overrightarrow{\nabla} \cdot \overrightarrow{J} \dif^3 r           & = \iiint\limits_{V} -\dpd{\rho}{t} \dif^3 r \\
+	\therefore \overrightarrow{\nabla} \cdot \overrightarrow{J}                           & = -\dpd{\rho}{t}
 \end{align*}
+
+\subsection{Charge Carriers}
+
+Current density is the product of the total charge and the net drift velocity of the charge carriers.
+\begin{align*}
+	\overrightarrow{J} & = n q \overrightarrow{v_{\textnormal{drift}}}
+\end{align*}
+where $n$ is the number of charge carriers and $q$ is the charge on each of them.
+\begin{align*}
+	\overrightarrow{v_{\textnormal{drift}}} & = \frac{1}{n} \sum \overrightarrow{v_i}
+\end{align*}
+where $\overrightarrow{v_i}$ is the velocity of the $i^{\text{th}}$ charge carrier.
+
+\section{Ohm's Law}
+
+\begin{law}[Ohm's Law]
+	The voltage across two points on a conductor is directly proportional to the current through the conductor.
+	The constant of proportionality is called the resistance of the conductor.
+	\begin{equation*}
+		\frac{V}{I} = R
+	\end{equation*}
+\end{law}
+
+\section{Resistors}
+
+\subsection{Resistivity}
+
+Consider a conductor of cross-sectional area $A$ and length $L$ connected to a potential difference of $V$.
+Let the current passing through it be $I$.\\
+Therefore,
+\begin{align*}
+	I & = J A \\
+	V & = E L
+\end{align*}
+Therefore,
+\begin{align*}
+	R & = \frac{V}{I}          \\
+          & = \frac{E L}{J A}      \\
+	\intertext{As $E \propto J$, $E$ can be written as $\rho J$. Therefore,}
+	R & = \frac{\rho J L}{J A} \\
+          & = \rho \frac{L}{A}
+\end{align*}
+
+\begin{definition}[Resistivity]
+	If
+	\begin{equation*}
+		R = \rho \frac{L}{A}
+	\end{equation*}
+	$\rho$ is called the resistivity of the conductor.\\
+	$\sigma = \frac{1}{\rho}$ is called the conductivity of the conductor.\\
+	They are constant for a particular material.
+\end{definition}
+
+\subsection{Resistors in Series}
+
+\begin{figure}[H]
+	\begin{circuitikz}
+		\draw (0,0) to [R = $R_1$, i = $I$] (2,0) to [R = $R_2$] (4,0);
+	\end{circuitikz}
+\end{figure}
+Let $V_1$ and $V_2$ be the voltages across $R_1$ and $R_2$ respectively.\\
+As the resistors are in series,
+\begin{align*}
+	V & = V_1 + V_2     \\
+          & = I R_1 + I R_2 \\
+          & = I (R_1 + R_2) \\
+          & = I R_{\textnormal{equivalent}}
+\end{align*}
+Therefore,
+\begin{align*}
+	R_{\textnormal{equivalent}} & = R_1 + R_2
+\end{align*}
+
+\subsection{Resistors in Parallel}
+
+\begin{figure}[H]
+	\begin{circuitikz}
+		\draw (0,0) -- (1,0);
+		\draw (1,0) to (2,1) to [R = $R_1$] (4,1) to (5,0);
+		\draw (1,0) to (2,-1) to [R = $R_2$] (4,-1) to (5,0);
+		\draw (5,0) -- (6,0);
+	\end{circuitikz}
+\end{figure}
+Let $I_1$ and $I_2$ be the currents through $R_1$ and $R_2$ respectively.\\
+As the resistors are in parallel,
+\begin{align*}
+	I & = I_1 + I_2                                      \\
+          & = \frac{V}{R_1} + \frac{V}{R_2}                  \\
+          & = V \left( \frac{1}{R_1} + \frac{1}{R_2} \right) \\
+          & = \frac{V}{R_{\textnormal{equivalent}}}
+\end{align*}
+Therefore,
+\begin{align*}
+	\frac{1}{R_{\textnormal{equivalent}}} & = \frac{1}{R_1} + \frac{1}{R_2}
+\end{align*}
+
+\section{Power and Energy}
+
+Consider a resistor of resistance $R$ connected to a source of voltage $V$.\\
+The energy needed to transfer a charge $\dif q$ across $V$ is
+\begin{align*}
+	\dif U & = V \dif q
+\end{align*}
+Therefore the power dissipated across the resistor is
+\begin{align*}
+	P & = \dod{U}{t}   \\
+          & = V \dod{q}{t} \\
+          & = V I          \\
+          & = I^2 R
+\end{align*}
+
+\section{RC Series Circuit}
+
+\begin{figure}[H]
+	\begin{circuitikz}
+		\draw 
+			(0,0) to [short, i = $I(t)$] (0,2)
+			(0,2) to [R = $R$] (3,2)
+			(3,2) to [C = $C$] (3,0)
+			(3,0) to [battery1 = $\varepsilon$] (0,0);
+	\end{circuitikz}
+\end{figure}
+
+\subsection{Charge on the Capacitor}
+
+\begin{align*}
+	\oint \overrightarrow{E} \cdot \overrightarrow{\dif l} & = 0                                                                                                \\
+	\therefore -\varepsilon + I R + \frac{Q}{C}            & = 0                                                                                                \\
+	\therefore I R + \frac{Q}{C}                           & = \varepsilon                                                                                      \\
+	\therefore I + \frac{Q}{R C}                           & = \frac{\varepsilon}{R}                                                                            \\
+	\therefore \dod{q}{t} + \frac{1}{R C} Q                & = \frac{\varepsilon}{R}                                                                            \\
+	\therefore Q                                           & = \frac{1}{e^{\int \frac{1}{R C} \dif t}} \int e^{\int \frac{1}{R C} \dif t} \frac{\varepsilon}{R} \\
+                                                               & = \frac{1}{e^{\frac{t}{R C}}} \varepsilon C e^{\frac{t}{R C}} + D
+\end{align*}
+As $Q(t = 0) = 0$, $D = -\varepsilon C$.\\
+Therefore,
+\begin{align*}
+	Q & = \varepsilon C \left( 1 - e^{-\frac{t}{R C}} \right)
+\end{align*}
+
+\begin{definition}[Time constant of RC circuit]
+	$\tau = R C$ is called the time constant of a circuit with a resistor of resistance $R$ and a capacitor of capacitance $C$ connected in series.
+\end{definition}
+
+\subsection{Current in the Circuit}
+
+\begin{align*}
+	I & = \dod{Q}{t} \\
+          & = \frac{\varepsilon}{R} e^{-\frac{t}{R C}}
+\end{align*}
+
+\subsection{Power and Energy}
+
+The power supplied by the battery is
+\begin{align*}
+	P_{\varepsilon} & = \varepsilon I \\
+                        & = \frac{\varepsilon^2}{R} e^{-\frac{t}{R C}}
+\end{align*}
+The power dissipated at the resistor is
+\begin{align*}
+	P_R & = I^2 R \\
+            & = \frac{\varepsilon^2}{R} e^{-\frac{2 t}{R C}}
+\end{align*}
+The energy stored in the capacitor is
+\begin{align*}
+	U_C & = \frac{Q^2}{2 C} \\
+            & = \frac{\varepsilon^2 C}{2} \left( 1 - e^{-\frac{t}{R C}} \right)^2
+\end{align*}
+Therefore the power in the capacitor is
+\begin{align*}
+	P_C & = \dod{U_C}{t}                                                                         \\
+            & = \varepsilon^2 C \left( 1 - e^{-\frac{t}{R C}} \right) \frac{e^{-\frac{t}{R C}}}{R C} \\
+            & = \frac{\varepsilon^2}{R} e^{-\frac{2 t}{R C}}
+\end{align*}
+Therefore,
+\begin{align*}
+	P_{\varepsilon} & = P_R + P_C
+\end{align*}
+Therefore, the power is conserved.
+
+\begin{question}
+	A thick conducting, cylindrical shell with inner radius $a$, outer radius $b$, and height $h$ is charged with conductivity $\sigma(r) = \alpha r^2$.
+	Assuming $h << a$,
+	\begin{enumerate}
+		\item Find the net resistance if the flat faces are connected to terminals of a battery.
+		\item Find the net resistance if the inner and outer surfaces are connected to terminals of a battery.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin = *]
+		\item
+			Consider an elemental resistor, i.e. a thin cylindrical shell of radius $a < r < b$ and thickness $\dif r$.\\
+			Therefore,
+			\begin{align*}
+				\dif R & = \frac{1}{\sigma} \frac{L}{A}                  \\
+                                       & = \frac{1}{\alpha r^2} \frac{h}{2 \pi r \dif r} \\
+                                       & = \frac{h}{2 \pi \alpha r^3 \dif r}
+			\end{align*}
+			As the elemental resistors are connected in parallel,
+			\begin{align*}
+				\frac{1}{R}  & = \int \frac{1}{\dif R}                                 \\
+                                             & = \int\limits_{a}^{b} \frac{2 \pi \alpha r^3 \dif r}{h} \\
+                                             & = \frac{\pi \alpha}{2 h} (b^4 - a^4)                    \\
+				\therefore R & = \frac{2 h}{\pi \alpha (b^4 - a^4)}
+			\end{align*}
+			~\\
+			Alternatively,
+			\begin{align*}
+				J & = \sigma E               \\
+                                  & = \sigma \frac{V}{h}     \\
+                                  & = \alpha r^2 \frac{V}{h} \\
+			\end{align*}
+			\begin{align*}
+				I & = \iint \overrightarrow{J} \cdot \overrightarrow{\dif A}          \\
+                                  & = \int\limits_{a}^{b} \alpha r^2 \frac{V}{h} \cdot 2 \pi r \dif r \\
+                                  & = \frac{\pi \alpha}{2 h}(b^4 - a^4) V
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				R & = \frac{V}{I} \\
+                                  & = \frac{2 h}{\pi \alpha (b^4 - a^4)}
+			\end{align*}
+			~\\
+			The charge density in the body is
+			\begin{align*}
+				\varrho &= \varepsilon_0 \overrightarrow{\nabla} \cdot \overrightarrow{E}\\
+				&= 0
+			\end{align*}
+		\item
+			Consider an elemental resistor, i.e. a thin cylindrical shell of radius $a < r < b$ and thickness $\dif r$.\\
+			Therefore,
+			\begin{align*}
+				\dif R & = \frac{1}{\sigma} \frac{L}{A}                  \\
+                                       & = \frac{1}{\alpha r^2} \frac{\dif r}{2 \pi r h} \\
+                                       & = \frac{\dif r}{2 \pi \alpha r^3 h}
+			\end{align*}
+			As the elemental resistors are connected in series,
+			\begin{align*}
+				R & = \int \dif R                                                                \\
+                                  & = \int\limits_{a}^{b} \frac{\dif r}{2 \pi \alpha r^3 h}                      \\
+                                  & = \frac{1}{2 \pi \alpha h} \left( -\frac{1}{2 b^2} + \frac{1}{2 a^2} \right) \\
+                                  & = \frac{1}{4 \pi \alpha h} \left( \frac{1}{a^2} - \frac{1}{b^2} \right)
+			\end{align*}
+			~\\
+			Alternatively,
+			\begin{align*}
+				J &= \sigma E\\
+				\therefore \frac{I}{2 \pi r h} &= \alpha r^2 E\\
+				\therefore E &= \frac{I}{2 \pi \alpha r^3 h}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				V &= \int\limits_{a}^{b} E \dif r\\
+				&= \int\limits_{a}^{b} \frac{I \dif r}{2 \pi \alpha r^3 h} \left( \frac{1}{a^2} - \frac{1}{b^2} \right)
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				R &= \frac{V}{I}\\
+				&= \frac{1}{4 \pi \alpha h} \left( \frac{1}{a^2} - \frac{1}{b^2} \right)
+			\end{align*}
+			~\\
+			The charge density in the body is
+			\begin{align*}
+				\varrho &= \varepsilon_0 \overrightarrow{\nabla} \cdot \overrightarrow{E}\\
+				&= \varepsilon_0 \frac{1}{r} \dod{}{r} (r E_r)\\
+				&= \varepsilon_0 \frac{1}{r} \dod{}{r} \left( \frac{I}{2 \pi \alpha r^3 h} \right)\\
+				&= -\frac{\varepsilon_0 I}{\pi \alpha r^4 h}
+			\end{align*}
+			Therefore, the charge in the body is not zero.\\
+			However, it is constant in time.
+			Therefore, in the steady state, it does not violate Kirchoff's Current Law.\\
+			Consider a cuboid Gaussian surface which contains part of the elemental ring in it.\\
+			As $\sigma$ is varying, the electric field decreases as $r$ increases.\\
+			Therefore by Gauss' Law, as the electric field entering the Gaussian surface is more than the electric field exiting the Gaussian surface.
+			Hence, there must be a negative charge inside the Gaussian surface.
+	\end{enumerate}
+\end{solution}
 
 \end{document}
