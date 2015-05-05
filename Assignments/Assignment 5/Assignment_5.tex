@@ -1,0 +1,153 @@
+\documentclass[fleqn, a4paper, 11pt, oneside]{amsart}
+%\usepackage[top = 2cm, bottom = 1cm, left = 1cm, right = 1cm]{geometry}
+\usepackage{exsheets, tasks}
+\usepackage{amsmath, amssymb, amsthm} %standard AMS packages
+\usepackage{marginnote} %marginnotes
+\usepackage{gensymb} %miscellaneous symbols
+\usepackage{commath} %differential symbols
+\usepackage{xcolor} %colours
+\usepackage{cancel} %cancelling terms
+\usepackage{siunitx} %formatting units
+\usepackage{tikz, pgfplots} %diagrams
+\usetikzlibrary{calc, hobby, patterns, intersections}
+\usepackage{graphicx} %inserting graphics
+\usepackage{hyperref} %hyperlinks
+\usepackage{datetime} %date and time
+\usepackage{ulem} %underline for \emph{}
+\usepackage{xfrac} %inline fractions
+\usepackage{enumerate,enumitem} %numbered lists
+\usepackage{float} %inserting floats
+\usepackage{circuitikz} %circuit diagrams
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}} %adds numbers to specific equations in non-numbered list of equations
+
+\newcommand{\AxisRotator}[1][rotate=0]{
+	\tikz [x=0.25cm,y=0.60cm,line width=.2ex,-stealth,#1] \draw (0,0) arc (-150:150:1 and 1);%
+} %rotation symbols on axes
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newcommand{\curl}{\mathrm{curl\,}}
+
+\makeatletter
+\@addtoreset{section}{part} %resets section numbers in new part
+\makeatother
+
+\renewcommand{\thesubsection}{(\arabic{subsection})}
+\renewcommand{\thesection}{(\arabic{section})}
+
+%section headings on left
+\makeatletter
+\def\specialsection{\@startsection{section}{1}%
+	\z@{\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\centering}}% DELETED
+	{\normalfont}}% NEW
+\def\section{\@startsection{section}{1}%
+	\z@{.7\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\scshape\centering}}% DELETED
+	{\normalfont\scshape}}% NEW
+\makeatother
+
+%forces newline after subsection
+\makeatletter
+\def\subsection{\@startsection{subsection}{3}%
+	\z@{.5\linespacing\@plus.7\linespacing}{.1\linespacing}%
+	{\normalfont\itshape}}
+\makeatother
+
+\settasks{counter-format = tsk[1].}
+
+\SetupExSheets{solution/print = true}
+
+%opening
+\title{Physics 2 : Assignment 5}
+\author
+{
+	Aakash Jog\\
+	ID : 989323563
+}
+\date{\formatdate{3}{5}{2015}}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\begin{question}
+	Find the electric field at height $z$ above the center of a square sheet (side $a$) carrying a uniform charge density $\sigma$.
+	Check your results for the limiting case $a \to \infty$.
+\end{question}
+
+\begin{solution}
+	Consider a square loop of side $l$ and thickness $\dif l$.\\
+	\begin{align*}
+		\dif E &= 2 k \frac{\sigma l z \dif l}{\left( \frac{l^2}{4} + z^2 \right) \left( \frac{l^2}{4} + \frac{l^2}{4} + z^2 \right)^{\frac{1}{2}}}\\
+		\therefore E &= \int\limits_{0}^{a} \frac{1}{2 \pi \varepsilon_0} \frac{\sigma l z \dif l}{\left( \frac{l^2}{4} + z^2 \right) \left( \frac{l^2}{4} + \frac{l^2}{4} + z^2 \right)^{\frac{1}{2}}}\\
+		&= \left. 4 \sigma  \tan^{-1} \left( \frac{\sqrt{l^2 + 2 z^2}}{\sqrt{2} z} \right) \right|_{0}^{a}\\
+		&= 4 \sigma \tan^{-1}\left( \frac{\sqrt{a^2 + 2 z^2}}{\sqrt{2} z} \right) - 4 \sigma \tan^{-1}\left( \frac{\sqrt{2 z^2}}{\sqrt{2} z} \right)\\
+		&= 4 \sigma \tan^{-1}\left( \frac{\sqrt{a^2 + 2 z^2}}{\sqrt{2} z} \right) - \sigma \pi
+	\end{align*}
+	If $a \to \infty$,
+	\begin{align*}
+		E &= \lim\limits_{a \to \infty} 4 \sigma \tan^{-1}\left( \frac{\sqrt{a^2 + 2 z^2}}{\sqrt{2} z} \right) - 4 \sigma \tan^{-1}\left( \frac{\sqrt{2 z^2}}{\sqrt{2} z} \right)\\
+		&= 4 \sigma \frac{\pi}{2} - \sigma \pi\\
+		&= \sigma \pi
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	If the electric field in some region (in spherical coordinates) is given by the expression
+	\begin{equation*}
+		\overrightarrow{E} = \frac{A \hat{r} + B \sin(\theta) \cos(\varphi) \hat{\varphi}}{r}
+	\end{equation*}
+	where $A$ and $B$ are constants.
+	What is the charge density?
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\overrightarrow{\nabla} \cdot \overrightarrow{E} &= \frac{\rho}{\varepsilon_0}\\
+		\therefore \rho &= \varepsilon_0 \left( \frac{1}{r^2} \dpd{}{r} \left( r^2 \frac{A}{r} \right) + \frac{1}{r \sin \theta} \dpd{}{\varphi} \left( \frac{B \sin \theta \cos \varphi}{r} \right) \right)\\
+		&= \varepsilon_0 \left( \frac{A}{r^2} + \frac{1}{r \sin \theta} \frac{B \sin \theta}{r} (-\sin \theta) \right)\\
+		&= \frac{\varepsilon_0}{r^2} (A - B \sin \varphi)
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	An inverted hemispherical bowl of radius $R$ is carrying a uniform surface charge density $\sigma$.
+	Find the potential difference between the ``north pole'' and the center.
+\end{question}
+
+\begin{solution}
+	If the hemispherical shell was complete, the potential at the centre would be
+	\begin{align*}
+		\varphi_{\textnormal{full sphere}} &= \frac{1}{4 \pi \varepsilon_0} \frac{Q}{R}\\
+		&= \frac{1}{4 \pi \varepsilon_0} \frac{\sigma \cdot 4 \pi R^2}{R}\\
+		&= \frac{\sigma R}{\varepsilon_0}
+	\end{align*}
+	The potential at the centre due to the hemispherical shell is half of that due to the entire shell.\\
+	Therefore,
+	\begin{align*}
+		\varphi_{\textnormal{centre}} &= \frac{1}{2} \left( \frac{1}{4 \pi \varepsilon_0} \frac{\sigma \cdot 2 \pi R^2}{R} \right)\\
+		&= \frac{\sigma R}{2 \varepsilon_0}
+	\end{align*}
+	Consider an elemental ring of radius $r$ at height $z$ from the pole.\\
+	Therefore,
+	\begin{align*}
+		\dif \varphi_{\textnormal{pole}} &= \frac{1}{4 \pi \varepsilon_0} \frac{\sigma \cdot 2 \pi r \dif r}{\sqrt{r^2 + z^2}}\\
+		\therefore \varphi_{\textnormal{pole}} &= \frac{\sigma}{2 \varepsilon_0} \int\limits_{0}^{R} \frac{r \dif r}{\sqrt{r^2 + z^2}}\\
+		&= \frac{\sigma R}{\sqrt{2} \varepsilon_0}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\varphi_{\textnormal{pole}} - \varphi_{\textnormal{centre}} &= \frac{\sigma R}{\varepsilon_0} - \frac{\sigma R}{\sqrt{2} - \varepsilon_0}\\
+		&= \frac{\sigma R}{\varepsilon_0} \left( \sqrt{2} - 1 \right)
+	\end{align*}
+\end{solution}
+
+\end{document}
