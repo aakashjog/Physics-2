@@ -999,6 +999,8 @@ E-mail: rms9999@gmail.com\\
 
 \recitation
 
+\section{Capacitors}
+
 \begin{question}
 	A plate capacitor which is made of square plates of sides $a$ fell and a little angle $\theta$ formed between its plates as shown.
 	The smallest distance between the plates is $d$.
@@ -1109,6 +1111,8 @@ E-mail: rms9999@gmail.com\\
 			\end{align*}
 	\end{enumerate}
 \end{solution}
+
+\section{Dielectric Materials}
 
 \begin{question}
 	The capacitance of an empty plate capacitor (vacuum between the plates) is $C_0$.
@@ -1224,6 +1228,229 @@ E-mail: rms9999@gmail.com\\
 	\begin{align*}
 		C_{\textnormal{equivalent}} &= C_1 + C_2
 	\end{align*}
+\end{solution}
+
+\recitation
+
+\begin{question}
+	A plate capacitor of area $A$ and distance $d$ is connected to a potential difference $V$.
+	A dielectric material of constant $\varepsilon = \kappa_e \varepsilon_0$ is inserted into the capacitor (while connected to the voltage source).
+	\begin{enumerate}
+		\item Calculate the new capacitance.
+		\item How did the free charge on the capacitor plates change in the process?
+		\item How did the energy stored in the capacitor change?
+	\end{enumerate}
+	Now, all the dielectric material is removed.
+	Afterward, the capacitor is disconnected from the voltage source.
+	A dielectric material of constant $\varepsilon = \kappa_e \varepsilon_0$ is inserted into the capacitor (while disconnected from the voltage source).
+	\begin{enumerate}[resume]
+		\item Calculate the new capacitance.
+		\item How did the potential difference between the plates change?
+		\item How did the energy stored in the capacitor change?
+	\end{enumerate}
+	For both cases, was the dielectric material attracted or repelled by the capacitor?
+\end{question}
+
+\begin{solution}
+%	Let the capacitance charge, etc\dots
+	If there is no dielectric in the capacitor, the capacitance is
+	\begin{align*}
+		C_0 & = \frac{Q_0}{V_0}                                     \\
+                    & = \frac{Q_0}{E_0 d}                                   \\
+                    & = \frac{\sigma_0 A}{\frac{\sigma_0}{\varepsilon_0} d} \\
+                    & = \frac{\varepsilon_0 A}{d}
+	\end{align*}
+	\begin{enumerate}[leftmargin = *]
+		\item
+			After the dielectric material is inserted,
+			\begin{align*}
+				C_1            & = \frac{Q_1}{V_1}                                              \\
+				\intertext{As the battery is connected, the voltage will remain constant. Therefore, $V_0 = V_1$.}
+				\therefore C_1 & = \frac{Q_1}{V_0}                                              \\
+                                               & = \frac{\sigma_1 A}{\frac{\sigma_1}{\kappa_e \varepsilon_0} d} \\
+                                               & = \frac{\kappa_e \varepsilon_0 A}{d}                           \\
+                                               & = \kappa_e C_0
+			\end{align*}
+		\item
+			\begin{align*}
+				C_1                     & = \frac{Q_1}{V_1}  \\
+				\therefore \kappa_e C_0 & = \frac{Q_1}{V_0}  \\
+				\therefore Q_1          & = \kappa_e C_0 V_0 \\
+                                                        & = \kappa_e Q_0
+			\end{align*}
+		\item
+			\begin{align*}
+				U_1 & = \frac{1}{2} C_1 {V_1}^2          \\
+                                    & = \frac{1}{2} \kappa_e C_0 {V_0}^2 \\
+                                    & = \kappa_e U_0
+			\end{align*}
+		\item
+			\begin{align*}
+				C_2            & = \frac{Q_2}{V_2}                                              \\
+				\intertext{As the battery is disconnected, the charge cannot flow out and must remain constant. Therefore, $Q_0 = Q_1$.}
+				\therefore C_2 & = \frac{Q_0}{V_2}                                              \\
+                                               & = \frac{\sigma_2 A}{\frac{\sigma_2}{\kappa_e \varepsilon_0} d} \\
+                                               & = \frac{\kappa_e \varepsilon_0 A}{d}                           \\
+                                               & = \kappa_e C_0
+			\end{align*}
+		\item
+			\begin{align*}
+				C_2                     & = \frac{Q_2}{V_2}          \\
+				\therefore \kappa_e C_0 & = \frac{Q_0}{V_2}          \\
+				\therefore V_2          & = \frac{Q_0}{\kappa_e C_0} \\
+                                                        & = \frac{V_0}{\kappa_e}
+			\end{align*}
+		\item
+			\begin{align*}
+				U_2 & = \frac{1}{2} C_2 {V_2}^2                               \\
+                                    & = \frac{1}{2} \kappa_e C_0 \frac{{V_0}^2}{{\kappa_e}^2} \\
+                                    & = \frac{U_0}{\kappa_e}
+			\end{align*}
+	\end{enumerate}
+	As $U_1 > U_0$, the process of inserting the dielectric increases the potential.
+	Therefore, the dielectric is repelled by the plates.\\
+	As $U_2 < U_0$, the process of inserting the dielectric decreases the potential.
+	Therefore, the dielectric is attracted by the plates.
+\end{solution}
+
+\newpage
+\part{Electrodynamics}
+
+\begin{question}
+	The current and current density are related by the relations
+	\begin{align*}
+		\overrightarrow{j} & = \rho \overrightarrow{v}   \\
+		\overrightarrow{k} & = \sigma \overrightarrow{v} \\
+		I                  & = \lambda v
+	\end{align*}
+	\begin{enumerate}
+		\item Calculate the current in a cylinder of radius $R$ carrying uniform charge density $\rho$ moving in velocity $v$ along the cylinder axis.
+		\item Calculate the current on a segment of length $L$ in an infinite thin plane carrying uniform charge density $\sigma$ moving in velocity $v$ along the plane surface.
+		\item Calculate the current in a thin ring of radius $R$ carrying uniform charge distribution $\lambda$ rotating around its axis with period $T$.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin = *]
+		\item
+			\begin{align*}
+				I & = \iint \overrightarrow{j} \cdot \overrightarrow{\dif A} \\
+                                  & = \rho v A
+			\end{align*}
+		\item
+			\begin{align*}
+				I & = \int \overrightarrow{k} \cdot \overrightarrow{\dif l} \\
+                                  & = \sigma v l
+			\end{align*}
+		\item
+			\begin{align*}
+				I & = \lambda v                             \\
+                                  & = \lambda \omega R                      \\
+                                  & = \lambda \cdot \frac{2 \pi}{T} \cdot R \\
+                                  & = \frac{2 \pi \lambda R}{T}
+			\end{align*}
+	\end{enumerate}
+\end{solution}
+
+\begin{question}
+	A cylinder of length $L$ and cross-section $A$ is made of metallic material with conductivity $\sigma = \sigma_0 \frac{L}{x}$.
+	The bases of the cylinder are connected to potential difference $V$.
+	\begin{enumerate}
+		\item Calculate the resistivity.
+		\item Calculate the current density in the cylinder.
+		\item Calculate the electric field inside the metal.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin = *]
+		\item
+			\begin{align*}
+				\sigma          & = \sigma_0 \frac{L}{x} \\
+				\therefore \rho & = \frac{1}{\sigma}     \\
+                                                & = \frac{x}{\sigma_0 L}
+			\end{align*}
+		\item
+			The cylinder can be considered to be a resistor made up of elemental disk resistors in series.\\
+			Consider an elemental disk of thickness $\dif x$ at a distance $x$ from the origin.\\
+			Therefore, the resistance of the disk is
+			\begin{align*}
+				\dif R       & = \frac{\rho \dif x}{A}                             \\
+                                             & = \frac{x \dif x}{\sigma_0 L A}                     \\
+				\therefore R & = \int\limits_{0}^{L} \frac{x \dif x}{\sigma_0 L A} \\
+                                             & = \frac{L^2}{2 \sigma_0 L A}                        \\
+                                             & = \frac{L}{2 \sigma_0 A}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				V                      & = I R                      \\
+                                                       & = I \frac{L}{2 \sigma_0 A} \\
+				\therefore I           & = \frac{2 \sigma_0 A V}{L} \\
+				\therefore \frac{I}{A} & = \frac{2 \sigma_0 V}{L}   \\
+				\therefore j           & = \frac{2 \sigma_0 V}{L}
+			\end{align*}
+		\item
+			\begin{align*}
+				j                                 & = \sigma E \\
+				\therefore \frac{2 \sigma_0 V}{L} & = \sigma E \\
+				\therefore E                      & = \frac{2 V x}{L^2}
+			\end{align*}
+	\end{enumerate}
+\end{solution}
+
+\addtocounter{question}{1}
+
+\begin{question}
+	A cylinder of length $L$ and radius $a$ ($L >> a$) is made of metallic material with resistivity $\rho = \rho_0 \frac{r}{a}$.
+	The bases of the cylinder are made of ideal conductor and are connected to potential difference $V$.
+	\begin{enumerate}
+		\item Calculate the resistance.
+		\item Calculate the current in the cylinder.
+		\item Calculate the electric field, $\overrightarrow{E}$, inside the metal.
+		\item Calculate the current density, $\overrightarrow{j}$, and make sure that $\int \overrightarrow{j} \cdot \overrightarrow{\dif s} = I$.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin = *]
+		\item
+			The cylinder can be considered to be a resistor made up of elemental cylindrical shell disk resistors in parallel.\\
+			Consider an elemental cylindrical shell of radius $r$ thickness $\dif r$.\\
+			Therefore, the resistance of the shell is
+			\begin{align*}
+				\dif R                 & = \frac{\rho L}{2 \pi r \dif r}                       \\
+                                                       & = \frac{\rho_0 r L}{2 \pi a r \dif r}                 \\
+                                                       & = \frac{\rho_0 L}{2 \pi a \dif r}                     \\
+				\therefore \frac{1}{R} & = \int \frac{1}{\dif R}                               \\
+                                                       & = \int\limits_{0}^{a} \frac{2 \pi a \dif r}{\rho_0 L} \\
+                                                       & = \frac{2 \pi a^2}{\rho_0 L}                          \\
+				\therefore R           & = \frac{\rho_0 L}{2 \pi a^2}
+			\end{align*}
+		\item
+			\begin{align*}
+				V            & = I R                          \\
+				\therefore V & = I \frac{\rho_0 L}{2 \pi a^2} \\
+				\therefore I & = \frac{2 \pi a^2 V}{\rho_0 L}
+			\end{align*}
+		\item
+			\begin{align*}
+				V            & = E L \\
+				\therefore E & = \frac{V}{L}
+			\end{align*}
+		\item
+			\begin{align*}
+				j & = \frac{I}{A}                                  \\
+                                  & = \frac{\frac{2 \pi a^2 V}{\rho_0 L}}{\pi a^2} \\
+                                  & = \frac{2 V}{\rho_0 L}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\int \overrightarrow{j} \cdot \overrightarrow{\dif s} & = \int\limits_{0}^{a} \frac{2 V}{\rho_0 L} \cdot 2 \pi r \dif r \\
+                                                                                      & = \frac{2 \pi a^2 V}{\rho_0 L}                                  \\
+                                                                                      & = I
+			\end{align*}
+			Therefore, $\int \overrightarrow{j} \cdot \overrightarrow{\dif s} = I$.
+	\end{enumerate}
 \end{solution}
 
 \end{document}
