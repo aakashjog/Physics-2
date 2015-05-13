@@ -22,7 +22,7 @@
 \usepackage{xfrac, lmodern} %inline fractions
 \usepackage{enumerate, enumitem} %numbered lists
 \usepackage{float} %inserting floats
-\usepackage{circuitikz} %circuit diagrams
+\usepackage[american voltages]{circuitikz} %circuit diagrams
 
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}} %adds numbers to specific equations in non-numbered list of equations
 
@@ -1451,6 +1451,213 @@ E-mail: rms9999@gmail.com\\
 			\end{align*}
 			Therefore, $\int \overrightarrow{j} \cdot \overrightarrow{\dif s} = I$.
 	\end{enumerate}
+\end{solution}
+
+\recitation
+
+\addtocounter{question}{1}
+
+\begin{question}
+	A circuit is comprised of a voltage source $(\varepsilon)$, three identical resistors ($R_1 = R_2 = R_3 = R$), a switch ($S$), and an empty capacitor ($C$).
+	At $t = 0$ the switch is closed and current starts to flow.
+	\begin{figure}[H]
+		\begin{circuitikz}
+			\draw
+				(0,0) to [battery1 = $\varepsilon$] (0,3)
+				(0,3) to [R = $R_1$] (3,3)
+				(3,3) to [closing switch] (5,3)
+				(5,3) to [R = $R_2$] (5,0)
+				(5,3) to (7,3)
+				(7,3) to [R = $R_3$] (7,1)
+				(7,1) to [C = $C$] (7,0)
+				(7,0) to (0,0);
+		\end{circuitikz}
+	\end{figure}
+	\begin{enumerate}
+		\item Calculate the current flowing in each of the resistors after a very short time ($t \to 0^+$).
+		\item Calculate the current flowing in each of the resistors after a very long time ($t \to \infty$).
+		\item What is short/long time in this case?
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{figure}[H]
+		\begin{circuitikz}
+			\draw
+				(0,0) to [battery1 = $\varepsilon$] (0,3)
+				(0,3) to [R = $R_1$, i = $I_1 + I_2$] (3,3)
+				(3,3) to [closing switch] (5,3)
+				(5,3) to [R = $R_2$, i = $I_1$] (5,0)
+				(5,3) to (7,3)
+				(7,3) to [R = $R_3$, i = $I_2$] (7,1)
+				(7,1) to [C = $C$] (7,0)
+				(7,0) to (0,0);
+		\end{circuitikz}
+	\end{figure}
+	By KVL on the left loop,
+	\begin{align*}
+		\varepsilon - (I_1 + I_2) R - I_1 R & = 0
+	\end{align*}
+	By KVL on the larger loop,
+	\begin{align*}
+		\varepsilon - (I_1 + I_2) R - I_2 R - \frac{Q}{C} & = 0
+	\end{align*}
+	Therefore, solving,
+	\begin{align*}
+		3 I_2 R + \frac{2 Q}{C} &= \varepsilon\\
+		\therefore 3 R \dod{Q}{t} + \frac{2 Q}{C} &= \varepsilon\\
+		\therefore \dod{Q}{t} &= \left( \frac{1}{3 R} \right) \left( \varepsilon - \frac{2 Q}{C} \right)\\
+		\therefore \frac{\dif Q}{Q - \frac{C \varepsilon}{2}} &= -\frac{1}{\frac{3 R C}{2}} \dif t\\
+		\intertext{Let $\tau = \frac{3 R C}{2}$. Therefore,}
+		\therefore \frac{\dif Q}{Q - \frac{C \varepsilon}{2}} &= -\frac{1}{\tau} \dif t\\
+		\therefore \int\limits_{-\frac{C \varepsilon}{2}}^{Q - \frac{C \varepsilon}{2}} \frac{\dif Q}{Q - \frac{C \varepsilon}{2}} &= \int\limits_{0}^{t} -\frac{1}{\tau} \dif t\\
+		\therefore Q &= \frac{C \varepsilon}{2} \left( 1 - e^{-\frac{t}{\tau}} \right)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		I_2(t) &= \dod{Q}{t}\\
+		&= \frac{C \varepsilon}{2} \left( \frac{1}{\tau} \right) e^{-\frac{t}{\tau}}\\
+		&= \frac{\varepsilon}{3 R} e^{-\frac{t}{\tau}}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		I_1 &= \frac{\varepsilon - I_2 R}{2 R}\\
+		&= \frac{\varepsilon}{2 R} - \frac{I_2}{2}
+	\end{align*}
+	\begin{enumerate}[leftmargin = *]
+		\item
+			If $t \to 0^+$,
+			\begin{align*}
+				I_2 &= \lim\limits_{t \to 0^+} \frac{\varepsilon}{3 R} e^{-\frac{t}{\tau}}\\
+				&= \frac{\varepsilon}{3 R} e^0\\
+				&= \frac{\varepsilon}{3 R}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				I_1 &= \frac{\varepsilon}{2 R} - \frac{I_2}{2}\\
+				&= \frac{\varepsilon}{2 R} - \frac{\frac{\varepsilon}{3 R}}{2}\\
+				&= \frac{\varepsilon}{2 R} - \frac{\varepsilon}{6 R}\\
+				&= \frac{\varepsilon}{3 R}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				I_0 &= I_1 + I_2\\
+				&= \frac{\varepsilon}{3 R} + \frac{\varepsilon}{3 R}\\
+				&= \frac{2 \varepsilon}{3 R}
+			\end{align*}
+		\item
+			If $t \to \infty$,
+			\begin{align*}
+				I_2 &= \lim\limits_{t \to \infty} \frac{\varepsilon}{3 R} e^{-\frac{t}{\tau}}\\
+				&= \frac{\varepsilon}{3 R} \cdot 0\\
+				&= 0
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				I_1 &= \frac{\varepsilon}{2 R} - \frac{I_2}{2}\\
+				&= \frac{\varepsilon}{2 R} - 0\\
+				&= \frac{\varepsilon}{2 R}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				I_0 &= I_1 + I_2\\
+				&= \frac{\varepsilon}{2 R} + 0\\
+				&= \frac{\varepsilon}{2 R}
+			\end{align*}
+		\item
+			These short and long times are in comparison to the time constant of the circuit, i.e. $\tau = \frac{3 R C}{2}$.
+	\end{enumerate}
+\end{solution}
+
+\addtocounter{question}{1}
+
+\newpage
+\part{Magnetism}
+
+\section{Lorentz Force}
+
+\begin{question}
+	A particle of mass $m$, charge $q$ and velocity $\overrightarrow{v}$ is entering a region of a constant uniform magnetic field $\overrightarrow{B}$.
+	The angle between the particle's velocity and the magnetic field is $\theta$.	
+	\begin{enumerate}
+		\item Describe the trajectory of the particle.
+		\item Calculate the cyclotron radius $R$.
+		\item Calculate the cyclotron frequency $\omega$ and period $T$.
+		\item Calculate the longitudinal distance the particle traverses in one time period.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}
+		\item
+			The magnetic force acting on the particle is
+			\begin{align*}
+				\overrightarrow{F} &= q \overrightarrow{v} \times \overrightarrow{B}
+			\end{align*}
+			Therefore, the force is always perpendicular to the velocity.\\
+			Therefore, it changes the direction of the component of the velocity perpendicular to the magnetic field, but not its magnitude.\\
+			However the component of the velocity in the direction of $\overrightarrow{B}$ is unaffected by the force.\\
+			Therefore, the particle goes in a circle, due to the component of the velocity perpendicular to $\overrightarrow{B}$ and in a straight line due to the component of the velocity parallel to $\overrightarrow{B}$.
+			Hence, it goes in a helical path.
+		\item
+			Let the direction of $\overrightarrow{B}$ be $\hat{k}$.
+			\begin{align*}
+				\overrightarrow{F} &= q \overrightarrow{v} \times \overrightarrow{B}\\
+				\therefore \overrightarrow{F} &= q v \left( \hat{j} \sin \theta + \hat{k} \cos \theta \right) \times \hat{k} B\\
+				&= q v B \sin \theta \hat{i}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\frac{m v^2 \sin^2 \theta}{R} &= q v B \sin \theta\\
+				\therefore R &= \frac{m v \sin \theta}{q B}
+			\end{align*}
+		\item
+			\begin{align*}
+				\omega &= \frac{v \sin \theta}{R}\\
+				&= \frac{v \sin \theta}{\frac{m v \sin \theta}{q B}}\\
+				&= \frac{q B}{m}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				T = \frac{2 \pi}{\omega}\\
+				&= \frac{2 \pi}{\frac{q B}{m}}\\
+				&= \frac{2 \pi m}{q B}
+			\end{align*}
+		\item
+			The component of the velocity in the direction of $\overrightarrow{B}$ is responsible for the longitudinal movement of the particle.\\
+			Therefore, the distance traversed by the particle in one time period is,
+			\begin{align*}
+				d &= v \cos \theta \cdot T\\
+				&= v \cos \theta \frac{2 \pi m}{q B}\\
+				&= \frac{2 \pi m v \cos \theta}{q B}
+			\end{align*}
+	\end{enumerate}
+\end{solution}
+
+\addtocounter{question}{1}
+
+\section{Biot-Savart Law}
+
+\begin{question}
+	Given an arc of radius $R$ and angle $\alpha$, the arc carries current $I$.
+	Calculate the magnetic field along the arc's axis.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\dif l &= R \dif \alpha
+	\end{align*}
+	Let $\overrightarrow{r}$ be the vector joining $\dif l$ and a point at a distance $z$ on the axis.\\
+	Therefore,
+	\begin{align*}
+		\overrightarrow{\dif B} &= \frac{\mu_0}{4 \pi} \frac{I \overrightarrow{\dif l} \times \hat{r}}{r^2}
+	\end{align*}
+	Therefore, $\overrightarrow{B}$ must be perpendicular to both $\hat{r}$ and $\overrightarrow{\dif l}$.
+	\begin{align*}
+		\dif B_z &= \frac{\mu_0}{4 \pi} \frac{I \dif l}{r^2} \cos \theta\\
+		\therefore B_z &= \frac{\mu_0 I}{4 \pi} \int\limits_{0}^{\alpha} \frac{R \dif \alpha}{r^2} \cos \theta\\
+		&= \frac{\mu_0}{4 \pi} \frac{I R^2 \cdot \alpha}{\left( z^2 + R^2 \right)^{\frac{3}{2}}}
+	\end{align*}
 \end{solution}
 
 \end{document}
