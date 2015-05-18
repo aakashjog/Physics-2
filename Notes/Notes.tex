@@ -108,6 +108,7 @@ E-mail: erezpyet@mail.tau.ac.il\\
 	\begin{align*}
 		\overrightarrow{F_{2 1}} &= \dfrac{1}{4 \pi \varepsilon_0} \dfrac{q_1 q_2}{{r_{1 2}}^2} \hat{r_{1 2}}
 	\end{align*}
+	\label{Coulomb's_Law}
 \end{law}
 ~\\
 Charge is defined according to this law.\\
@@ -1234,6 +1235,7 @@ where $\overrightarrow{v_i}$ is the velocity of the $i^{\text{th}}$ charge carri
 	\begin{equation*}
 		\frac{V}{I} = R
 	\end{equation*}
+	\label{Ohm's_Law}
 \end{law}
 
 \section{Resistors}
@@ -1587,26 +1589,33 @@ It is constructed with regions of magnetic field $\overrightarrow{B}$ and region
 		\def\R{4};
 		\def\d{2};
 		\def\l{0.5};
-
-		\draw (\R,\d/2) arc (0:180:\R);
-		\draw (-\R,\d/2) -- (\R,\d/2);
-
-		\draw (-\R,-\d/2) arc (180:360:\R);
-		\draw (-\R,-\d/2) -- (\R,-\d/2);
-
+	
+		\begin{scope}[red]
+			\draw (\R + 2,\d/2) arc (0:180:\R + 2);
+			\draw (-\R - 2,\d/2) -- (\R + 2,\d/2);
+	
+			\draw (-\R - 2,-\d/2) arc (180:360:\R + 2);
+			\draw (-\R - 2,-\d/2) -- (\R + 2,-\d/2);
+		\end{scope}
+	
 		\filldraw ($ (\l,-\d/2) + (0,2pt) $) circle (2pt);
-
+	
 		\coordinate (particle) at ($ (\l,-\d/2) + (0,2pt) $);
-
-		\foreach \r in {1,...,\R}
+	
+		\foreach \r in {1,3}
 		{
-			\draw (particle) -- ++($ (0,\d) - (0,2pt) $);
-			\draw ($ (particle) + (0,\d) - (0,2pt) $) arc (0:180:\r);
-
-			\coordinate (particle) at ($ (particle) + (0,\d) - (0,2pt) + (-2*\r,0) $);
+			\draw (particle) -- ++(0,\d);
+	
+			\draw ($ (particle) + (0,\d) $) arc (0:180:\r);
+			
+			\draw ($ (particle) + (0,\d) + (-2*\r,0) $) -- ++(0,-\d);
+	
+			\draw ($ (particle) + (0,\d) + (-2*\r,0) + (0,-\d) $) arc (180:360:\r + 1);
+	
+			\coordinate (particle) at ($ (particle) + (\r + 1,0) $);
 		}
-	\end{tikzpicture}<++>
-\end{figure}<++>
+	\end{tikzpicture}
+\end{figure}
 The semicircular areas have magnetic field $\overrightarrow{B}$ directed inwards and the region between the semicircular areas have $\overrightarrow{E}$ directed upwards.
 The electric field changes directions such that the frequency of the field is half the frequency of the rotation of the charged particle.\\
 The particle with mass $m$ and charge $q$ starts as shown and is accelerated under the electric field till it enters the semicircular area.\\
@@ -1635,6 +1644,7 @@ Therefore, $\frac{e}{m}$ can be physically calculated.
 		\dif \overrightarrow{B} & = \frac{\mu_0}{4 \pi} \frac{I \dif \overrightarrow{l} \times \hat{r}}{r^2} \\
 		\therefore B            & = \frac{\mu_0}{4 \pi} \frac{q \overrightarrow{v} \times \hat{r}}{r^2}
 	\end{align*}
+	\label{Biot-Savart_Law}
 \end{law}
 
 \begin{question}
@@ -1705,6 +1715,175 @@ Therefore, $\frac{e}{m}$ can be physically calculated.
                                               & = \frac{I \mu_0 r}{4 \pi} \frac{\dif z}{\left( r^2 + z^2 \right)^{\frac{3}{2}}} \hat{\varphi}                                \\
 		\therefore \overrightarrow{B} & = \hat{\varphi} \frac{I \mu_0 r}{4 \pi} \int\limits_{-\infty}^{\infty} \frac{\dif z}{\left( r^2 + z^2 \right)^{\frac{3}{2}}} \\
                                               & = \frac{\mu_0 I}{2 \pi r} \hat{\varphi}
+	\end{align*}
+\end{solution}
+
+\begin{definition}[Magnetic dipole moment]
+	The magnetic dipole moment of a loop of area $A$ carrying current $I$ is defined as
+	\begin{equation*}
+		\overrightarrow{m} = \overrightarrow{\mu} = I \overrightarrow{A}
+	\end{equation*}
+\end{definition}
+
+\begin{question}
+	A rigid, closed, square loop, carrying current $I$ is placed in a region of external magnetic field $\overrightarrow{B}$ as shown.
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\a{4};
+
+			\begin{scope}[-stealth, red]
+				\foreach \i in {0,...,\a}
+				{
+					\draw (-1,\i) -- (\a + 1, \i) node [right] {$B$};
+				}
+			\end{scope}
+
+			\begin{scope}
+				\draw (0,0) to [short, i = $I$] (\a,0);
+				\draw (\a,0) to [short, i = $I$] (\a,\a);
+				\draw (\a,\a) to [short, i = $I$] (0,\a);
+				\draw (0,\a) to [short, i = $I$] (0,0);
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+	Describe the motion of the loop.
+\end{question}
+
+\begin{solution}
+	The force on the right side of the square loop is directed inwards, and the force on the left side is directed outwards.
+	These forces are equal in magnitude.
+	\begin{align*}
+		F & = I a B
+	\end{align*}
+	The forces on the upper and lower sides of the loop are zero, as the directions of the magnetic field and $\overrightarrow{I \dif l}$ are the same.\\
+	Therefore, as the forces on the left and right sides are opposite in direction, there is no net force on the loop, but there is a net torque.\\
+	Hence, the loop will rotate around an axis as shown.\\
+	After the loop rotates, the upper and lower sides will have a force acting on them.
+	However, due to the directions of the forces, it will have no effect on the motion of the loop.
+	The forces only work towards deforming the loop.\\
+	Therefore, the net torque on the loop is
+	\begin{align*}
+		\overrightarrow{\tau} & = 2 \left( \frac{a}{2} \cdot I a B \cdot \sin \theta \right) \hat{z} \\
+                                      & = I a^2 B \sin \theta \hat{z}                                        \\
+                                      & = I A B \sin \theta \hat{z}                                          \\
+                                      & = I \overrightarrow{A} \times \overrightarrow{B}                     \\
+                                      & = \overrightarrow{\mu} \times \overrightarrow{B}
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	Find the force between two wires of length $l$, carrying currents $I_1$ and $I_2$, respectively, separated by a distance $r$, where $l >> r$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		F & = I_2 l B_1                     \\
+                  & = I_2 l \frac{\mu_0 I}{2 \pi r} \\
+                  & = \frac{\mu_0 I_1 I_2 l}{2 \pi r}
+	\end{align*}
+\end{solution}
+
+\section{Ampere's Law}
+
+\begin{law}[Ampere's Law]
+	Let $C$ be a virtual closed loop.
+	\begin{equation*}
+		\oint\limits_{C} \overrightarrow{B} \cdot \overrightarrow{\dif l} = \mu_0 I_{\textnormal{enclosed}}
+	\end{equation*}
+	\label{Ampere's_Law}
+\end{law}
+
+\begin{question}
+	A cylindrical wire of radius $R$ is carrying current with current density $\overrightarrow{j} = j \hat{z}$.
+	Find the magnetic field at a distance $r > R$ from the centre of the wire.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\overrightarrow{B} & = B_r \hat{r} + B_{\varphi} \hat{\varphi} + B_z \hat{z}
+	\end{align*}
+	Due to the symmetry of the cylinder, $B$ is independent of $\varphi$.\\
+	As the wire is infinite, $B$ is independent of $z$.\\
+	By the \nameref{Biot-Savart_Law}, $B$ should be in the $\hat{\varphi}$ direction only.\\
+	Therefore,
+	\begin{align*}
+		\overrightarrow{B}(r) & = B_{\varphi}(r) \hat{\varphi}
+	\end{align*}
+	Consider a circular virtual Ampere loop with radius $r$.\\
+	Therefore, by \nameref{Ampere's_Law},
+	\begin{align*}
+		\oint \overrightarrow{B} \cdot \overrightarrow{\dif l} & = \mu_0 I                 \\
+		\therefore B \cdot 2 \pi r                             & = \mu_0 I                 \\
+		\therefore B                                           & = \frac{\mu_0 I}{2 \pi r} \\
+		\therefore \overrightarrow{B}                          & = \frac{\mu_0 I}{2 \pi r} \hat{\varphi}
+	\end{align*}
+	If $r > R$,
+	\begin{align*}
+		\overrightarrow{B} & = \frac{\mu_0 j \pi R^2}{2 \pi r} \hat{\varphi} \\
+                                   & = \frac{\mu_0 j R^2}{2 r} \hat{\varphi}
+	\end{align*}
+	If $r < R$,
+	\begin{align*}
+		\overrightarrow{B} & = \frac{\mu_0 j \pi r^2}{2 \pi r} \hat{\varphi} \\
+                                   & = \frac{\mu_0 j r}{2} \hat{\varphi}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\overrightarrow{B} &=
+			\begin{cases}
+				\frac{\mu_0 j r}{2} \hat{\varphi}     & ;\quad r < R \\
+				\frac{\mu_0 j R^2}{2 r} \hat{\varphi} & ;\quad r > R \\
+			\end{cases}
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	An infinite plate in the $x$-$y$ plane is carrying current in the positive $x$ direction.
+	The current density is $k = \frac{I}{l}$.
+\end{question}
+
+\begin{solution}
+	Consider a square virtual Ampere loop, directed anti-clockwise, as shown.
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\xMIN{-5};
+			\def\xMAX{5};
+			\def\yMIN{-5};
+			\def\yMAX{5};
+
+			\def\l{2};
+			\def\h{3};
+
+			\begin{scope}[stealth-stealth, lightgray]
+				\draw (\xMIN,0) -- (\xMAX,0) node [right] {$y$};
+				\draw (0,\yMIN) -- (0,\yMAX) node [above] {$z$};
+			\end{scope}
+
+			\begin{scope}
+				\draw (-\l/2,-\h/2) rectangle (\l/2,\h/2);
+			\end{scope}
+
+			\begin{scope}
+				\foreach \x in {\xMIN,...,\xMAX}
+				{
+					\node at (\x,0) {$\odot$};
+				}
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+	Therefore by \nameref{Ampere's_Law},
+	\begin{align*}
+		\oint \overrightarrow{B} \cdot \overrightarrow{\dif l} &= \mu_0 I_{\textnormal{enclosed}}\\
+		\therefore 2 |B| l &= \mu_0 k l\\
+		\therefore |B| &= \frac{\mu_0 k}{2}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\overrightarrow{B} &=
+			\begin{cases}
+				-\frac{\mu_0 k}{2} \hat{y} & ;\quad z > 0 \\
+				\frac{\mu_0 k}{2} \hat{y}  & ;\quad z < 0 \\
+			\end{cases}
 	\end{align*}
 \end{solution}
 
