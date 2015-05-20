@@ -1660,4 +1660,232 @@ E-mail: rms9999@gmail.com\\
 	\end{align*}
 \end{solution}
 
+\recitation
+
+\begin{question}
+	The electric potential is given in cylindrical coordinates by
+	\begin{equation*}
+		V(r) =
+			\begin{cases}
+				A (a^2 - r^2)                    & ;\quad r < a     \\
+				-A a^2 \ln \frac{r}{a} + C       & ;\quad a < r < b \\
+				-(A a^2 + B) \ln \frac{r}{b} + D & ;\quad b < r     \\
+			\end{cases}
+	\end{equation*}
+	where $r$ is the distance from the $z$ axis.
+	The constants $A \neq 0$ and $B \neq 0$ are also given.
+	\begin{enumerate}
+		\item Calculate the electric field everywhere.
+		\item Find the charge distributions that create this field.
+		\item Find the surface charge density at $r = a$ and at $r = 2 b$.
+		\item Write an expression for $C$ and $D$ as functions of the given parameters $a$, $b$, $A$ and $B$.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin = *]
+		\item
+			If $r < a$,
+			\begin{align*}
+				E & = -\dpd{V}{r} \hat{r}                             \\
+                                  & = -\dpd{}{r} \left( A (a^2 - r^2) \right) \hat{r} \\
+                                  & = 2 A r \hat{r}
+			\end{align*}
+			If $a < r < b$,
+			\begin{align*}
+				E & = -\dpd{V}{r} \hat{r}                                          \\
+                                  & = -\dpd{}{r} \left( -A a^2 \ln \frac{r}{a} + C \right) \hat{r} \\
+                                  & = \frac{A a^2}{r} \hat{r}
+			\end{align*}
+			If $b < r$,
+			\begin{align*}
+				E & = -\dpd{V}{r} \hat{r}                                                 \\
+                                  & = -\dpd{}{r} \left( --(A a^2 + B) \ln \frac{r}{b} + D \right) \hat{r} \\
+                                  & = \frac{A a^2 + B}{r} \hat{r}
+			\end{align*}
+		\item
+			\begin{align*}
+				\overrightarrow{\nabla} \cdot \overrightarrow{E}                                               & = \frac{\rho}{\varepsilon_0} \\
+				\therefore \frac{1}{r} \dpd{}{r} (r E_r) + \frac{1}{r} \dpd{E_{\theta}}{\theta} + \dpd{E_z}{z} & = \frac{\rho}{\varepsilon_0}
+			\end{align*}
+			Therefore, if $r < a$,
+			\begin{align*}
+				\overrightarrow{\nabla} \cdot \overrightarrow{E} & = \frac{1}{r} \dpd{}{r} \left( r E \right)           \\
+                                                                                 & = \frac{1}{r} \dpd{}{r} \left( r \cdot 2 A r \right) \\
+				\therefore \frac{\rho}{\varepsilon_0}            & = 4 A                                                \\
+				\therefore \rho                                  & = 4 A \varepsilon_0
+			\end{align*}
+			Therefore, if $a < r < b$,
+			\begin{align*}
+				\overrightarrow{\nabla} \cdot \overrightarrow{E} & = \frac{1}{r} \dpd{}{r} \left( r E \right)                     \\
+                                                                                 & = \frac{1}{r} \dpd{}{r} \left( r \cdot \frac{A a^2}{r} \right) \\
+				\therefore \frac{\rho}{\varepsilon_0}            & = 0                                                            \\
+				\therefore \rho                                  & = 0
+			\end{align*}
+			Therefore, if $b < r$,
+			\begin{align*}
+				\overrightarrow{\nabla} \cdot \overrightarrow{E} & = \frac{1}{r} \dpd{}{r} \left( r E \right)                         \\
+                                                                                 & = \frac{1}{r} \dpd{}{r} \left( r \cdot \frac{A a^2 + B}{r} \right) \\
+				\therefore \frac{\rho}{\varepsilon_0}            & = 0                                                                \\
+				\therefore \rho                                  & = 0
+			\end{align*}
+		\item
+			Consider a cylindrical Gaussian surface with radius $r$ and height $H$.\\
+			Therefore, by Gauss' Law,
+			\begin{align*}
+				\int \overrightarrow{E} \cdot \overrightarrow{\dif S} & = \frac{Q}{\varepsilon_0} \\
+                                                                                      & = \int (2 A r) \dif S     \\
+                                                                                      & = (2 A r) (2 \pi r H)     \\
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\sigma(r = a) & = \frac{Q}{2 \pi a H} \\
+				\sigma(r = b) & = \frac{Q}{2 \pi b H}
+			\end{align*}
+		\item
+			The potential must be continuous at $r = a$ and $r = b$.\\
+			Therefore, comparing the expressions of the potential,
+			\begin{align*}
+				C & = 0 \\
+				D & = A a^2 \ln \frac{a}{b}
+			\end{align*}
+	\end{enumerate}
+\end{solution}
+
+\addtocounter{question}{1}
+
+\begin{question}
+	A thin disk of radius $R$ carries surface charge density $\sigma$.
+	The disk is rotating around its axis at angular frequency $\omega$ in the $x$-$y$ plane.
+	\begin{enumerate}
+		\item Calculate the disk's magnetic dipole moment.
+		\item Calculate the magnetic field in the center of the disk.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin = *]
+		\item
+			Consider an elemental ring of radius $r$ and thickness $\dif r$.
+			Therefore, the current due to the rotating elemental ring is
+			\begin{align*}
+				\dif I       & = \frac{\dif q}{2 \pi} \cdot \omega \\
+                                             & = \frac{\omega}{2 \pi} \dif q       \\
+				\therefore I & = \int \frac{\omega}{2 \pi} \dif q  \\
+                                             & = \frac{Q \omega}{2 \pi}
+			\end{align*}
+			The magnetic dipole moment of the disk is
+			\begin{align*}
+				\overrightarrow{\mu} & = I \overrightarrow{A}                 \\
+				\therefore \mu       & = \frac{Q \omega}{2 \pi} A             \\
+                                                     & = \frac{Q \omega}{2 \pi} \cdot \pi R^2 \\
+                                                     & = \frac{Q \omega R^2}{2}
+			\end{align*}
+			The magnetic dipole moment is directed perpendicular to the disk.
+		\item
+			The magnetic field due to the moving elemental ring is
+			\begin{align*}
+				\dif B       & = \frac{\mu_0 \dif I}{2 r}                                 \\
+				\therefore B & = \frac{\mu_0 \omega \sigma}{2} \int\limits_{0}^{R} \dif r \\
+                                             & = \frac{\mu_0 \omega \sigma R}{2}
+			\end{align*}
+	\end{enumerate}
+\end{solution}
+
+\begin{question}
+	A hollow cylinder of inner radius $a$ and outer radius $b$ carries uniform current density ⃗$\overrightarrow{j}$ parallel to the cylinder's axis.
+	Calculate the magnetic field $\overrightarrow{B}$ everywhere.
+\end{question}
+
+\begin{solution}
+	Consider a closed, virtual Ampere loop of radius $r$.\\
+	Therefore, by Ampere's law,
+	\begin{align*}
+		\int \overrightarrow{B} \cdot \overrightarrow{\dif l} & = \mu_0 I_{\textnormal{enclosed}}
+	\end{align*}
+	If $b < r$,
+	\begin{align*}
+		\int \overrightarrow{B} \cdot \overrightarrow{\dif l} & = \mu_0 I_{\textnormal{enclosed}}         \\
+		\therefore B \cdot 2 \pi r                            & = \mu_0 j \pi (b^2 - a^2)                 \\
+		\therefore B                                          & = \frac{\mu_0 j (b^2 - a^2) \pi}{2 \pi r} \\
+                                                                      & = \frac{\mu_0 j (b^2 - a^2)}{2 r}
+	\end{align*}
+	If $a < r < b$,
+	\begin{align*}
+		\int \overrightarrow{B} \cdot \overrightarrow{\dif l} & = \mu_0 I_{\textnormal{enclosed}}         \\
+		\therefore B \cdot 2 \pi r                            & = \mu_0 j \pi (r^2 - a^2)                 \\
+		\therefore B                                          & = \frac{\mu_0 j (r^2 - a^2) \pi}{2 \pi r} \\
+                                                                      & = \frac{\mu_0 j (r^2 - a^2)}{2 r}
+	\end{align*}
+	If $r < a$,
+	\begin{align*}
+		\int \overrightarrow{B} \cdot \overrightarrow{\dif l} & = \mu_0 I_{\textnormal{enclosed}} \\
+		\therefore B \cdot 2 \pi r                            & = 0                               \\
+		\therefore B                                          & = 0
+	\end{align*}
+\end{solution}
+
+\addtocounter{question}{1}
+
+\begin{question}
+	A uniform surface charge density $\sigma$ is spread on the entire $x$-$y$ plane.
+	This charge density is moving at constant velocity $\overrightarrow{v} = v \hat{x}$.
+	Calculate the magnetic field everywhere.
+\end{question}
+
+\begin{solution}
+	Consider a square virtual Ampere loop, directed anti-clockwise, as shown.
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\xMIN{-5};
+			\def\xMAX{5};
+			\def\yMIN{-5};
+			\def\yMAX{5};
+
+			\def\l{2};
+			\def\h{3};
+
+			\begin{scope}[stealth-stealth, lightgray]
+				\draw (\xMIN,0) -- (\xMAX,0) node [right] {$y$};
+				\draw (0,\yMIN) -- (0,\yMAX) node [above] {$z$};
+			\end{scope}
+
+			\begin{scope}
+				\draw (-\l/2,-\h/2) rectangle (\l/2,\h/2);
+			\end{scope}
+
+			\begin{scope}
+				\foreach \x in {\xMIN,...,\xMAX}
+				{
+					\node at (\x,0) {$\odot$};
+				}
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+	Let
+	\begin{align*}
+		\overrightarrow{k} & = \sigma \overrightarrow{v}\\
+		\therefore I       & = k l
+	\end{align*}
+	Therefore by Ampere's Law,
+	\begin{align*}
+		\oint \overrightarrow{B} \cdot \overrightarrow{\dif l} & = \mu_0 I_{\textnormal{enclosed}} \\
+		\therefore 2 |B| l                                     & = \mu_0 k l                       \\
+		\therefore |B|                                         & = \frac{\mu_0 k}{2}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\overrightarrow{B} &=
+			\begin{cases}
+				-\frac{\mu_0 k}{2} \hat{y} & ;\quad z > 0 \\
+				\frac{\mu_0 k}{2} \hat{y}  & ;\quad z < 0 \\
+			\end{cases}\\
+		&=
+			\begin{cases}
+				-\frac{\mu_0 \sigma v}{2} \hat{y} & ;\quad z > 0 \\
+				\frac{\mu_0 \sigma v}{2} \hat{y}  & ;\quad z < 0 \\
+			\end{cases}
+	\end{align*}
+\end{solution}
+
 \end{document}
