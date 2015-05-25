@@ -736,62 +736,83 @@ Therefore,
 	\end{align*}
 \end{solution}
 
-\section{Integral Form of Gauss' Law}
+\section{Differential Form of Gauss' Law}
 
-The volume of the elemental body used for integration is denoted by $\dif^3 r$.\\
-For Cartesian coordinate systems, $\dif^3 r = \dif x \dif y \dif z$.\\
-For cylindrical coordinate systems, $\dif^3 r = r \dif \theta \dif \varphi \dif z$.\\
-For spherical coordinate systems, $\dif^3 r = r^2 \sin \theta \dif r \dif \theta \dif \varphi $.\\
+\begin{law}[Differential Form of Gauss' Law]
+	\begin{equation*}
+		\dif \overrightarrow{E} = \overrightarrow{\nabla} \cdot \overrightarrow{E} = \frac{\rho}{\varepsilon_0}
+	\end{equation*}
+\end{law}
 
-\begin{align*}
-	\iint\limits_{\partial V} \overrightarrow{E} \cdot \dif \overrightarrow{A} &= \dfrac{1}{\varepsilon_0} Q_{\textnormal{inside}}\\
-	&= \dfrac{1}{\varepsilon_0} \iiint\limits_{V} \rho \dif^3 r 
-	\footnotemark
-\end{align*}
+\begin{proof}
+	The volume of the elemental body used for integration is denoted by $\dif^3 r$.\\
+	For Cartesian coordinate systems, $\dif^3 r = \dif x \dif y \dif z$.\\
+	For cylindrical coordinate systems, $\dif^3 r = r \dif \theta \dif \varphi \dif z$.\\
+	For spherical coordinate systems, $\dif^3 r = r^2 \sin \theta \dif r \dif \theta \dif \varphi $.\\
+	
+	\begin{align*}
+		\iint\limits_{\partial V} \overrightarrow{E} \cdot \dif \overrightarrow{A} &= \dfrac{1}{\varepsilon_0} Q_{\textnormal{inside}}\\
+		&= \dfrac{1}{\varepsilon_0} \iiint\limits_{V} \rho \dif^3 r 
+	\end{align*}
+	
+	If a body with volume $V$ and surface area $S$ is cut into two parts, with volumes $V_1$ and $V_2$ and surface area $S_1$ and $S_2$ respectively,
+	\begin{equation*}
+		V = V_1 + V_2
+	\end{equation*}
+	However, the surface area increases,
+	\begin{equation*}
+		S = S_1 + S_2 + 2 A \neq S_1 + S_2
+	\end{equation*}
+	where $A$ is the area of the new surface created due to the cut.\\
+	Therefore,
+	\begin{align*}
+		\iint\limits_{S_1} \overrightarrow{E} \cdot \dif \overrightarrow{A} + \iint\limits_{S_2} \overrightarrow{E} \cdot \dif \overrightarrow{A} &= \iint\limits_{\partial V} \overrightarrow{E} \cdot \dif \overrightarrow{A}
+	\end{align*}
+	
+	Consider a small cuboid of sides $\dif x$, $\dif y$, $\dif z$.
+	Let the vertex of the cube, nearest to the origin be $(x,y,z)$.\\
+	Therefore,
+	\begin{align*}
+		\Phi &= \quad E_z \left( x + \dfrac{\dif x}{2}, y + \dfrac{\dif y}{2}, z + \dif z \right) \dif x \dif y\\
+		&\quad - E_z \left( x + \dfrac{\dif x}{2}, y + \dfrac{\dif y}{2}, z \right) \dif x \dif y\\
+		&\quad + E_y \left( x + \dfrac{\dif x}{2}, y + \dif y, z + \dfrac{\dif z}{2} \right) \dif x \dif z\\
+		&\quad  - E_y \left( x + \dfrac{\dif x}{2}, y, z + \dfrac{\dif z}{2} \right) \dif x \dif z\\
+		&\quad + E_x \left( x + \dif x, y + \dfrac{\dif y}{2}, z + \dfrac{\dif z}{2} \right) \dif y \dif z\\
+		&\quad  - E_x \left( x, y + \dfrac{\dif y}{2}, z + \dfrac{\dif z}{2} \right) \dif y \dif z\\
+		&= \quad \dfrac{E_z \left( x + \dfrac{\dif x}{2}, y + \dfrac{\dif y}{2}, z + \dif z \right) - E_z \left( x + \dfrac{\dif x}{2}, y + \dfrac{\dif y}{2}, z \right)}{\dif z} \dif x \dif y\\
+		&\quad + \dfrac{E_y \left( x + \dfrac{\dif x}{2}, y + \dif y, z + \dfrac{\dif z}{2} \right) - E_y \left( x + \dfrac{\dif x}{2}, y, z + \dfrac{\dif z}{2} \right)}{\dif y} \dif x \dif z\\
+		&\quad + \dfrac{E_x \left( x + \dif x, y + \dfrac{\dif y}{2}, z + \dfrac{\dif z}{2} \right) - E_x \left( x, y + \dfrac{\dif y}{2}, z + \dfrac{\dif z}{2} \right)}{\dif x} \dif y \dif z\\
+		&= \quad \left( \left. \dpd{E_x}{x} \right|_{\left( x + \frac{\dif x}{2}, y + \frac{\dif y}{2}, z \right)} \right.\\
+		&\quad \quad + \left. \dpd{E_y}{y} \right|_{\left( x + \frac{\dif x}{2}, y, z + \frac{\dif z}{2} \right)}\\
+		&\quad \quad + \left. \left. \dpd{E_z}{z} \right|_{\left( x + \frac{\dif x}{2}, y + \frac{\dif y}{2}, z \right)} \right) \dif x \dif y \dif z\\
+	\end{align*}
+	Therefore
+	\begin{align*}
+		\divergence \overrightarrow{E} &= \lim\limits_{\dif x \to 0, \dif y \to 0, \dif z \to 0} \dfrac{\Phi}{\dif x \dif y \dif z}\\
+		&= \left. \left( \dpd{E_x}{x} + \dpd{E_y}{y} + \dpd{E_z}{z} \right) \right|_{(x,y,z)}\\
+		&= \overrightarrow{\nabla} \cdot \overrightarrow{E}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\overrightarrow{\nabla} \cdot \overrightarrow{E} &= \frac{\rho}{\varepsilon_0}
+	\end{align*}
+\end{proof}
 
-If a body with volume $V$ and surface area $S$ is cut into two parts, with volumes $V_1$ and $V_2$ and surface area $S_1$ and $S_2$ respectively,
-\begin{equation*}
-	V = V_1 + V_2
-\end{equation*}
-However, the surface area increases,
-\begin{equation*}
-	S = S_1 + S_2 + 2 A \neq S_1 + S_2
-\end{equation*}
-where $A$ is the area of the new surface created due to the cut.\\
-Therefore,
-\begin{align*}
-	\iint\limits_{S_1} \overrightarrow{E} \cdot \dif \overrightarrow{A} + \iint\limits_{S_2} \overrightarrow{E} \cdot \dif \overrightarrow{A} &= \iint\limits_{\partial V} \overrightarrow{E} \cdot \dif \overrightarrow{A}
-\end{align*}
+\section{Poisson Equation}
 
-Consider a small cuboid of sides $\dif x$, $\dif y$, $\dif z$.
-Let the vertex of the cube, nearest to the origin be $(x,y,z)$.\\
-Therefore,
-\begin{align*}
-	\Phi &= \quad E_z \left( x + \dfrac{\dif x}{2}, y + \dfrac{\dif y}{2}, z + \dif z \right) \dif x \dif y\\
-	&\quad - E_z \left( x + \dfrac{\dif x}{2}, y + \dfrac{\dif y}{2}, z \right) \dif x \dif y\\
-	&\quad + E_y \left( x + \dfrac{\dif x}{2}, y + \dif y, z + \dfrac{\dif z}{2} \right) \dif x \dif z\\
-	&\quad  - E_y \left( x + \dfrac{\dif x}{2}, y, z + \dfrac{\dif z}{2} \right) \dif x \dif z\\
-	&\quad + E_x \left( x + \dif x, y + \dfrac{\dif y}{2}, z + \dfrac{\dif z}{2} \right) \dif y \dif z\\
-	&\quad  - E_x \left( x, y + \dfrac{\dif y}{2}, z + \dfrac{\dif z}{2} \right) \dif y \dif z\\
-	&= \quad \dfrac{E_z \left( x + \dfrac{\dif x}{2}, y + \dfrac{\dif y}{2}, z + \dif z \right) - E_z \left( x + \dfrac{\dif x}{2}, y + \dfrac{\dif y}{2}, z \right)}{\dif z} \dif x \dif y\\
-	&\quad + \dfrac{E_y \left( x + \dfrac{\dif x}{2}, y + \dif y, z + \dfrac{\dif z}{2} \right) - E_y \left( x + \dfrac{\dif x}{2}, y, z + \dfrac{\dif z}{2} \right)}{\dif y} \dif x \dif z\\
-	&\quad + \dfrac{E_x \left( x + \dif x, y + \dfrac{\dif y}{2}, z + \dfrac{\dif z}{2} \right) - E_x \left( x, y + \dfrac{\dif y}{2}, z + \dfrac{\dif z}{2} \right)}{\dif x} \dif y \dif z\\
-	&= \quad \left( \left. \dpd{E_x}{x} \right|_{\left( x + \frac{\dif x}{2}, y + \frac{\dif y}{2}, z \right)} \right.\\
-	&\quad \quad + \left. \dpd{E_y}{y} \right|_{\left( x + \frac{\dif x}{2}, y, z + \frac{\dif z}{2} \right)}\\
-	&\quad \quad + \left. \left. \dpd{E_z}{z} \right|_{\left( x + \frac{\dif x}{2}, y + \frac{\dif y}{2}, z \right)} \right) \dif x \dif y \dif z\\
-\end{align*}
-Therefore
-\begin{align*}
-	\divergence \overrightarrow{E} &= \lim\limits_{\dif x \to 0, \dif y \to 0, \dif z \to 0} \dfrac{\Phi}{\dif x \dif y \dif z}\\
-	&= \left. \left( \dpd{E_x}{x} + \dpd{E_y}{y} + \dpd{E_z}{z} \right) \right|_{(x,y,z)}\\
-	&= \overrightarrow{\nabla} \cdot \overrightarrow{E}
-\end{align*}
+\begin{law}[Poisson Equation]
+	\begin{equation*}
+		\Delta \varphi = \nabla^2 \varphi = -\frac{\rho}{\varepsilon_0}
+	\end{equation*}
+\end{law}
 
 \begin{align*}
 	\overrightarrow{E} &= -\overrightarrow{\nabla} \varphi\\
 	\therefore \divergence \overrightarrow{E} &= \overrightarrow{\nabla} \cdot \left( -\overrightarrow{\nabla} \varphi \right)\\
-	&= \dpd[2]{\varphi}{x} + \dpd[2]{\varphi}{y} + \dpd[2]{\varphi}{x}\\
-	&= \nabla^2 \varphi = \Delta \varphi
+	&= -\left( \dpd[2]{\varphi}{x} + \dpd[2]{\varphi}{y} + \dpd[2]{\varphi}{x} \right)\\
+	&= -\nabla^2 \varphi\\
+	&= -\Delta \varphi\\
+	\therefore \Delta \varphi &= -\frac{\rho}{\varepsilon_0}
 \end{align*}
 
 \begin{definition}[Laplacian]
