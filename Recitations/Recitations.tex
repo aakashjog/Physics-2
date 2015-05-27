@@ -1752,6 +1752,8 @@ E-mail: rms9999@gmail.com\\
 	\end{enumerate}
 \end{solution}
 
+\section{Magnetic Dipole Moment}
+
 \addtocounter{question}{1}
 
 \begin{question}
@@ -1791,6 +1793,8 @@ E-mail: rms9999@gmail.com\\
 			\end{align*}
 	\end{enumerate}
 \end{solution}
+
+\section{Ampere's Law}
 
 \begin{question}
 	A hollow cylinder of inner radius $a$ and outer radius $b$ carries uniform current density ⃗$\overrightarrow{j}$ parallel to the cylinder's axis.
@@ -1885,6 +1889,163 @@ E-mail: rms9999@gmail.com\\
 				-\frac{\mu_0 \sigma v}{2} \hat{y} & ;\quad z > 0 \\
 				\frac{\mu_0 \sigma v}{2} \hat{y}  & ;\quad z < 0 \\
 			\end{cases}
+	\end{align*}
+\end{solution}
+
+\recitation
+
+\setcounter{question}{2}
+\begin{question}
+	A parallel plate capacitor is made of two circular disks of radius $a$ with distance $d$ between them.
+	The capacitor carries charge $\pm Q_0$ on its plates.
+	At $t = 0$, the capacitor is connected to a resistor $R$.
+	\begin{enumerate}
+		\item Find the time dependent current $I(t)$, in the circuit.
+		\item Find the surface current density $\overrightarrow{k}(r,t)$, on the plates of the capacitor.
+	\end{enumerate}
+	The capacitor is charged again, with charge $\pm Q_0$ on its plates.
+	At $t = 0$, the capacitor is filled with a material of resistivity $\rho_0$.
+	\begin{enumerate}[resume]
+		\item Find the time dependent current $I(t)$, in the circuit.
+		\item Find the surface current density $\overrightarrow{k}(r,t)$, on the plates of the capacitor.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin = *]
+		\item
+			As the capacitor is being discharged,
+			\begin{align*}
+				I &= \frac{Q_0}{R C} e^{-\frac{t}{R C}}
+			\end{align*}
+		\item
+			The area of the plates of the capacitor is
+			\begin{align*}
+				A &= \pi a^2
+			\end{align*}
+			The charge on an annular area with inner radius $r$ and outer radius $a$ is
+			\begin{align*}
+				q &= \left( \frac{Q}{\pi a^2} \right) \left( \pi a^2 - \pi r^2 \right)\\
+				&= Q \left( 1 - \frac{r^2}{a^2} \right)
+			\end{align*}
+			Therefore, the current through that annular area is
+			\begin{align*}
+				I &= \dod{q}{t}\\
+				\therefore k \cdot 2 \pi r &= \dod{q}{t}\\
+				\therefore 2 \pi r k &= \dod{Q}{t} \left( 1 - \frac{r^2}{a^2} \right)\\
+				\therefore k &= \frac{I}{2 \pi r} \left( 1 - \frac{r^2}{a^2} \right)
+			\end{align*}
+		\item
+			The capacitor filled with the resisting material is equivalent to the capacitor connected to an equivalent resistor.\\
+			The resistance due to the resisting material is
+			\begin{align*}
+				R &= \rho_0 \frac{d}{A}\\
+				&= \frac{\rho_0 d}{\pi a^2}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				I &= \frac{Q_0}{R C} e^{-\frac{t}{R C}}\\
+				&= \frac{Q_0}{\frac{\rho_0 d}{\pi a^2} C} e^{-\frac{t}{\frac{\rho_0 d}{\pi a^2} C}}\\
+				&= \frac{Q_0 \pi a^2}{\rho_0 d C} e^{\frac{\pi a^2 t}{\rho_0 d C}}
+			\end{align*}
+		\item
+			\begin{align*}
+				k &= \frac{I}{2 \pi r} \left( 1 - \frac{r^2}{a^2} \right)
+			\end{align*}
+	\end{enumerate}
+\end{solution}
+
+\begin{question}
+	A square loop of sides $a$ and mass $m$, carrying current $I$, is hung on the $z$ axis with frictionless hinges as shown.
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\xMIN{-3};
+			\def\xMAX{3};
+			\def\yMIN{-3};
+			\def\yMAX{3};
+
+			\def\a{2};
+			\def\angle{30};
+			\def\F{1};
+
+			\coordinate (loop top) at (0,0);
+			\coordinate (loop bottom) at ({-90 + \angle}:\a);
+			\coordinate (loop center) at ({-90 + \angle}:{\a/2});
+
+			\begin{scope}[stealth-stealth, lightgray]
+				\draw (\xMIN,0) -- (\xMAX,0) node [right] {$x$};
+				\draw (0,\yMIN) -- (0,\yMAX) node [above] {$y$};
+			\end{scope}
+
+			\begin{scope}[ultra thick]
+				\draw (loop top) -- (loop bottom);
+				\node at (loop top) {$\odot$};
+				\node at (loop bottom) {$\otimes$};
+			\end{scope}
+
+			\begin{scope}[-stealth]
+				\foreach \x in {\xMIN,...,\xMAX}
+				{
+					\draw (\x,\yMIN) -- (\x,\yMAX) node [above] {$B$};
+				}
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+	The gravitational force is in the $-\hat{y}$ direction.
+	Calculate the magnetic field $\overrightarrow{B} = B_y \hat{y}$ needed in order to maintain the square loop at angle $\theta$ with the $y$-$z$ plane.
+\end{question}
+
+\begin{solution}
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\xMIN{-3};
+			\def\xMAX{3};
+			\def\yMIN{-3};
+			\def\yMAX{3};
+
+			\def\a{2};
+			\def\angle{30};
+			\def\F{1};
+
+			\coordinate (loop top) at (0,0);
+			\coordinate (loop bottom) at ({-90 + \angle}:\a);
+			\coordinate (loop center) at ({-90 + \angle}:{\a/2});
+
+			\begin{scope}[stealth-stealth, lightgray]
+				\draw (\xMIN,0) -- (\xMAX,0) node [right] {$x$};
+				\draw (0,\yMIN) -- (0,\yMAX) node [above] {$y$};
+			\end{scope}
+
+			\begin{scope}[ultra thick]
+				\draw (loop top) -- (loop bottom);
+				\node at (loop top) {$\odot$};
+				\node at (loop bottom) {$\otimes$};
+			\end{scope}
+
+			\begin{scope}[-stealth]
+				\draw (loop center) -- ++(-90:\F) node [below] {$F_g$};
+
+				\foreach \x in {\xMIN,...,\xMAX}
+				{
+					\draw (\x,\yMIN) -- (\x,\yMAX) node [above] {$B$};
+				}
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+	\begin{align*}
+		\overrightarrow{\tau_g} &= \overrightarrow{r} \times \overrightarrow{F_g}\\
+		&= \left( \frac{a}{2} \right) \left( \hat{i} \sin \theta - \hat{j} \cos \theta \right) \times \left( m g \right) \left( -\hat{j} \right)\\
+		&= \frac{a}{2} \cdot m g \sin \theta \left( -\hat{k} \right)
+	\end{align*}
+	\begin{align*}
+		\overrightarrow{\tau_B} &= \overrightarrow{r} \times \overrightarrow{F_B}\\
+		&= a \left( \hat{i} \sin \theta - \hat{j} \cos \theta \right) \left( I a B_0 \hat{i} \right)\\
+		&= I a^2 B \cos \theta \hat{k}
+	\end{align*}
+	For the rod to be at equilibrium,
+	\begin{align*}
+		\tau_g &= \tau_B\\
+		\therefore B &= \frac{m g}{2 I a} \tan \theta
 	\end{align*}
 \end{solution}
 
