@@ -96,9 +96,9 @@
 		&= -\dod{}{t}\left( \overrightarrow{A} \cdot \overrightarrow{B} \right)\\
 		&= -\dod{}{t}\left( A B \cos \theta \right)\\
 		&= -A B \dod{(\cos \theta)}{t}\\
-		&= -A B \dod{(\cos \omega t)}{t}\\
-		&= A B \omega \sin \omega t\\
-		&= a^2 B \omega \sin \omega t
+		&= -A B \dod{(\cos \omega t + \varphi)}{t}\\
+		&= A B \omega \sin \omega t + \varphi\\
+		&= a^2 B \omega \sin \omega t + \varphi
 	\end{align*}
 \end{solution}
 
@@ -245,8 +245,8 @@
 	When the loop reaches terminal velocity,
 	\begin{align*}
 		F_g &= F_B\\
-		\therefore m g &= \frac{A B^2 l^2 v}{4 l \rho}\\
-		\therefore v &= \frac{4 l \rho m g}{A B^2 l^2}\\
+		\therefore m g &= \frac{A B^2 l^2 v_t}{4 l \rho}\\
+		\therefore v_t &= \frac{4 l \rho m g}{A B^2 l^2}\\
 		&= \frac{4 l \rho (4 A l \eta) g }{A B^2 l^2}\\
 		&= \frac{16 l^2 A \rho \eta g}{A B^2 l^2}\\
 		&= \frac{16 \rho \eta g}{B^2}
@@ -256,6 +256,32 @@
 		v &= \frac{(16) \left( 2.8 \times 10^{-8} \right) \left( 2.7 \times 10^3 \right) g}{1^2}\\
 		&= (16) (2.8) (2.7) (g) \left( 10^{-5} \right)\\
 		&= 120.96 g \times 10^{-5} \si{\metre\per\second}
+	\end{align*}
+	\begin{align*}
+		\dod{v}{t} &= a\\
+		&= g - \frac{A B^2 l^2 v}{4 m \rho l}\\
+		&= g - \frac{A B^2 l^2 v}{4 (4 A l \eta) \rho l}\\
+		&= g - \frac{A B^2 l^2 v}{ 16 A l^2 \rho \eta}\\
+		&= g - \frac{B^2 v}{16 \rho \eta}\\
+		\therefore \frac{\dif v}{g - \frac{B^2 v}{16 \rho \eta}} &= \dif t\\
+		\therefore \int\limits_{0}^{v} \frac{\dif v}{g - \frac{B^2 v}{16 \rho \eta}} &= \int\limits_{0}^{t} \dif t
+	\end{align*}
+	Therefore, integrating,
+	\begin{align*}
+		\therefore -\frac{16 \rho \eta}{B^2} \left( \ln\left( g - \frac{B^2 v}{16 \rho \eta} \right) - \ln g \right) &= t\\
+		\therefore \ln\left( \frac{g - \frac{B^2 v}{16 \rho \eta}}{g} \right) &= -\frac{B^2 t}{16 \rho \eta}\\
+		\therefore \frac{g - \frac{B^2 v}{16 \rho \eta}}{g} &= e^{-\frac{B^2 t}{16 \rho \eta}}\\
+		\therefore \frac{B^2 v}{16 \rho \eta} &= g - g e^{-\frac{B^2 t}{16 \rho \eta}}\\
+		\therefore v &= \frac{16 \rho \eta g}{B^2} \left( 1 - e^{-\frac{B^2 t}{16 \rho \eta}} \right)\\
+		&= v_t \left( 1 - e^{-\frac{B^2 t}{16 \rho \eta}} \right)
+	\end{align*}
+	Therefore, if $v = 0.9 v_t$,
+	\begin{align*}
+		0.9 v_t &= v_t \left( 1 - e^{-\frac{B^2 t}{16 \rho \eta}} \right)\\
+		\therefore 0.9 &= 1 - e^{-\frac{B^2 t}{16 \rho \eta}}\\
+		\therefore e^{-\frac{B^2 t}{16 \rho \eta}} &= 0.1\\
+		\therefore -\frac{B^2 t}{16 \rho \eta} &= \ln 0.1\\
+		\therefore t &= -\frac{16 \rho \eta \ln(0.1)}{B^2}
 	\end{align*}
 	If a tiny slit is cut in the ring, there will be no current flowing in the ring.\\
 	Therefore, there will will be no resisting force.\\
