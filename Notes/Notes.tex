@@ -2131,7 +2131,8 @@ Consider a rectangular loop of height $L$ moving with velocity $v$ as shown.
 \end{align*}
 \begin{align*}
 	\dif \Phi_B & = \Phi_B(t + \dif t) - \Phi_B(t)                                                                                                  \\
-                    & = \left( \text{flux due to common area} + B_2 L v \dif t \right) - \left( \text{flux due to common area} + B_1 L v \dif t \right) \\
+                    & = \quad \left( \text{flux due to common area} + B_2 L v \dif t \right)\\
+		    &\quad - \left( \text{flux due to common area} + B_1 L v \dif t \right) \\
                     & = (B_2 L v - B_1 L v) \dif t
 \end{align*}
 Therefore,
@@ -2157,11 +2158,224 @@ In general,
 	\label{Faraday's_Law}
 \end{law}
 
-\section{Lenz's Law}
-
 \begin{law}[Lenz's Law]
-	The direction of an induced current is in a direction such that it opposed the change in the magnetic flux responsible for its creation.
-	\label{Lenz's Law}
+	The direction of an induced current is in a direction such that it opposes the change in the magnetic flux responsible for its creation.
+	\label{Lenz's_Law}
 \end{law}
+
+\begin{question}
+	A solenoid of infinite length has $n$ turns per unit length.
+	The current through it is
+	\begin{align*}
+		I &= \alpha t
+	\end{align*}
+	Find the induced electric field, at a point inside it.
+\end{question}
+
+\begin{solution}
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\xMIN{-4};
+			\def\xMAX{4};
+			\def\yMIN{-4};
+			\def\yMAX{4};
+
+			\def\R{3};
+			\def\r{2};
+			\def\angle{30};
+			\def\F{1};
+
+			\begin{scope}[stealth-stealth, lightgray]
+				\draw (\xMIN,0) -- (\xMAX,0) node [right] {$x$};
+				\draw (0,\yMIN) -- (0,\yMAX) node [above] {$y$};
+			\end{scope}
+
+			\begin{scope}[-stealth]
+				\draw (0,0) circle (\R);
+			\end{scope}
+
+			\begin{scope}[dashed]
+				\draw (0,0) circle (\r);
+			\end{scope}
+
+			\begin{scope}[gray]
+				\clip (0,0) circle (\R);
+
+				\foreach \x in {\xMIN,...,\xMAX}
+				{
+					\foreach \y in {\yMIN,...,\yMAX}
+					{
+						\node at (\x,\y) {$\odot$};
+					}
+				}
+			\end{scope}
+
+			\begin{scope}[-stealth]
+				\foreach \ang in {30,120,210}
+				{
+					\draw[red] (\ang:\r) -- ++(\ang + 90 : \F) node [right] {$\dif l$};
+					\draw[blue] (\ang:\r) -- ++(\ang - 90 : \F) node [right] {$E$};
+				}
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+	Consider a virtual loop of radius $r$, directed anti-clockwise.\\
+	Therefore, by \nameref{Faraday's_Law},
+	\begin{align*}
+		\oint \overrightarrow{E} \cdot \overrightarrow{\dif l} &= -\dod{}{t}\left( B \cdot \pi r^2 \right)\\
+		&= -\dod{}{t}\left( \mu_0 \alpha t n \cdot \pi r^2 \right)\\
+		&= -\mu_0 \alpha n \pi r^2\\
+		\therefore E \cdot 2 \pi r &= -\mu_0 \alpha n \pi r^2\\
+		\therefore E &= -\frac{\mu_0 \alpha n r}{2}
+	\end{align*}
+	Therefore, as $E$ is negative, it is opposite to the direction of the loop.\\
+	Therefore,
+	\begin{align*}
+		E &= -\frac{\mu_0 \alpha n r}{2} \hat{\varphi}
+	\end{align*}
+\end{solution}
+
+\section{Inductors}
+
+Consider a solenoid with $n$ turns per unit length.\\
+Therefore,
+\begin{align*}
+	B &= \mu_0 I n
+\end{align*}
+and
+\begin{align*}
+	\varepsilon &= -\dod{\Phi_B}{t}\\
+\end{align*}
+Therefore,
+\begin{align*}
+	\varepsilon &\propto \dod{I}{t}
+\end{align*}
+
+\begin{definition}[Self inductance]
+	\begin{align*}
+		L &= \frac{\varepsilon}{\dod{I}{t}}
+	\end{align*}
+	is called self inductance.
+\end{definition}
+
+\begin{question}
+	Find the self inductance of a solenoid with length $l$, and $N$ turns of radius $R$.
+\end{question}
+
+\begin{solution}
+	Let the number of turns per unit length be
+	\begin{align*}
+		n &= \frac{N}{l}
+	\end{align*}
+	Let $\varepsilon_1$ be the voltage across each loop of the solenoid.\\
+	Therefore,
+	\begin{align*}
+		\varepsilon_1 &= -\dot{\varphi_B}
+	\end{align*}
+	Therefore, the voltage between the ends of the solenoid is,
+	\begin{align*}
+		\varepsilon_L &= N \varepsilon_1\\
+		\therefore L \dot{I} &= N \dot{\varphi_B}\\
+		&= N \dod{}{t}\left( \mu_0 I n \pi R^2 \right)\\
+		&= N \mu_0 \dot{I} n \pi R^2\\
+		&= \mu_0 \frac{N^2}{l} \pi R^2 \dot{I}\\
+		\therefore L &= \mu_0 \frac{N^2}{l} \pi R^2\\
+		&= \mu_0 n^2 l A
+	\end{align*}
+\end{solution}
+
+\subsection{Energy Stored in an Inductor}
+
+Consider an inductor of length $l$, cross-sectional area $A$, and inductance $L$.
+\begin{align*}
+	P &= \varepsilon_L I\\
+	\therefore \dod{U_L}{t} &= L \dot{I} I\\
+	\therefore U_L &= \frac{1}{2} L I^2
+\end{align*}
+
+\subsection{Energy Density}
+
+Consider an inductor of length $l$, cross-sectional area $A$, and inductance $L$.
+\begin{align*}
+	U_L &= \frac{1}{2} L I^2\\
+	&= \frac{1}{2} \mu_0 n^2 l A \frac{B^2}{{\mu_0}^2 n^2}\\
+	&= \frac{B^2}{2 \mu_0} l A
+\end{align*}
+Therefore,
+\begin{align*}
+	u_L &= \frac{U_L}{V}\\
+	&= \frac{B^2}{2 \mu_0}\\
+	&= \frac{1}{2} \frac{1}{\mu_0} B^2
+\end{align*}
+
+\section{LR Series Circuit}
+
+\begin{figure}[H]
+	\begin{circuitikz}
+		\draw 
+			(0,0) to [short, i = $I(t)$] (0,2)
+			(0,2) to [R = $R$] (3,2)
+			(3,2) to [L = $L$] (3,0)
+			(3,0) to [battery1 = $\varepsilon$] (0,0);
+	\end{circuitikz}
+\end{figure}
+
+\subsection{Current in the Inductor}
+
+\begin{align*}
+	\oint \overrightarrow{E} \cdot \overrightarrow{\dif l} &= 0\\
+	\therefore -\varepsilon + I R + L \dot{I} &= 0\\
+	\therefore \dot{I} + \frac{R}{L} I &= \frac{\varepsilon}{L}\\
+	\therefore \dod{I}{t} + \frac{R}{L} I &= \frac{\varepsilon}{L}\\
+	\therefore I &= \frac{1}{e^{\int \frac{R}{L} \dif t}} \int e^{\frac{R}{L} \dif t} \frac{\varepsilon}{L} \dif t\\
+	&= \frac{\varepsilon}{R} \left( 1 - e^{-\frac{R}{L} t} \right)
+\end{align*}
+
+\begin{definition}[Time constant of LR circuit]
+	$\tau = \frac{L}{R}$ is called the time constant of a circuit with a resistor of resistance $R$ and a inductor of inductance $L$ connected in series.
+\end{definition}
+
+\subsection{Mutual Inductance}
+
+\begin{definition}[Mutual Inductance]
+	Consider two loops, loop $1$ and loop $2$.\\
+	Let there be a current $I_1$ in loop $1$.\\
+	Therefore, a magnetic field $B_1$ will be induced.\\
+	Therefore, there will be a magnetic flux, ${\Phi_{B}}_{2 1}$, due to $B_1$, in loop $2$.\\
+	As a result, there will be a potential difference, $\varepsilon_2$, induced in loop $2$.
+	Hence, there will be a current, $I_2$, induced in loop $2$.\\
+	The mutual inductance of the two loops is defined as
+	\begin{align*}
+		\varepsilon_2 &= -M_{2 1} \dot{I_1}
+	\end{align*}
+	\begin{equation*}
+		M_{1 2} = M_{2 1} = M
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}
+	Consider two loops, loop $1$ and loop $2$.\\
+	Then,
+	\begin{equation*}
+		M_{1 2} = M_{2 1} = M
+	\end{equation*}
+\end{theorem}
+
+\begin{question}
+	Find the mutual inductance of two concentric rings of radii $r_1 << r_2$.
+\end{question}
+
+\begin{solution}
+	Let there be a current $I_2$ in the ring of radius $r_2$.\\
+	Therefore, the magnetic field at the centre, due to $I_2$ is,
+	\begin{align*}
+		B_2 &= \frac{\mu_0 I_2}{2 r_2}\\
+		\therefore {\Phi_B}_{1 2} &= \frac{\mu_0 I_2}{2 r_2} \cdot \pi {r_1}^2\\
+		\therefore \varepsilon_1 &= -\dot{{\Phi_B}_{1 2}}\\
+		&= -\frac{\mu_0 \pi {r_1}^2}{2 r_2} \dot{I_2}\\
+		\therefore \frac{\varepsilon_i}{\dot{I_2}} &= \frac{\mu_0 \pi {r_1}^2}{2 r_2}\\
+		\therefore M &= \frac{\mu_0 \pi {r_1}^2}{2 r_2}
+	\end{align*}
+\end{solution}
 
 \end{document}
