@@ -2049,4 +2049,178 @@ E-mail: rms9999@gmail.com\\
 	\end{align*}
 \end{solution}
 
+\recitation
+
+\begin{question}
+	A hollow cylinder of inner radius $a$ and outer radius $b$ is given.
+	The following magnetic field is measured
+	\begin{equation*}
+		B =
+			\begin{cases}
+				0 \hat{\theta}                                  & ;\quad r < a     \\
+				C \left( r - \frac{a^2}{r} \right) \hat{\theta} & ;\quad a < r < b \\
+				\frac{A}{r} \hat{\theta}                        & ;\quad b < r     \\
+			\end{cases}
+	\end{equation*}
+	where $r$ is the distance from the $z$ axis.
+	The constants $A$ and $C$ are also given.\\
+	Calculate the current density $\overrightarrow{j}$ everywhere.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	By the differential form of Ampere's Law,
+	\begin{align*}
+		\overrightarrow{\nabla} \times \overrightarrow{B} &= \mu_0 \overrightarrow{j}
+	\end{align*}
+	In cylindrical coordinates,
+	\begin{align*}
+		\overrightarrow{\nabla} \times \overrightarrow{B} &= \quad \left( \frac{1}{r} \dpd{B_z}{\theta} - \dpd{B_{\theta}}{z} \right) \hat{r}\\
+		&\quad + \left( \dpd{B_r}{z} - \dpd{B_z}{r} \right) \hat{\theta}\\
+		&\quad + \frac{1}{r} \left( \dpd{}{r} (r B_{\theta}) - \dpd{B_r}{\theta} \right) \hat{z}\\
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\mu_0 \overrightarrow{j} &= \quad \left( \frac{1}{r} \dpd{B_z}{\theta} - \dpd{B_{\theta}}{z} \right) \hat{r}\\
+		&\quad + \left( \dpd{B_r}{z} - \dpd{B_z}{r} \right) \hat{\theta}\\
+		&\quad + \frac{1}{r} \left( \dpd{}{r} (r B_{\theta}) - \dpd{B_r}{\theta} \right) \hat{z}\\
+
+	\end{align*}
+	If $r < a$,
+	\begin{align*}
+		\overrightarrow{\nabla} \times \overrightarrow{B} &= 0\\
+		\therefore \mu_0 \overrightarrow{j} &= 0\\
+		\therefore \overrightarrow{j} &= 0
+	\end{align*}
+	If $a < r < b$,
+	\begin{align*}
+		\overrightarrow{\nabla} \times \overrightarrow{B} &= \frac{1}{r} \dpd{}{r} (r B_{\theta}) \hat{z}\\
+		\therefore \mu_0 \hat{j} &= \frac{c}{r} \dpd{}{r}\left( r^2 - a^2 \right) \hat{z}\\
+		&= \frac{2 C r}{r} \hat{z}\\
+		&= 2 C \hat{z}\\
+		\therefore \overrightarrow{j} &= \frac{2 C}{\mu_0}
+	\end{align*}
+	If $b < r$,
+	\begin{align*}
+		\overrightarrow{\nabla} \times \overrightarrow{B} &= \frac{1}{r} \dpd{}{r} (r B_{\theta}) \hat{z}\\
+		\therefore \mu_0 \hat{j} &= \frac{1}{r} \dpd{}{r}\left( r \frac{A}{r} \right) \hat{z}\\
+		&= 0\\
+		\therefore \hat{j} &= 0
+	\end{align*}
+\end{solution}
+
+\section{Faraday's Law}
+
+\addtocounter{question}{1}
+
+\begin{question}
+	A long rectangular wire loop of side $b$ is made of thin ideal conductor.
+	The far end of the rectangular loop is not connected.
+	A rod of mass $m$ and resistance $R$ is placed on the loop, and can slide on it without friction.
+	A uniform, constant magnetic field $\overrightarrow{B} = B_0 \hat{z}$, perpendicular to the plane of the loop, is given.
+	The velocity of the rod when it is placed at $x = 0$, the left end of the loop, is $\overrightarrow{v} = v_0 \hat{x}$.\\
+	Calculate the emf $\varepsilon$, the current $I$ induced in the rectangular wire, the velocity $\overrightarrow{v}$, and the force $\overrightarrow{F}$ acting on the rod as a function of $x$.
+\end{question}
+
+\begin{solution}
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\xMIN{-3};
+			\def\xMAX{3};
+			\def\yMIN{-3};
+			\def\yMAX{3};
+
+			\def\b{2};
+
+			\begin{scope}[stealth-stealth, lightgray]
+				\draw (\xMIN,0) -- (\xMAX,0) node [right] {$x$};
+				\draw (0,\yMIN) -- (0,\yMAX) node [above] {$y$};
+			\end{scope}
+
+			\begin{scope}
+				\draw (\xMAX, -\b/2) -- (0,-\b/2) -- (0,\b/2) -- (\xMAX,\b/2);
+			\end{scope}
+
+			\begin{scope}[xshift = -10]
+				\draw [decorate, decoration = {mirror, brace}] (0,\b/2) -- (0,-\b/2) node [midway, left] {$b$};
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+		\begin{align*}
+			\Phi_B & = \int \overrightarrow{V} \cdot \overrightarrow{\dif A} \\
+                               & = B A                                                   \\
+                               & = B b l
+		\end{align*}
+		Therefore,
+		\begin{align*}
+			\dod{\Phi_B}{t} & = B b \dod{l}{t} \\
+                                        & = B_0 b v
+		\end{align*}
+		Therefore, by Faraday's Law,
+		\begin{align*}
+			\varepsilon & = -\dod{\Phi_B}{t} \\
+                                    & = -B_0 b v
+		\end{align*}
+		Therefore,
+		\begin{align*}
+			\varepsilon  & = I R \\
+			\therefore I & = \frac{B_0 b v}{R}
+		\end{align*}
+		As the magnetic flux is increasing in the $\hat{z}$ direction, i.e. inwards, by Lenz's Law, the current is directed clockwise.
+		\begin{align*}
+			\overrightarrow{F}                                & = -I b \hat{j} \times B_0 \hat{k}              \\
+                                                                          & = -I b B_0 \hat{i}                             \\
+			\therefore m \dod{v}{t}                           & = -I b B_0                                     \\
+			\therefore \dod{v}{t}                             & = -\frac{I b B_0}{m}                           \\
+                                                                          & = -\frac{{B_0}^2 b^2 v}{m R}                   \\
+			\therefore \frac{\dif v}{v}                       & = -\frac{{B_0}^2 b^2}{m R}                     \\
+			\therefore \int\limits_{v_0}^{v} \frac{\dif v}{v} & = \int\limits_{0}^{t} -\frac{{B_0}^2 b^2}{m R} \\
+			\therefore \ln\left( \frac{v}{v_0} \right)        & = -\frac{{B_0}^2 b^2}{m R} t                   \\
+			\therefore v                                      & = v_0 e^{-\frac{{B_0}^2 b^2}{m R} t}
+		\end{align*}
+\end{solution}
+
+\begin{question}
+	A metallic rod of length $R$ is rotating in the $x$-$y$ plane, around one of its ends, at angular velocity $\omega$ in an area with constant magnetic field $\overrightarrow{B} = B_0 \hat{x}$.
+	Calculate the integral $\int \overrightarrow{E} \cdot \overrightarrow{\dif l}$ between the edges of the reod in two ways.
+	\begin{enumerate}
+		\item Using integration over the Lorentz force acting on the charges in the rod.
+		\item Using Faraday's Law.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin = *]
+		\item
+			\begin{align*}
+				q \overrightarrow{v} \times \overrightarrow{B} & = q \overrightarrow{E} \\
+				\therefore q v B                               & = q E                  \\
+				\therefore B_0 q \omega r                      & = q E                  \\
+				\therefore E                                   & = B_0 \omega r
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\int\limits_{0}^{a} \overrightarrow{E} \cdot \overrightarrow{\dif r} & = \int\limits_{0}^{a} B_0 \omega r \dif r \\
+                                                                                                     & = \frac{B_0 \omega a^2}{2}
+			\end{align*}
+		\item
+			The area swept by the rod is,
+			\begin{align*}
+				\dif A & = \int\limits_{0}^{a} r \theta \dif r \\
+                                       & = \frac{a^2 \theta}{2}                \\
+			\end{align*}
+			By Faraday's Law,
+			\begin{align*}
+				\varepsilon & = -\dod{\Phi_B}{t}                                                     \\
+                                            & = -\dod{}{t}\left( \overrightarrow{B} \cdot \overrightarrow{A} \right) \\
+                                            & = -B_0 \dod{A}{t}                                                      \\
+                                            & = -B_0 \omega \frac{a^2}{2}                                            \\
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\int \overrightarrow{E} \cdot \overrightarrow{\dif l} & = \frac{B_0 \omega a^2}{2}
+			\end{align*}
+	\end{enumerate}
+\end{solution}
+
 \end{document}
