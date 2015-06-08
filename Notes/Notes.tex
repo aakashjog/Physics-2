@@ -19,6 +19,8 @@
 \usepackage{enumerate, enumitem} %numbered lists
 \usepackage{float} %inserting floats
 \usepackage[american voltages]{circuitikz} %circuit diagrams
+\usepackage{pdflscape}
+\usepackage{setspace}
 
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}} %adds numbers to specific equations in non-numbered list of equations
 
@@ -743,6 +745,7 @@ Therefore,
 	\begin{equation*}
 		\dif \overrightarrow{E} = \overrightarrow{\nabla} \cdot \overrightarrow{E} = \frac{\rho}{\varepsilon_0}
 	\end{equation*}
+	\label{Differential_Form_of_Gauss'_Law}
 \end{law}
 
 \begin{proof}
@@ -2377,5 +2380,361 @@ Therefore,
 		\therefore M &= \frac{\mu_0 \pi {r_1}^2}{2 r_2}
 	\end{align*}
 \end{solution}
+
+\section{Transformers}
+
+Two coils of equal radii have $n_1$ and $n_2$ turns respectively.
+They are connected as shown.
+\begin{figure}[H]
+	\begin{tikzpicture}
+		\draw node [transformer] at (0,0) {};
+	\end{tikzpicture}
+\end{figure}
+Coil $1$ is connected to a variable voltage $\varepsilon_1$.
+Therefore, there is an induced magnetic field $B$ acting on both coils.\\
+Therefore, there is an induced magnetic flux through both coils.\\
+Hence, there will be an induced emf, $\varepsilon_2$ across the second coil.
+\begin{align*}
+	\varepsilon_1 & = -n_1 \dot{\varphi_B} \\
+	\varepsilon_2 & = -n_2 \dot{\varphi_B}
+\end{align*}
+Therefore, as the cross-sectional area of the coils is equal, the flux through them is equal.\\
+Therefore,
+\begin{align*}
+	\frac{\varepsilon_1}{n_1} & = \frac{\varepsilon_2}{n_2} \\
+	\therefore \varepsilon_2  & = \varepsilon_1 \frac{n_2}{n_1}
+\end{align*}
+
+\section{Maxwell's Correction to Ampere's Law}
+By \nameref{Ampere's_Law},
+\begin{align*}
+	\overrightarrow{\nabla} \times \overrightarrow{B} & = \mu_0 \cdot \overrightarrow{j}
+\end{align*}
+Therefore, taking the divergence of both sides,
+\begin{align*}
+	\overrightarrow{\nabla} \cdot \overrightarrow{\nabla} \times \overrightarrow{B} & = 0              \\
+	\intertext{but}
+	\overrightarrow{\nabla} \cdot \left( \mu_0 \overrightarrow{j} \right)           & = -\dpd{\rho}{t} \\
+                                                                                        & \neq 0
+\end{align*}
+Therefore, there must be a missing term in the RHS.\\
+Therefore,
+\begin{align*}
+	\overrightarrow{\nabla} \times \overrightarrow{B}                                          & = \mu_0 \overrightarrow{j} + \overrightarrow{g}                                                             \\
+	\therefore \overrightarrow{\nabla} \cdot \overrightarrow{\nabla} \times \overrightarrow{B} & = \mu_0 \overrightarrow{\nabla} \cdot \overrightarrow{j} + \overrightarrow{\nabla} \cdot \overrightarrow{g} \\
+	\therefore 0                                                                               & = -\dpd{\rho}{t} + \overrightarrow{\nabla} \cdot \overrightarrow{g}                                         \\
+	\therefore \overrightarrow{\nabla} \cdot \overrightarrow{g}                                & = \mu_0 \dpd{\rho}{t}
+\end{align*}
+By \nameref{Differential_Form_of_Gauss'_Law},
+\begin{align*}
+	\overrightarrow{\nabla} \cdot \overrightarrow{E}                                                  & = \frac{\rho}{\varepsilon_0} \\
+	\therefore \overrightarrow{\nabla} \cdot \left( \varepsilon_0 \overrightarrow{E} \right)          & = \rho                       \\
+	\therefore \overrightarrow{\nabla} \cdot \left( \varepsilon_0 \dpd{\overrightarrow{E}}{t} \right) & = \dpd{\rho}{t}
+\end{align*}
+Therefore,
+\begin{align*}
+	\overrightarrow{\nabla} \cdot \overrightarrow{g} & = \mu_0 \dpd{\rho}{t}                                   \\
+                                                         & = \overrightarrow{\nabla} \cdot \overrightarrow{g}      \\
+                                                         & = \mu_0 \varepsilon_0 \cdot \dpd{\overrightarrow{E}}{t} \\
+	\therefore g                                     & = \mu_0 \varepsilon_0 \dpd{\overrightarrow{E}}{t}
+\end{align*}
+
+\begin{definition}[Displacement current density]
+	\begin{align*}
+		\overrightarrow{j_D} & = \varepsilon_0 \dpd{\overrightarrow{E}}{t}
+	\end{align*}
+	is called the displacement current density.
+\end{definition}
+
+Therefore,
+\begin{law}[Maxwell's Correction to Ampere's Law]
+	\begin{align*}
+		\overrightarrow{\nabla} \times \overrightarrow{B} & = \mu_0 \overrightarrow{j} + \mu_0 \varepsilon_0 \dpd{\overrightarrow{E}}{t} \\
+                                                                  & = \mu_0 \overrightarrow{j} + \mu_0 \overrightarrow{j_D}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\oint\limits_{\partial S} \overrightarrow{B} \cdot \overrightarrow{\dif l} & = \mu_0 \iint\limits_{S} \overrightarrow{j} \cdot \overrightarrow{\dif A} + \mu_0 \varepsilon_0 \dod{}{t}\iint\limits_{S} \overrightarrow{E} \cdot \overrightarrow{\dif A} \\
+                                                                                           & = \mu_0 I \cdot \overrightarrow{\dif A} + \mu_0 I_D
+	\end{align*}
+	\label{Maxwell's_Correction_to_Ampere's_Law}
+\end{law}
+
+\begin{landscape}
+
+\doublespacing
+
+\section{Maxwell's Equations}
+
+\begin{tabular}{|l||l|l|}
+	\hline
+	Law                        & Integral Form                                                                                                                                                                                                                               & Differential Form                                                                                                                \\ [1.5ex]
+	\hline
+	Gauss' Law for Electricity & $\displaystyle \oiint\limits_{\partial V} = \dfrac{1}{\varepsilon_0} \iiint\limits_{V} \rho \dif^3 r$                                                                                                                                       & $\overrightarrow{\nabla} \cdot \overrightarrow{E} = \dfrac{\rho}{\varepsilon_0}$                                                 \\ [1.5ex]
+
+	Gauss' Law for Magnetism   & $\displaystyle \oint\limits_{\partial S} \overrightarrow{E} \cdot \overrightarrow{\dif l} = -\dod{}{t} \iint\limits_{S} \overrightarrow{B} \cdot \dif \overrightarrow{A}$                                                                   & $\overrightarrow{\nabla} \times \overrightarrow{E} = -\dpd{\overrightarrow{B}}{t}$                                               \\ [1.5ex]
+
+	Faraday's Law              & $\displaystyle \oiint\limits_{S} \overrightarrow{B} \cdot \dif \overrightarrow{A} = 0$                                                                                                                                                      & $\overrightarrow{\nabla} \cdot \overrightarrow{B} = 0$                                                                           \\ [1.5ex]
+
+	Ampere's Law               & $\displaystyle \overrightarrow{B} \cdot \overrightarrow{\dif l} = \mu_0 \iint\limits_{S} \overrightarrow{j} \cdot \dif \overrightarrow{A} + \mu_0 \varepsilon_0 \dod{}{t}\iint\limits_{S} \overrightarrow{E} \cdot \dif \overrightarrow{A}$ & $\overrightarrow{\nabla} \times \overrightarrow{B} = \mu_0 \overrightarrow{j} + \mu_0 \varepsilon_0 \dpd{\overrightarrow{E}}{t}$ \\ [1.5ex]
+
+	\hline
+\end{tabular}
+
+\end{landscape}
+
+\singlespacing
+
+\begin{question}
+	A capacitor has circular plates of radius $a$ with distance $d$ between them.\\
+	It is connected by wires with distance $L$ between the wires.\\
+	A rod is kept connecting the wires, as shown.\\
+	A constant magnetic field $B$ is directed inwards as shown.
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\a{1};
+			\def\d{2};
+			\def\L{4};
+			\def\F{1};
+			
+			\coordinate (bottom plate centre) at (0,-\d/2);
+			\coordinate (top plate centre) at (0,\d/2);
+			
+			\begin{scope}[lightgray]
+				\clip (\L/2,-\L/2) rectangle (2*\L,\L/2);
+				\foreach \x in {0,...,10}
+				{
+					\foreach \y in {-10,...,10}
+					{
+						\node at (\x,\y) {$\otimes$};
+					}
+				}
+			\end{scope}
+
+			\begin{scope}[ultra thick]
+				\draw ($ (bottom plate centre) + (-\a,0) $) -- ($ (bottom plate centre) + (\a,0) $);
+				\draw ($ (top plate centre) + (-\a,0) $) -- ($ (top plate centre) + (\a,0) $);
+			\end{scope}
+
+			\begin{scope}
+				\draw (bottom plate centre) -- (0,-\L/2);
+				\draw (top plate centre) -- (0,\L/2);
+
+				\draw (0,-\L/2) -- (2*\L,-\L/2);
+				\draw (0,\L/2) -- (2*\L,\L/2);
+			\end{scope}
+
+			\begin{scope}[ultra thick]
+				\draw (\L,\L/2) -- (\L,-\L/2);
+			\end{scope}
+
+			\begin{scope}
+				\draw [-stealth] (\L,0) -- ++(\F,0) node [right] {$v$};
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+	The rod is moving to the right with $v = \alpha t^2$.\\
+	Find the magnetic field induced between the plates of the capacitor.
+\end{question}
+
+\begin{solution}
+	As the rod is moving, there is an induced emf $\varepsilon$ between the ends of the rod.\\
+	Therefore, the system is equivalent to
+	\begin{figure}[H]
+		\begin{circuitikz}
+			\draw (0,0) to [C = $C$] (0,4);
+			\draw (0,4) to (4,4);
+			\draw (4,0) to [battery1 = $\varepsilon$] (4,4);
+			\draw (4,0) to (0,0);
+		\end{circuitikz}
+	\end{figure}
+	Therefore,
+	\begin{align*}
+		C           & = \frac{A \varepsilon_0}{d}       \\
+                            & = \varepsilon_0 \frac{\pi a^2}{d} \\
+		\varepsilon & = v B L                           \\
+                            & = \alpha t^2 B L
+	\end{align*}
+	Let the charge on the plates of the capacitor by $+Q$ and $-Q$.\\
+	Therefore,
+	\begin{align*}
+		Q & = C \varepsilon \\
+                  & = \varepsilon_0 \frac{\pi a^2}{d} \alpha t^2 B L
+	\end{align*}
+	The electric field between the capacitor plates is
+	\begin{align*}
+		E & = \frac{\varepsilon}{d} \\
+                  & = \frac{\alpha t^2 B L}{d}
+	\end{align*}
+	Consider a virtual Ampereian loop of radius $r$, between the capacitor plates.\\
+	Let this loop be directed clockwise if seen from above.\\
+	Let the magnetic field acting on the loop be $\tilde{B}$.\\
+	Therefore, by \nameref{Maxwell's_Correction_to_Ampere's_Law},
+	\begin{align*}
+		\oint \overrightarrow{B} \cdot \overrightarrow{\dif l} & = \cancelto{0}{\mu_0 \iint \overrightarrow{j} \cdot \dif \overrightarrow{A}} + \mu_0 \varepsilon_0 \dod{}{t}\iint \overrightarrow{E} \cdot \dif \overrightarrow{A} \\
+                                                                       & = \mu_0 \varepsilon_0 \dod{}{t}\left( \frac{\alpha t^2 B L}{d} \pi r^2 \right)                                                                                     \\
+		\therefore \tilde{B} \cdot 2 \pi r                     & = \mu_0 \varepsilon_0 \frac{2 \alpha t B L}{d} \pi r^2                                                                                                             \\
+		\therefore \tilde{B}                                   & = \frac{\mu_0 \varepsilon_0 \alpha B L}{d} t r
+	\end{align*}
+	Therefore, as $\overrightarrow{\tilde{B}}$ is positive, it is directed parallel to $\dif l$.\\
+	Therefore, it supports its cause.\\
+	In general, the magnetic field induced due to a change in $\Phi_B$ opposes its own cause, and the magnetic field induced due to a change in $\Phi_E$ supports it own cause.
+\end{solution}
+
+\begin{question}
+	A capacitor with circular plates of radius $a$ and distance $d$ between them is connected to a battery of voltage $V$.\\
+	The capacitor is filled with a liquid dielectric of dielectric constant $\kappa$.\\
+	The dielectric is leaking through the bottom, such that the level of the liquid is falling with velocity $u$.\\
+	Find the magnetic field inside the capacitor and the displacement current.
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\a{2};
+			\def\d{3};
+			\def\L{4};
+			\def\F{1};
+			\def\h{0.6*\d};
+
+			\coordinate (bottom plate centre) at (3*\a,-\d/2);
+			\coordinate (top plate centre) at (3*\a,\d/2);
+
+			\begin{scope}[ultra thick]
+				\draw ($ (bottom plate centre) + (-\a,0) $) -- ($ (bottom plate centre) + (\a,0) $);
+				\draw ($ (top plate centre) + (-\a,0) $) -- ($ (top plate centre) + (\a,0) $);
+			\end{scope}
+
+			\begin{scope}
+				\draw (bottom plate centre) -- (3*\a,-\L/2);
+				\draw (top plate centre) -- (3*\a,\L/2);
+
+				\draw (0,-\L/2) -- (3*\a,-\L/2);
+				\draw (0,\L/2) -- (3*\a,\L/2);
+
+				\draw (0,\L/2) to [battery1 = $V$] (0,-\L/2);
+			\end{scope}
+			\begin{scope}
+				\fill [blue, opacity = 0.5] ($ (bottom plate centre) + (-\a,0) $) rectangle ($ (bottom plate centre) + (\a,\h) $);
+				\draw [-stealth] ($ (bottom plate centre) + (0,\h) $) -- ++(-90:\F) node [below] {$u$};
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+\end{question}
+
+\begin{solution}
+	The capacitor is equivalent to a capacitor filled completely with the dielectric connected in series with a capacitor with a vacuum inside it.\\
+	Therefore,
+	\begin{align*}
+		\frac{1}{C} & = \frac{1}{\varepsilon_0 \frac{A}{u t}} + \frac{1}{\varepsilon_0 \kappa \frac{A}{d - u t}}            \\
+                            & = \frac{1}{\varepsilon_0 A} \left( \frac{1}{\frac{1}{u t}} + \frac{1}{\frac{\kappa}{d - u t}} \right) \\
+                            & = \frac{1}{\varepsilon_0 A} \left( u t + \frac{d - u t}{\kappa} \right)                               \\
+                            & = \frac{1}{\varepsilon_0 A} \left( \frac{d}{k} + u t \left( 1 - \frac{1}{k} \right) \right)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		C & = \varepsilon_0 \frac{A}{\frac{d}{k} + u t \left( \frac{k - 1}{k} \right)} \\
+                  & = \varepsilon_0 \kappa \frac{A}{d + u t (\kappa - 1)}
+	\end{align*}
+	Therefore, the charge on the bottom plate of the capacitor is,
+	\begin{align*}
+		Q & = C V \\
+                  & = \varepsilon_0 \kappa \frac{A V}{d + u t (\kappa + 1)}
+	\end{align*}
+	Let the electric field in the area of the capacitor which has vacuum be $E_{\textnormal{vacuum}}$.\\
+	Let the electric field in the area of the capacitor which has dielectric be $E_{\textnormal{dielectric}}$.\\
+	Let both $E_{\textnormal{vacuum}}$ and $E_{\textnormal{dielectric}}$ be directed from the bottom plate to the top plate, i.e. upwards.\\
+	Therefore,
+	\begin{align*}
+		E_{\textnormal{dielectric}} & = \frac{\sigma}{\kappa \varepsilon_0} \\
+                                            & = \frac{Q}{\kappa \varepsilon_0 A}    \\
+                                            & = \frac{\kappa V}{\kappa \left( d + u t (\kappa - 1) \right)}
+	\end{align*}
+	Consider a box shaped Gaussian surface at the upper surface of the dielectric, with the bottom surface in the dielectric and the top surface in vacuum.\\
+	Therefore, the electric field entering the surface is $\frac{\kappa V}{\kappa \left( d + u t (\kappa - 1) \right)}$, and the electric field exiting the surface is $\frac{\kappa V}{d + u t (\kappa + 1)}$.\\
+	Therefore, by \nameref{Gauss'_Law},
+	\begin{align*}
+		\frac{\kappa V}{d + u t (\kappa - 1)} - \frac{\kappa V}{\kappa \left( d + u t (\kappa - 1) \right)} & = \frac{\sigma_{\textnormal{bound}}}{\varepsilon_0} \\
+		\therefore \sigma_{\textnormal{bound}}                                                              & = \varepsilon_0 \left( \frac{\kappa V}{d + u t (\kappa - 1)} - \frac{V}{d + u t (\kappa - 1)} \right)
+	\end{align*}
+	Consider a virtual Ampereian loop of radius $r$ in the area of the capacitor with vacuum.\\
+	Therefore, by \nameref{Maxwell's_Correction_to_Ampere's_Law},
+	\begin{align*}
+		\oint\limits_{\partial S} \overrightarrow{B} \cdot \overrightarrow{\dif l} & = \mu_0 \iint\limits_{S} \overrightarrow{j} \cdot \overrightarrow{\dif A} + \mu_0 \varepsilon_0 \dod{}{t} \iint\limits_{D} \overrightarrow{E} \cdot \dif \overrightarrow{A} \\
+                                                                                           & = \mu_0 \varepsilon_0 \dod{}{t}\left( \frac{\kappa V}{d + u t (\kappa - 1)} \pi r^2 \right)                                                                                 \\
+                                                                                           & = \mu_0 \varepsilon_0 \left( -\frac{\kappa V u (\kappa - 1)}{\left( d + u t (\kappa - 1) \right)^2} \pi r^2 \right)
+	\end{align*}
+	The charge on the bottom plate of the capacitor is,
+	\begin{align*}
+		Q              & = \varepsilon_0 \kappa \frac{A V}{d + u t (\kappa - 1)} \\
+		\therefore Q_i & = \varepsilon_0 \frac{A V}{d + u \cdot 0 (\kappa - 1)}  \\
+                               & = \varepsilon_0 \kappa \frac{A V}{d}                    \\
+		\therefore Q_f & = \varepsilon_0 \frac{A V}{d + d (\kappa - 1)}          \\
+                               & = \varepsilon_0 \frac{A V}{d}
+	\end{align*}
+	Therefore, the charge on the plate is reducing.
+	Hence, the current in the circuit will be from the bottom plate to the top plate, i.e. clockwise.\\
+	Therefore, the induced magnetic field inside the capacitor will be such that the magnetic field due to it is directed downwards.
+	Therefore, it supports its own cause.\\
+	This is consistent with the expectations.\\
+	Therefore, the displacement current is,
+	\begin{align*}
+		I_D & = \frac{\oint\limits_{\partial S} \overrightarrow{B} \cdot \overrightarrow{\dif l}}{\mu_0} \\
+                    & = \varepsilon_0 \dod{}{t}\left( \frac{\kappa V}{d + u t (\kappa - 1)} \pi r^2 \right)      \\
+                    & = \varepsilon_0 \left( -\frac{\kappa V u (\kappa - 1)}{\left( d + u t (\kappa - 1) \right)^2} \pi r^2 \right)
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	A capacitor with circular plates of radius $a$ and distance $d$ between them is filled with a material of conductivity $\sigma$.
+	The capacitor connected to a sinusoidal voltage source $V = V_0 \sin \omega t$.
+	Find the magnetic field induced inside the capacitor.
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\a{2};
+			\def\d{3};
+			\def\L{4};
+			\def\F{1};
+			\def\h{0.6*\d};
+
+			\coordinate (bottom plate centre) at (3*\a,-\d/2);
+			\coordinate (top plate centre) at (3*\a,\d/2);
+
+			\begin{scope}[ultra thick]
+				\draw ($ (bottom plate centre) + (-\a,0) $) -- ($ (bottom plate centre) + (\a,0) $);
+				\draw ($ (top plate centre) + (-\a,0) $) -- ($ (top plate centre) + (\a,0) $);
+			\end{scope}
+
+			\begin{scope}
+				\draw (bottom plate centre) -- (3*\a,-\L/2);
+				\draw (top plate centre) -- (3*\a,\L/2);
+
+				\draw (0,-\L/2) -- (3*\a,-\L/2);
+				\draw (0,\L/2) -- (3*\a,\L/2);
+
+				\draw (0,\L/2) to [sV= $V_0 \sin \omega t$] (0,-\L/2);
+			\end{scope}
+			\begin{scope}
+				\fill [gray, opacity = 0.5] ($ (bottom plate centre) + (-\a,0) $) rectangle ($ (top plate centre) + (\a,0) $);
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+\end{question}
+
+\begin{solution}
+	Let the electric field inside the capacitor be $E$.
+	Let $E$ be directed upwards, i.e. in the $\hat{z}$ direction.\\
+	\begin{align*}
+		\overrightarrow{E}            & = \frac{V}{d} \hat{z}                 \\
+                                              & = \frac{V_0 \sin \omega t}{d} \hat{z} \\
+		\therefore \overrightarrow{j} & = \sigma \overrightarrow{E}           \\
+                                              & = \frac{\sigma V_0 \sin \omega t}{d} \hat{z}
+	\end{align*}
+	Consider a virtual Ampereian loop with radius $r$ inside the capacitor.\\
+	Therefore, by \nameref{Maxwell's_Correction_to_Ampere's_Law},
+	\begin{align*}
+		\oint\limits_{\partial S} \overrightarrow{B} \cdot \overrightarrow{\dif l} & = \mu_0 \iint\limits_{S} \overrightarrow{j} \cdot \dif \overrightarrow{A} + \mu_0 \varepsilon_0 \dod{}{t}\iint\limits_{S} \overrightarrow{E} \cdot \dif \overrightarrow{A} \\
+                                                                                           & = \mu_0 \frac{\sigma V_0 \sin \omega t}{d} \pi r^2 + \mu_0 \varepsilon_0 \dod{}{t}\left( \frac{V_0 \sin \omega t}{d} \pi r^2 \right)                                       \\
+		\therefore 2 \pi r B                                                       & = \frac{V_0 \mu_0 \pi r^2}{d} \left( \sigma \sin \omega t + \varepsilon_0 \omega \cos \omega t \right)                                                                     \\
+		\therefore B                                                               & = \frac{V_0 \mu_0 r}{2 d} (\sigma \sin \omega t + \varepsilon_0 \omega \cos \omega t)
+	\end{align*}
+\end{solution}<++>
 
 \end{document}
