@@ -1,0 +1,239 @@
+\documentclass[fleqn, a4paper, 11pt, oneside]{amsart}
+%\usepackage[top = 2cm, bottom = 1cm, left = 1cm, right = 1cm]{geometry}
+\usepackage{exsheets, tasks}
+\usepackage{amsmath, amssymb, amsthm} %standard AMS packages
+\usepackage{marginnote} %marginnotes
+\usepackage{gensymb} %miscellaneous symbols
+\usepackage{commath} %differential symbols
+\usepackage{xcolor} %colours
+\usepackage{cancel} %cancelling terms
+\usepackage[free-standing-units, space-before-unit]{siunitx} %formatting units
+\usepackage{tikz, pgfplots} %diagrams
+\usetikzlibrary{calc, hobby, patterns, intersections, decorations.markings}
+\usepackage{graphicx} %inserting graphics
+\usepackage{hyperref} %hyperlinks
+\usepackage{datetime} %date and time
+\usepackage{ulem} %underline for \emph{}
+\usepackage{xfrac} %inline fractions
+\usepackage{enumerate,enumitem} %numbered lists
+\usepackage{float} %inserting floats
+\usepackage{circuitikz}[american voltages, american currents] %circuit diagrams
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}} %adds numbers to specific equations in non-numbered list of equations
+
+\newcommand{\AxisRotator}[1][rotate=0]{
+	\tikz [x=0.25cm,y=0.60cm,line width=.2ex,-stealth,#1] \draw (0,0) arc (-150:150:1 and 1);%
+} %rotation symbols on axes
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newcommand{\curl}{\mathrm{curl\,}}
+
+\makeatletter
+\@addtoreset{section}{part} %resets section numbers in new part
+\makeatother
+
+\renewcommand{\thesubsection}{(\arabic{subsection})}
+\renewcommand{\thesection}{(\arabic{section})}
+
+%section headings on left
+\makeatletter
+\def\specialsection{\@startsection{section}{1}%
+	\z@{\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\centering}}% DELETED
+	{\normalfont}}% NEW
+\def\section{\@startsection{section}{1}%
+	\z@{.7\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\scshape\centering}}% DELETED
+	{\normalfont\scshape}}% NEW
+\makeatother
+
+%forces newline after subsection
+\makeatletter
+\def\subsection{\@startsection{subsection}{3}%
+	\z@{.5\linespacing\@plus.7\linespacing}{.1\linespacing}%
+	{\normalfont\itshape}}
+\makeatother
+
+\settasks{counter-format = tsk[1].}
+
+\SetupExSheets{solution/print = true}
+
+%opening
+\title{Physics 2 : Assignment 12}
+\author
+{
+	Aakash Jog\\
+	ID : 989323563
+}
+\date{\formatdate{10}{6}{2015}}
+
+\begin{document}
+
+\tikzset{->-/.style={decoration={
+  markings,
+  mark=at position #1 with {\arrow{>}}},postaction={decorate}}}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\begin{question}
+	A long solenoid of radius $a$ is driven by an alternating current, so that the field inside is sinusoidal $\overrightarrow{B}(t) = B_0 \cos \omega t \hat{z}$.
+	A circular loop of wire of radius $\frac{a}{2}$ and resistance $R$ is placed inside the solenoid, coaxial with it.
+	Find the current induced in the loop as function of time.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		B &= B_0 \cos \omega t\\
+	\end{align*}
+	Therefore, the flux through the surface bounded by the ring is,
+	\begin{align*}
+		\Phi_B &= B_0 \cos \omega t \cdot \pi \left( \frac{a}{2} \right)^2\\
+		\therefore \dod{\Phi_B}{t} &= -\frac{\pi a^2}{4} B_0 \omega \sin \omega t
+	\end{align*}
+	Therefore, by Faraday's Law,
+	\begin{align*}
+		\varepsilon &= -\dod{\Phi_B}{t}\\
+		&= \frac{\pi a^2}{4} B_0 \omega \sin \omega t
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		I &= \frac{\varepsilon}{R}\\
+		&= \frac{\pi a^2}{4 R} B_0 \omega \sin \omega t
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	A long solenoid with radius $a$ and $n$ turns per unit length carries a time-dependent current $I(t)$ in the $\hat{\varphi}$ direction.
+	Find the magnitude and direction of the electric field at a distance $s$ from the axis, inside and outside the solenoid.
+\end{question}
+
+\begin{solution}
+	Consider a virtual Amperian loop of radius $r$ coaxial to the solenoid.\\
+	Therefore, by Faraday's Law,\\
+	If $s < a$,
+	\begin{align*}
+		\oint \overrightarrow{E} \cdot \overrightarrow{\dif l} &= -\dod{}{t}\iint \overrightarrow{B} \cdot \dif \overrightarrow{A}\\
+		\therefore E \cdot 2 \pi s &= -\dod{}{t}\left( B \pi s^2 \right)\\
+		&= -\dod{}{t}\left( \mu_0 n I \pi s^2 \right)\\
+		&= -\mu_0 n \pi s^2 \dod{I}{t}\\
+		\therefore E &= \frac{\mu_0 n s}{2} \dod{I}{t}
+	\end{align*}
+	If $r > a$,
+	\begin{align*}
+		\oint \overrightarrow{E} \cdot \overrightarrow{\dif l} &= -\dod{}{t}\iint \overrightarrow{B} \cdot \dif \overrightarrow{A}\\
+		\therefore E \cdot 2 \pi s &= -\dod{}{t}\left( B \pi a^2 \right)\\
+		&= -\dod{}{t}\left( \mu_0 n I \pi a^2 \right)\\
+		&= -\mu_0 n \pi a^2 \dod{I}{t}\\
+		\therefore E &= \frac{\mu_0 n a^2}{2 s} \dod{I}{t}
+	\end{align*}
+	In both cases, the electric field is directed in the $\hat{\varphi}$ direction.
+\end{solution}
+
+\begin{question}
+	An alternating current $I = I_0 \cos \omega t$ flows down a long straight wire, and returns along a coaxial conducting tube of radius $a$.
+	\begin{enumerate}
+		\item
+			In which direction does the induced electric field point?
+			Radial, circumferential or longitudinal?
+		\item Assuming that the field goes to zero as $s \to \infty$, find $\overrightarrow{E}(s,t)$, where $s$ is the distance from the wire.
+	\end{enumerate}
+\end{question}
+
+\begin{question}
+	A long solenoid of radius $a$, carrying $n$ turns per unit length, is looped by a wire with resistance $R$.
+	\begin{enumerate}
+		\item If the current in the solenoid in increasing at a constant rate $k = \od{I}{t}$, what current flows in the loop, and which way, left or right, does it pass through the resistor?
+		\item If the current $I$ in the solenoid is constant but the solenoid is pulled out of the loop and reinserted in the opposite direction, what total charge passes through the resistor?
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin = *]
+		\item
+			\begin{align*}
+				\Phi_B &= B \cdot \pi a^2\\
+				&= \mu_0 n I \pi a^2\\
+				\therefore \dod{\Phi_B}{t} &= \mu_0 n \pi a^2 \dod{I}{t}
+			\end{align*}
+			Therefore, by Faraday's Law,
+			\begin{align*}
+				\varepsilon &= -\dod{\Phi_B}{t}\\
+				&= -\mu_0 n \pi a^2 \dod{I}{t}\\
+				&= -\mu_0 n \pi a^2 k
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				I_{\textnormal{resistor}} &= \frac{\varepsilon}{R}\\
+				&= -\frac{\mu_0 n \pi a^2 k}{R}
+			\end{align*}
+			Therefore, the direction of the current in the resistor is opposite to that of the current in the solenoid.
+		\item
+			If the solenoid is pulled out of the loop and reinserted, the change in the magnetic flux through the loop is,
+			\begin{align*}
+				\dif \Phi_B &= 2 \pi a^2 \mu_0 n I
+			\end{align*}
+			Therefore, by Faraday's Law,
+			\begin{align*}
+				\varepsilon &= -\dod{\Phi_B}{t}\\
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				I_{\textnormal{resistor}} &= \frac{\varepsilon}{R}\\
+				\therefore \dod{Q}{t} &= -\frac{1}{R} \dod{\Phi_B}{t}\\
+				\therefore \dif Q &= -\frac{\dif \Phi_B}{R}\\
+				\therefore \dif Q &= -\frac{2 \pi a^2 \mu_0 n I}{R}
+			\end{align*}
+	\end{enumerate}
+\end{solution}
+
+\begin{question}
+	A small wire loop of radius $a$ lies at a distance $z$ above the centre of a large loop of radius $b$.
+	The planes of the two loops are parallel, and perpendicular to the common axis.
+	\begin{enumerate}
+		\item Find the flux through the small loop if current $I$ is flowing in the large loop.
+		\item Find the flux through the large loop if current $I$ is flowing in the small loop.
+		\item Find the mutual inductance of the two loops.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin = *]
+		\item
+			Assuming $a << b$, the magnetic field passing through the small loop is,
+			\begin{align*}
+				B &= \frac{\mu_0 I}{2} \frac{b^2}{\left( b^2 + z^2 \right)^{\frac{3}{2}}}
+			\end{align*}
+			Therefore, the magnetic flux through the small loop is,
+			\begin{align*}
+				\Phi_B &= B \cdot \pi a^2\\
+				&= \frac{\mu_0 I \pi a^2 b^2}{2 \left( b^2 + z^2 \right)^{\frac{3}{2}}}
+			\end{align*}
+		\item
+			The magnetic field passing through a point at distance $r$ from the axis is,
+			\begin{align*}
+				B &= \frac{\mu_0 I}{4 \pi} \frac{\pi a^2}{r^3} \left( 2 \cos \theta \hat{r} + \sin \theta \hat{\theta} \right)
+			\end{align*}
+			Therefore, the magnetic flux through the large loop is,
+			\begin{align*}
+				\varphi_B &= \iint \overrightarrow{B} \cdot \dif \overrightarrow{A}\\
+				&= \frac{\mu_0 I \pi a^2 b^2}{2 \left( b^2 + z^2 \right)^{\frac{3}{2}}}
+			\end{align*}
+		\item
+			\begin{equation*}
+				{\Phi_B}_1 = {\Phi_B}_2 = M I
+			\end{equation*}
+			Therefore,
+			\begin{align*}
+				M &= \frac{\mu_0 \pi a^2 b^2}{2 \left( b^2 + z^2 \right)^{\frac{3}{2}}}
+			\end{align*}
+	\end{enumerate}
+\end{solution}
+
+\end{document}
