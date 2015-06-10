@@ -2223,4 +2223,100 @@ E-mail: rms9999@gmail.com\\
 	\end{enumerate}
 \end{solution}
 
+\recitation
+
+\addtocounter{question}{1}
+\begin{question}
+	The magetic field inside an infinite long solenoid of radius $a$ is $\overrightarrow{B} = B_z(t) \hat{z}$.
+	\begin{enumerate}
+		\item Calculate the electric field everywhere.
+		\item Show that the differential and the integral forms of Faraday's Law give the same result.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		B & = B_z(t) \\
+                  & = \mu_0 n I(t)
+	\end{align*}
+	Consider a virtual Amperian loop of radius $r$, coaxial to the solenoid.\\
+	Therefore, the magnetic flux through it is,
+	\begin{align*}
+		\Phi_B &=
+			\begin{cases}
+				\mu_0 \pi r^2 n I(t) & ;\quad r < a \\
+				\mu_0 \pi a^2 n I(t) & ;\quad r > a \\
+			\end{cases}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\dod{\Phi_B}{t} &=
+			\begin{cases}
+				\mu_0 \pi r^2 n \dot{I}(t) & ;\quad r < a \\
+				\mu_0 \pi a^2 n \dot{I}(t) & ;\quad r > a \\
+			\end{cases}
+	\end{align*}
+	Therefore, by the integral form of Faraday's Law,
+	\begin{align*}
+		\oint \overrightarrow{E} \cdot \overrightarrow{\dif l} &= -\dod{\Phi_B}{t}\\
+		\therefore E \cdot 2 \pi r                             &=
+			\begin{cases}
+				-\mu_0 \pi r^2 n \dot{I}(t) & ;\quad r < a \\
+				-\mu_0 \pi a^2 n \dot{I}(t) & ;\quad r > a \\
+			\end{cases}\\
+		\therefore E                                           &=
+			\begin{cases}
+				-\frac{\mu_0 r n}{2} \dot{I}(t)     & ;\quad r < a \\
+				-\frac{\mu_0 a^2 n}{2 r} \dot{I}(t) & ;\quad r > a \\
+			\end{cases}
+	\end{align*}
+	By the differential form of Faraday's Law,
+	\begin{align*}
+		\overrightarrow{\nabla} \times \overrightarrow{E}                                                               & = -\dpd{\overrightarrow{B}}{t}     \\
+		\therefore \left( \frac{1}{r} \dod{}{r}(r E_{\theta}) \hat{k} - \cancelto{0}{\dpd{E_r}{\theta}} \right) \hat{k} & = -\mu_0 n \dod{I}{t} \hat{k}      \\
+		\therefore \frac{1}{r} \dpd{}{r}(r E_{\theta})                                                                  & = -\mu_0 n \dot{I}(t)              \\
+		\therefore \partial(r E_{\theta})                                                                               & = -\mu_0 n \dot{I}(t) r \partial r \\
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		r E_{\theta} &=
+			\begin{cases}
+				-\mu_0 n \dot{I} \frac{r^2}{2} & ;\quad r < a \\
+				-\mu_0 n \dot{I} \frac{a^2}{2} & ;\quad r > a \\
+			\end{cases}\\
+		\therefore E &=
+			\begin{cases}
+				-\frac{\mu_0 r n}{2} \dot{I}(t)     & ;\quad r < a \\
+				-\frac{\mu_0 a^2 n}{2 r} \dot{I}(t) & ;\quad r > a \\
+			\end{cases}
+	\end{align*}
+\end{solution}
+
+\addtocounter{question}{2}
+\begin{question}
+	A short solenoid (length $l$ and radius $a$, with $n_1$ turns per unit length) lies on the axis of a very long solenoid (radius $b > a$, $n_2$ turns per unit length).
+	A current $I_1$ flows in the short solenoid.
+	What is the flux through the long solenoid?
+\end{question}
+
+\begin{solution}
+	If the current in the larger solenoid is $I_2$ and the current in the smaller solenoid is $0$,
+	\begin{align*}
+		B & = \mu_0 n_2 I_2
+	\end{align*}
+	Therefore, the magnetic flux through the short solenoid is,
+	\begin{align*}
+		{\Phi_B}_1 & = n_1 l B A \\
+                           & = n_1 l \cdot \mu_0 n_2 I_2 \cdot \pi a^2
+	\end{align*}
+	As $M = \frac{{\Phi_B}_1}{I_2} = \frac{{\Phi_B}_2}{I_1}$,
+	\begin{align*}
+		\frac{{\Phi_B}_2}{I_1}            & = \frac{{\Phi_B}_1}{I_2}                              \\
+		\therefore \frac{{\Phi_B}_2}{I_1} & = \frac{n_1 l \cdot \mu_0 n_2 I_2 \cdot \pi a^2}{I_2} \\
+                                                  & = \mu_0 \pi n_1 n_2 l a^2                             \\
+		\therefore {\Phi_B}_2             & = \mu_0 \pi n_1 n_2 l a^2 I_1
+	\end{align*}
+	Therefore, the flux through the long solenoid is $\mu_0 \pi n_1 n_2 l a^2 I_1$.
+\end{solution}
+
 \end{document}
