@@ -810,14 +810,16 @@ Therefore,
 	\end{equation*}
 \end{law}
 
-\begin{align*}
-	\overrightarrow{E} &= -\overrightarrow{\nabla} \varphi\\
-	\therefore \divergence \overrightarrow{E} &= \overrightarrow{\nabla} \cdot \left( -\overrightarrow{\nabla} \varphi \right)\\
-	&= -\left( \dpd[2]{\varphi}{x} + \dpd[2]{\varphi}{y} + \dpd[2]{\varphi}{x} \right)\\
-	&= -\nabla^2 \varphi\\
-	&= -\Delta \varphi\\
-	\therefore \Delta \varphi &= -\frac{\rho}{\varepsilon_0}
-\end{align*}
+\begin{proof}
+	\begin{align*}
+		\overrightarrow{E} &= -\overrightarrow{\nabla} \varphi\\
+		\therefore \divergence \overrightarrow{E} &= \overrightarrow{\nabla} \cdot \left( -\overrightarrow{\nabla} \varphi \right)\\
+		&= -\left( \dpd[2]{\varphi}{x} + \dpd[2]{\varphi}{y} + \dpd[2]{\varphi}{x} \right)\\
+		&= -\nabla^2 \varphi\\
+		&= -\Delta \varphi\\
+		\therefore \Delta \varphi &= -\frac{\rho}{\varepsilon_0}
+	\end{align*}
+\end{proof}
 
 \begin{definition}[Laplacian]
 	$\nabla^2$ is called the Laplacian.
