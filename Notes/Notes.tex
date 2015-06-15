@@ -21,6 +21,7 @@
 \usepackage[american voltages]{circuitikz} %circuit diagrams
 \usepackage{pdflscape}
 \usepackage{setspace}
+\usepackage{microtype}
 
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}} %adds numbers to specific equations in non-numbered list of equations
 
@@ -2737,6 +2738,268 @@ Therefore,
 		\therefore 2 \pi r B                                                       & = \frac{V_0 \mu_0 \pi r^2}{d} \left( \sigma \sin \omega t + \varepsilon_0 \omega \cos \omega t \right)                                                                     \\
 		\therefore B                                                               & = \frac{V_0 \mu_0 r}{2 d} (\sigma \sin \omega t + \varepsilon_0 \omega \cos \omega t)
 	\end{align*}
-\end{solution}<++>
+\end{solution}
+
+\section{Magnetism in Materials}
+
+\begin{definition}[Paramagnetic material]
+	A material which is repelled by an external magnetic field is called a paramagnetic material.
+\end{definition}
+
+\begin{definition}[Diamagnetic material]
+	A material which is repelled by an external magnetic field is called a diamagnetic material.
+\end{definition}
+
+\begin{definition}[Ferromagnetic material]
+	A material which is magnetized by an external magnetic field and remains magnetized after the external field is removed is called a ferromagnetic material.
+\end{definition}
+
+\newpage
+\part{Electromagnetic Waves}
+
+\section{Wave Impulse}
+
+Let $\psi(x,t)$ be a equation representing a wave.\\
+Let the speed of propagation of the wave be $\pm v$, depending on the direction.\\
+Therefore, if the peak of the wave is at a point $x$ at time $0$, then the peak of the wave will be at a point $v t$ away from $x$, depending on the direction of the propagation of the wave.\\
+\begin{figure}[H]
+	\begin{tikzpicture}
+		\def\xMIN{-1};
+		\def\xMAX{8};
+		\def\yMIN{-1};
+		\def\yMAX{3};
+
+		\def\v{2};
+		\def\t{2};
+
+		\begin{scope}[stealth-stealth, lightgray]
+			\draw (\xMIN,0) -- (\xMAX,0) node [right];
+			\draw (0,\yMIN) -- (0,\yMAX) node [above] {$y$};
+		\end{scope}
+
+		\begin{scope}[smooth]
+			\draw (0,0) to [out = 20, in = 190] (1,2) to [out = -10, in = 160] (2,0);
+
+			\node [above] at (1,2) {$t = 0$};
+		\end{scope}
+
+		\begin{scope}[smooth, red]
+			\draw (0,0) to ({\v*\t},0) to [out = 20, in = 190] ++(1,2) to [out = -10, in = 160] ++(1,-2);
+			\node [above] at ($ ({\v*\t},0) + (1,2) $) {$t$};
+		\end{scope}
+
+		\begin{scope}[|<->|, blue]
+			\draw ($ (0,0) + (1,1) $) -- ($ (\v*\t,0) + (1,1) $) node [midway, fill = white] {$v t$};
+		\end{scope}
+	\end{tikzpicture}
+\end{figure}
+Let $f(x) = \psi(x,0)$.\\
+Therefore,
+\begin{align*}
+	\psi(x,t) &= f(x \mp v t)
+\end{align*}
+Let
+\begin{align*}
+	\xi = x \mp v t
+\end{align*}
+Therefore, differentiating $\psi$ with respect to $x$,
+\begin{align*}
+	\dpd{\psi}{x} &= \dpd{f}{\xi} \dpd{\xi}{x}\\
+	&= \dpd{f}{\xi}\\
+	\therefore \dpd[2]{\psi}{x} &= \dpd{}{x}\left( \dpd{f}{\xi} \right)\\
+	&= \dpd[2]{f}{\xi} \dpd{\xi}{x}\\
+	&= \dpd[2]{f}{\xi}
+\end{align*}
+Differentiating $\psi$ with respect to $t$,
+\begin{align*}
+	\dpd{\psi}{t} &= \dpd{f}{\xi} \dpd{\xi}{t}\\
+	&= \dpd{f}{\xi} (\mp v)\\
+	\therefore \dpd[2]{\psi}{t} &= \dpd{}{t}\left( \dpd{f}{\xi} (\mp v) \right)\\
+	&= (\mp v) \dpd{}{t} \left( \dpd{f}{\xi} \right)\\
+	&= (\mp v) \dpd[2]{f}{\xi} \dpd{\xi}{t}\\
+	&= (\mp v) \dpd[2]{f}{\xi} (\mp v)\\
+	&= v^2 \dpd[2]{f}{\xi}
+\end{align*}
+Therefore,
+\begin{align*}
+	\dpd[2]{\psi}{x} &= \frac{1}{v^2} \dpd[2]{\psi}{t}
+\end{align*}
+
+\section{1D Waves}
+
+Let
+\begin{align*}
+	\psi(x,t) &= A \cos\left( k (x - v t) + \varphi_0 \right)\\
+	&= A \cos\left( k x - \omega t + \varphi_0 \right)
+\end{align*}
+$A$ is called the amplitude.\\
+$k$ is called the wave number.\\
+$v$ is the propagation speed.
+It is dependent on the medium of propagation only.\\
+$\omega = k v$ is called the angular frequency.\\
+$T = \frac{2 \pi}{\omega}$ is called the time period.\\
+$f = \nu = \frac{1}{T} = \frac{\omega}{2 \pi}$ is called the time frequency.\\
+$\varphi_0$ is called the initial phase.\\
+$\lambda = \frac{2 \pi}{k}$ is called the wavelength of the wave.
+
+\section{3D Waves}
+
+Let $\hat{n}$ be the unit vector in the direction of the propagation of the wave.\\
+Therefore, the equation of the wave
+\begin{align*}
+	\psi\left( \overrightarrow{r} , t \right) &= f\left( \hat{n} \cdot \overrightarrow{r} - v t \right)\\
+	&= A \cos\left( k \left( \hat{n} \cdot \overrightarrow{r} - v t \right) + \varphi_0 \right)\\
+	&= A \cos\left( \overrightarrow{k} \cdot \overrightarrow{r} - \omega t + \varphi_0 \right)
+\end{align*}
+$\overrightarrow{k} = k \hat{n}$ is called the wave vector.\\
+Therefore,
+\begin{align*}
+	\nabla^2 \psi &= \frac{1}{v^2} \dpd[2]{\psi}{t}
+\end{align*}
+
+\section{Electromagnetic Waves}
+
+For $\overrightarrow{E}$ and $\overrightarrow{B}$, in vacuum, Maxwell's Equations are
+\begin{align*}
+	\overrightarrow{\nabla} \cdot \overrightarrow{E} &= 0\\
+	\overrightarrow{\nabla} \times \overrightarrow{E} &= -\dpd{B}{t}\\
+	\overrightarrow{\nabla} \cdot \overrightarrow{B} &= 0\\
+	\overrightarrow{\nabla} \times \overrightarrow{E} &= \mu_0 \varepsilon_0 \dpd{E}{t}
+\end{align*}
+Therefore,
+\begin{align*}
+	\overrightarrow{\nabla} \times \overrightarrow{E}                                    & = \mu_0 \varepsilon_0 \dpd{E}{t}                                                                                        \\
+	\therefore \dpd{}{t}\left( \overrightarrow{\nabla} \times \overrightarrow{B} \right) & = \dpd{}{t}\left( \mu_0 \varepsilon_0 \dpd{\overrightarrow{E}}{t} \right)                                               \\
+	\therefore \overrightarrow{\nabla} \times \dpd{\overrightarrow{B}}{t}                & = \mu_0 \varepsilon_0 \dpd[2]{\overrightarrow{E}}{t}                                                                    \\
+	\therefore \mu_0 \varepsilon_0 \dpd[2]{\overrightarrow{E}}{t}                        & =  \overrightarrow{\nabla} \times \left( \overrightarrow{\nabla} \times \overrightarrow{E} \right)                      \\
+                                                                                             & = -\overrightarrow{\nabla} \times \left( \overrightarrow{\nabla} \times \overrightarrow{E} \right)                      \\
+                                                                                             & = -\overrightarrow{\nabla} \cancelto{0}{\left( \overrightarrow{\nabla} \cdot \overrightarrow{E} \right)} + \nabla^2 \overrightarrow{E} \\
+                                                                                             & = \nabla^2 \overrightarrow{E}                                                                                           \\
+\end{align*}
+Similarly for $\overrightarrow{B}$.\\
+Therefore,
+\begin{align*}
+	\nabla^2 \overrightarrow{E} &= \mu_0 \varepsilon_0 \dpd[2]{\overrightarrow{E}}{t}\\
+	\nabla^2 \overrightarrow{B} &= \mu_0 \varepsilon_0 \dpd[2]{\overrightarrow{B}}{t}
+\end{align*}
+Therefore, both $\overrightarrow{E}$ and $\overrightarrow{B}$ satisfy 3D wave equations.\\
+Hence the electric an magnetic fields are waves.
+
+\subsection{Direction of EM Wave Propagation}
+
+\begin{align*}
+	\overrightarrow{E} &= \overrightarrow{E_0} f\left( \hat{n} \cdot \overrightarrow{r} - c t \right)\\
+	&= \overrightarrow{E_0} f(n_x x + n_y y + n_z z - c t)\\
+	\overrightarrow{B} &= \overrightarrow{B_0} f\left( \hat{n} \cdot \overrightarrow{r} - c t \right)\\
+	&= \overrightarrow{B_0} f(n_x x + n_y y + n_z z - c t)\\
+\end{align*}
+By Maxwell's Equations,
+\begin{align*}
+	0 &=\overrightarrow{\nabla} \cdot \overrightarrow{E}\\
+	&= \overrightarrow{\nabla} \left( \overrightarrow{E_0} f(n_x x + n_y y + n_z z - c t) \right)\\
+	&= \cancelto{0}{\left( \overrightarrow{\nabla} \cdot \overrightarrow{E_0} \right)} f(n_x x + n_y y + n_z z - c t) + \overrightarrow{E_0} \cdot \overrightarrow{\nabla} f(n_x x + n_y y + n_z z - c t)\\
+	&= \overrightarrow{E_0} \cdot \hat{n} f'
+\end{align*}
+Therefore, as the cross product is zero, $\overrightarrow{E_0} \perp \hat{n}$.\\
+Similarly, as $\overrightarrow{\nabla} \cdot \overrightarrow{B} = 0$, $\overrightarrow{B_0} \perp \hat{n}$.
+
+\subsection{Mutual Perpendicularity of $\overrightarrow{E}$ and $\overrightarrow{B}$}
+
+\begin{align*}
+	-\dpd{\overrightarrow{B}}{t} &= \overrightarrow{\nabla} \times \overrightarrow{E}\\
+	&= \overrightarrow{\nabla} \times \left( \overrightarrow{E_0} \cdot f \right)\\
+	&= \cancelto{0}{\left( \overrightarrow{\nabla} \times \overrightarrow{E_0} \right)} f - \overrightarrow{E_0} \times \overrightarrow{\nabla} f\\
+	&= -\overrightarrow{E_0} \times f' \hat{n}\\
+	\therefore -\overrightarrow{B_0} \cdot f' \cdot (-c) &= -\overrightarrow{B_0} \times f' \hat{n}\\
+	\therefore \hat{n} \times \overrightarrow{E_0} &= \overrightarrow{B_0} c
+\end{align*}
+Therefore, $\overrightarrow{E}$ and $\overrightarrow{B}$ are mutually perpendicular, and $E_0 = c B_0$.
+
+\subsection{Electromagnetic Energy Density}
+
+The electromagnetic energy density in vacuum is
+\begin{align*}
+	u_{\textnormal{em}} &= \frac{1}{2} \varepsilon_0 E^2 + \frac{1}{2} \frac{1}{\mu_0} B^2\\
+	&= \frac{1}{2} \varepsilon_0 E^2 + \frac{1}{2 \mu_0} \left( \frac{E}{c} \right)^2\\
+	\intertext{As $c^2 = \frac{1}{\mu_0 \varepsilon_0}$,}
+	u_{\textnormal{em}} &= \frac{1}{2} \varepsilon_0 E^2 + \frac{1}{2 \mu_0} \frac{E^2}{\frac{1}{\mu_0 \varepsilon_0}}\\
+	&= \frac{1}{2} \varepsilon_0 E^2 + \frac{1}{2} \varepsilon_0 E^2\\
+	&= \varepsilon_0 E^2\\
+	&= c \varepsilon_0 E B
+\end{align*}
+
+\subsection{Poynting Vector}
+
+\begin{definition}[Poynting vector]
+	\begin{align*}
+		\overrightarrow{s} &= u_{\textnormal{em}} C \hat{n}\\
+		&= c^2 \varepsilon_0 E B \hat{n} \\
+		&= \frac{E B}{\mu_0} \hat{n}\\
+		&= \frac{\overrightarrow{E} \times \overrightarrow{B}}{\mu_0}
+	\end{align*}
+	is called the Poynting vector.
+\end{definition}
+
+\begin{question}
+	A cylindrical resistor of resistance $R$ has length $L$ and radius $a$.\\
+	The resistor is kept on the $z$ axis.\\
+	A current $I$ is flowing in the $\hat{z}$ direction.\\
+	The voltage across the resistor is $V$.\\
+	Show that the total flux of $\overrightarrow{S}$ through the surface of the resistor is equal to the power in the resistor.
+\end{question}
+
+\begin{solution}
+	Due to the potential difference across the resistor, there is an electric field inside the resistor.
+	\begin{align*}
+		\overrightarrow{E} &= \frac{V}{L} \hat{z}
+	\end{align*}
+	Due to the current flowing through the resistor, there is a magnetic field everywhere.\\
+	The magnetic field at the surface of the resistor is
+	\begin{align*}
+		\overrightarrow{B} &= \frac{\mu_0 I}{2 \pi a} \hat{\varphi}
+	\end{align*}
+	Therefore, at the surface of the resistor, the Poynting vector is
+	\begin{align*}
+		\overrightarrow{S} &= \frac{\overrightarrow{E} \times \overrightarrow{B}}{\mu_0}\\
+		&= -\hat{r} \frac{\frac{V}{L} \frac{\mu_0 I}{2 \pi a}}{\mu_0}\\
+		&= -\frac{I^2 R}{2 \pi a L} \hat{r}
+	\end{align*}
+	Therefore, the total flux of $\overrightarrow{S}$ through the resistor's surface is
+	\begin{align*}
+		\frac{I^2 R}{2 \pi a L} \cdot 2 \pi a L &= I^2 R\\
+		&= P
+	\end{align*}
+\end{solution}
+
+\section{Momentum due to Electromagnetic Waves}
+
+Consider two particles of mass $m$ and charge $q$ each, moving as shown.
+\begin{figure}[H]
+	\begin{tikzpicture}
+		\def\a{3};
+		\def\F{1};
+
+		\begin{scope}[red]
+			\filldraw (0,\a) circle (2pt);
+			\draw[-stealth] (0,\a) -- ++(-90:\F) node [below] {$v$};
+			\draw[-stealth] (\a,0) -- ++(90:\F) node [above] {$F$};
+		\end{scope}
+
+		\begin{scope}[blue]
+			\filldraw (\a,0) circle (2pt);
+			\draw[-stealth] (\a,0) -- ++(180:\F) node [left] {$v$};
+			\draw[-stealth] (0,\a) -- ++(0:\F) node [right] {$F$};
+		\end{scope}
+	\end{tikzpicture}
+\end{figure}
+Therefore, the magnetic force exerted by each particle on the other is as shown.\\
+Therefore, the net force on the system does not cancel out.\\
+Hence, Newton's Third Law is violated.\\
+As a result, the Principle of Conservation of Momentum is also violated.\\
+To correct this error, the momentum due to the generated electromagnetic waves is defined to be
+\begin{align*}
+	\overrightarrow{p_{\textnormal{em}}} &= \frac{\overrightarrow{S}}{C^2}\\
+	&= \frac{u_{\textnormal{em}}}{c} \hat{n}
+\end{align*}
 
 \end{document}
