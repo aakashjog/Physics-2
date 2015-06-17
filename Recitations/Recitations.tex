@@ -2065,7 +2065,6 @@ E-mail: rms9999@gmail.com\\
 	where $r$ is the distance from the $z$ axis.
 	The constants $A$ and $C$ are also given.\\
 	Calculate the current density $\overrightarrow{j}$ everywhere.
-	\end{enumerate}
 \end{question}
 
 \begin{solution}
@@ -2317,6 +2316,101 @@ E-mail: rms9999@gmail.com\\
 		\therefore {\Phi_B}_2             & = \mu_0 \pi n_1 n_2 l a^2 I_1
 	\end{align*}
 	Therefore, the flux through the long solenoid is $\mu_0 \pi n_1 n_2 l a^2 I_1$.
+\end{solution}
+
+\recitation
+
+\begin{question}
+	A coaxial cable of length $L$ is made out of two parallel, conductive, thin tubes of radii $a,b << L$, each carrying current $I$ in the opposite direction.
+	\begin{enumerate}
+		\item Calculate the magnetic field everywhere.
+		\item Calculate the cable's inductance.
+		\item Calculate the magnetic energy density.
+		\item Using the energy density, calculate the cable's inductance.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin = *]
+		\item
+			Consider a virtual Amperian loop of radius $r$, coaxial to the cable.\\
+			Therefore, by Ampere's Law,
+			\begin{align*}
+				B &=
+					\begin{cases}
+						0                       & ;\quad r < a     \\
+						\frac{\mu_0 I}{2 \pi r} & ;\quad a < r < b \\
+						0                       & ;\quad b < r     \\
+					\end{cases}
+			\end{align*}
+		\item
+			\begin{align*}
+				\Phi_B & = \int \overrightarrow{B} \cdot \dif \overrightarrow{S}                                  \\
+                                       & = \int\limits_{a}^{b} \frac{\mu_0 I}{2 \pi r} \hat{\varphi} \cdot l \dif r \hat{\varphi} \\
+                                       & = \frac{\mu_0 I l}{2 \pi} \ln \frac{b}{a}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				L                      & = \frac{\varepsilon}{\dod{I}{t}}        \\
+                                                       & = \frac{\dod{\Phi_B}{t}}{\dod{I}{t}}    \\
+                                                       & = \frac{\Phi_B}{I}                      \\
+                                                       & = \frac{\mu_0 l}{2 \pi} \ln \frac{b}{a} \\
+				\therefore \frac{L}{l} & = \frac{\mu_0}{2 \pi} \ln \frac{b}{a}
+			\end{align*}
+		\item
+			\begin{align*}
+				u_B &= \int\limits_{a}^{b} \frac{B^2}{2 \mu_0} \cdot 2 \pi r \dif r
+			\end{align*}
+		\item
+			\begin{align*}
+				u_B &= \frac{1}{2} L I^2\\
+				\therefore L &= \frac{\mu_0 l}{2 \pi} \ln \frac{b}{a}
+			\end{align*}
+	\end{enumerate}
+\end{solution}
+
+\addtocounter{question}{2}
+
+\begin{question}
+	A parallel plate capacitor with round plates is charged.
+	The area of the plates is $A$ and the distance between them is $d$.
+	\begin{enumerate}
+		\item Show that during the charging of the capacitor the displacement current $I_D(t)$ is equal to the charge current.
+		\item
+			The capacitor is disconnected from the power source.
+			The plates are being pulled apart at constant velocity $v$.
+			Calculate the displacement current.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin = *]
+		\item
+			\begin{align*}
+				E &= \frac{\sigma}{\varepsilon_0}\\
+				&= \frac{Q}{\varepsilon_0 A}\\
+				\therefore I_D &= \varepsilon_0 A \dot{E} &= \dot{Q}\\
+				&= I_{\textnormal{wire}}\\
+				&= \dod{Q}{t}
+			\end{align*}
+		\item
+			Let the distance between the plates be $x$.
+			\begin{align*}
+				u &= \frac{Q^2}{2 C}\\
+				&= \frac{Q^2 x}{2 \varepsilon_0 A}\\
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				F &= \dod{u}{x}\\
+				&= \frac{Q^2}{2 \varepsilon_0 A}\\
+				&= \frac{\sigma^2 A}{2 \varepsilon_0}
+			\end{align*}
+			By Ampere's Law,
+			\begin{align*}
+				I_D &= \varepsilon_0 \mu_0 \dod{}{t}\iint \overrightarrow{E} \cdot \dif \overrightarrow{S}\\
+				&= \varepsilon_0 \mu_0 \dod{\Phi}{t}
+			\end{align*}
+	\end{enumerate}
 \end{solution}
 
 \end{document}
