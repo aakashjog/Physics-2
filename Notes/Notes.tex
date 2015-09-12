@@ -2475,9 +2475,9 @@ Therefore,
 	\hline
 	Gauss' Law for Electricity & $\displaystyle \oiint\limits_{\partial V} = \dfrac{1}{\varepsilon_0} \iiint\limits_{V} \rho \dif^3 r$                                                                                                                                       & $\overrightarrow{\nabla} \cdot \overrightarrow{E} = \dfrac{\rho}{\varepsilon_0}$                                                 \\ [1.5ex]
 
-	Gauss' Law for Magnetism   & $\displaystyle \oint\limits_{\partial S} \overrightarrow{E} \cdot \overrightarrow{\dif l} = -\dod{}{t} \iint\limits_{S} \overrightarrow{B} \cdot \dif \overrightarrow{A}$                                                                   & $\overrightarrow{\nabla} \times \overrightarrow{E} = -\dpd{\overrightarrow{B}}{t}$                                               \\ [1.5ex]
+	Faraday's Law              & $\displaystyle \oint\limits_{\partial S} \overrightarrow{E} \cdot \overrightarrow{\dif l} = -\dod{}{t} \iint\limits_{S} \overrightarrow{B} \cdot \dif \overrightarrow{A}$                                                                   & $\overrightarrow{\nabla} \times \overrightarrow{E} = -\dpd{\overrightarrow{B}}{t}$                                               \\ [1.5ex]
 
-	Faraday's Law              & $\displaystyle \oiint\limits_{S} \overrightarrow{B} \cdot \dif \overrightarrow{A} = 0$                                                                                                                                                      & $\overrightarrow{\nabla} \cdot \overrightarrow{B} = 0$                                                                           \\ [1.5ex]
+	Gauss' Law for Magnetism   & $\displaystyle \oiint\limits_{S} \overrightarrow{B} \cdot \dif \overrightarrow{A} = 0$                                                                                                                                                      & $\overrightarrow{\nabla} \cdot \overrightarrow{B} = 0$                                                                           \\ [1.5ex]
 
 	Ampere's Law               & $\displaystyle \overrightarrow{B} \cdot \overrightarrow{\dif l} = \mu_0 \iint\limits_{S} \overrightarrow{j} \cdot \dif \overrightarrow{A} + \mu_0 \varepsilon_0 \dod{}{t}\iint\limits_{S} \overrightarrow{E} \cdot \dif \overrightarrow{A}$ & $\overrightarrow{\nabla} \times \overrightarrow{B} = \mu_0 \overrightarrow{j} + \mu_0 \varepsilon_0 \dpd{\overrightarrow{E}}{t}$ \\ [1.5ex]
 
@@ -2773,7 +2773,7 @@ Therefore, if the peak of the wave is at a point $x$ at time $0$, then the peak 
 		\def\t{2};
 
 		\begin{scope}[stealth-stealth, lightgray]
-			\draw (\xMIN,0) -- (\xMAX,0) node [right];
+			\draw (\xMIN,0) -- (\xMAX,0) node [right] {};
 			\draw (0,\yMIN) -- (0,\yMAX) node [above] {$y$};
 		\end{scope}
 
@@ -2903,7 +2903,7 @@ By Maxwell's Equations,
 Therefore, as the cross product is zero, $\overrightarrow{E_0} \perp \hat{n}$.\\
 Similarly, as $\overrightarrow{\nabla} \cdot \overrightarrow{B} = 0$, $\overrightarrow{B_0} \perp \hat{n}$.
 
-\subsection{Mutual Perpendicularity of $\overrightarrow{E}$ and $\overrightarrow{B}$}
+\subsection{Mutual Perpendicularity of Electric Field and Magnetic Field Vectors}
 
 \begin{align*}
 	-\dpd{\overrightarrow{B}}{t} &= \overrightarrow{\nabla} \times \overrightarrow{E}\\
